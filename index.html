@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Science with Python — Course Outline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12161F;
+    --ink-soft:#4B5262;
+    --bg:#F6F7FA;
+    --panel:#FFFFFF;
+    --line:#E4E7ED;
+    --blue:#2C5F8A;      /* python blue */
+    --blue-soft:#EAF1F7;
+    --yellow:#E8A93B;    /* muted python yellow */
+    --yellow-soft:#FBF1DE;
+    --slate:#8A93A6;
+    --radius:10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    display:flex;
+    min-height:100vh;
+  }
+  ::selection{ background:var(--yellow-soft); }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width:280px;
+    min-width:280px;
+    background:var(--panel);
+    border-right:1px solid var(--line);
+    padding:28px 22px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .brand{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    margin-bottom:4px;
+  }
+  .brand .prompt{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--blue);
+    font-size:13px;
+    font-weight:500;
+  }
+  .brand h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .brand-sub{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-bottom:24px;
+  }
+  .search{
+    width:100%;
+    padding:9px 12px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    color:var(--ink);
+    background:var(--bg);
+    margin-bottom:22px;
+  }
+  .search:focus{ outline:none; border-color:var(--blue); background:var(--panel); }
+
+  .nav-group{ margin-bottom:2px; }
+  .nav-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 10px;
+    border-radius:7px;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-size:13.5px;
+    font-weight:500;
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-link .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--slate);
+    min-width:20px;
+  }
+  .nav-link:hover{ background:var(--blue-soft); color:var(--blue); }
+  .nav-link.active{ background:var(--blue-soft); color:var(--blue); }
+  .nav-link.active .tag{ color:var(--blue); }
+
+  .sidebar-footer{
+    margin-top:28px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-size:12px;
+    color:var(--slate);
+    line-height:1.6;
+  }
+
+  /* ---------- Main ---------- */
+  main{ flex:1; min-width:0; }
+
+  .hero{
+    padding:64px 56px 44px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(680px 240px at 88% -10%, var(--yellow-soft), transparent 60%),
+      var(--panel);
+  }
+  .hero .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--blue);
+    background:var(--blue-soft);
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:6px;
+    margin-bottom:18px;
+    letter-spacing:.02em;
+  }
+  .hero h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:38px;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    max-width:640px;
+    line-height:1.15;
+    margin-bottom:14px;
+  }
+  .hero p{
+    font-size:15.5px;
+    color:var(--ink-soft);
+    max-width:560px;
+    line-height:1.65;
+  }
+  .hero-meta{
+    display:flex;
+    gap:28px;
+    margin-top:28px;
+    flex-wrap:wrap;
+  }
+  .hero-meta div{ font-size:13px; color:var(--ink-soft); }
+  .hero-meta strong{
+    display:block;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:20px;
+    color:var(--ink);
+    font-weight:600;
+  }
+
+  .content{ padding:48px 56px 100px; max-width:960px; }
+
+  .module{
+    scroll-margin-top:24px;
+    margin-bottom:52px;
+    padding-bottom:52px;
+    border-bottom:1px solid var(--line);
+  }
+  .module:last-child{ border-bottom:none; }
+
+  .module-head{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:14px;
+  }
+  .module-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--blue);
+    background:var(--blue-soft);
+    border-radius:6px;
+    padding:5px 9px;
+    margin-top:4px;
+    white-space:nowrap;
+  }
+  .module h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:23px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin-bottom:6px;
+  }
+  .module .desc{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    line-height:1.6;
+    max-width:640px;
+  }
+
+  .topics{
+    margin:20px 0 22px 0;
+    padding-left:0;
+    list-style:none;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 24px;
+  }
+  .topics li{
+    font-size:13.5px;
+    color:var(--ink);
+    padding-left:18px;
+    position:relative;
+    line-height:1.5;
+  }
+  .topics li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:7px;
+    width:6px;
+    height:6px;
+    border-radius:1px;
+    background:var(--yellow);
+  }
+
+  .resources{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 13px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:500;
+    color:var(--ink);
+    transition:border-color .15s ease, transform .1s ease, background .15s ease;
+  }
+  .chip:hover{ transform:translateY(-1px); }
+  .chip svg{ width:14px; height:14px; flex-shrink:0; }
+
+  .chip.slide{ border-color:#EAD6A6; }
+  .chip.slide:hover{ background:var(--yellow-soft); border-color:var(--yellow); }
+  .chip.slide svg{ color:var(--yellow); }
+
+  .chip.doc{ border-color:#C9DCEA; }
+  .chip.doc:hover{ background:var(--blue-soft); border-color:var(--blue); }
+  .chip.doc svg{ color:var(--blue); }
+
+  .chip.file{ border-color:var(--line); }
+  .chip.file:hover{ background:#F1F2F5; border-color:var(--slate); }
+  .chip.file svg{ color:var(--slate); }
+
+  .chip .missing{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:#B5473A;
+    background:#FBEAE7;
+    padding:2px 6px;
+    border-radius:4px;
+    margin-left:2px;
+  }
+
+  .note{
+    margin-top:56px;
+    padding:20px 22px;
+    background:var(--panel);
+    border:1px dashed var(--line);
+    border-radius:var(--radius);
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.7;
+  }
+  .note strong{ color:var(--ink); }
+
+  @media (max-width: 860px){
+    body{ flex-direction:column; }
+    .sidebar{ width:100%; height:auto; position:relative; border-right:none; border-bottom:1px solid var(--line); }
+    .hero{ padding:40px 24px; }
+    .content{ padding:32px 24px 80px; }
+    .topics{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="prompt">&gt;&gt;&gt;</span>
+      <h1>DS with Python</h1>
+    </div>
+    <div class="brand-sub">Junior onboarding track · 7 modules</div>
+
+    <input class="search" id="navSearch" type="text" placeholder="Search modules…">
+
+    <nav id="navList">
+      <div class="nav-group">
+        <a class="nav-link" data-target="m1" href="#m1"><span class="tag">01</span>Python Foundations</a>
+        <a class="nav-link" data-target="m2" href="#m2"><span class="tag">02</span>Core DS Stack</a>
+        <a class="nav-link" data-target="m3" href="#m3"><span class="tag">03</span>Getting &amp; Cleaning Data</a>
+        <a class="nav-link" data-target="m4" href="#m4"><span class="tag">04</span>Exploratory Data Analysis</a>
+        <a class="nav-link" data-target="m5" href="#m5"><span class="tag">05</span>Basic Statistics</a>
+        <a class="nav-link" data-target="m6" href="#m6"><span class="tag">06</span>Intro to Modeling</a>
+        <a class="nav-link" data-target="m7" href="#m7"><span class="tag">07</span>Capstone Project</a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      Update the <strong style="color:var(--ink)">href</strong> links in this file to point to your own<br>
+      Canva slides, Docs, and shared files.
+    </div>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main>
+    <section class="hero">
+      <span class="eyebrow">course outline</span>
+      <h2>Data Science with Python — Junior Track</h2>
+      <p>A structured, self-paced path from Python basics to a finished capstone project. Every module links out to the slide deck, reference doc, and working files for that lesson.</p>
+      <div class="hero-meta">
+        <div><strong>7</strong>Modules</div>
+        <div><strong>2–4 wks</strong>Suggested pace</div>
+        <div><strong>1</strong>Capstone project</div>
+      </div>
+    </section>
+
+    <div class="content">
+
+      <!-- Module 1 -->
+      <article class="module" id="m1">
+        <div class="module-head">
+          <span class="module-num">01</span>
+          <div>
+            <h3>Python Foundations</h3>
+            <p class="desc">Baseline Python fluency for anyone new to the language, before touching any data tools.</p>
+          </div>
+        </div>
+        <ul class="topics">
+          <li>Variables, data types, control flow</li>
+          <li>Functions and scope</li>
+          <li>Lists, dicts, list comprehensions</li>
+          <li>Reading and writing CSV / JSON files</li>
+        </ul>
+        <div class="resources">
+          <a class="chip slide" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+            Slides <span class="missing">add Canva link</span>
+          </a>
+          <a class="chip doc" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M6 3h8l6 6v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/></svg>
+            Lesson doc
+          </a>
+          <a class="chip file" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6l2 2h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/></svg>
+            Practice files
+          </a>
+        </div>
+      </article>
+
+      <!-- Module 2 -->
+      <article class="module" id="m2">
+        <div class="module-head">
+          <span class="module-num">02</span>
+          <div>
+            <h3>Core Data Science Stack</h3>
+            <p class="desc">The three libraries that power almost everything downstream: NumPy, pandas, and plotting.</p>
+          </div>
+        </div>
+        <ul class="topics">
+          <li>NumPy arrays, vectorized ops, broadcasting</li>
+          <li>pandas DataFrames, indexing, filtering</li>
+          <li>groupby, merging, missing data</li>
+          <li>Matplotlib &amp; Seaborn basic plots</li>
+        </ul>
+        <div class="resources">
+          <a class="chip slide" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+            Slides <span class="missing">add Canva link</span>
+          </a>
+          <a class="chip doc" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M6 3h8l6 6v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/></svg>
+            Lesson doc
+          </a>
+          <a class="chip file" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6l2 2h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/></svg>
+            Notebook (.ipynb)
+          </a>
+        </div>
+      </article>
+
+      <!-- Module 3 -->
+      <article class="module" id="m3">
+        <div class="module-head">
+          <span class="module-num">03</span>
+          <div>
+            <h3>Getting &amp; Cleaning Data</h3>
+            <p class="desc">Real data is messy. This module covers ingesting it and getting it into a usable shape.</p>
+          </div>
+        </div>
+        <ul class="topics">
+          <li>Reading CSV / Excel / API sources</li>
+          <li>Handling missing values &amp; duplicates</li>
+          <li>Outlier detection</li>
+          <li>Type conversion &amp; string cleaning</li>
+        </ul>
+        <div class="resources">
+          <a class="chip slide" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+            Slides <span class="missing">add Canva link</span>
+          </a>
+          <a class="chip doc" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M6 3h8l6 6v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/></svg>
+            Lesson doc
+          </a>
+          <a class="chip file" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6l2 2h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/></svg>
+            Sample dataset
+          </a>
+        </div>
+      </article>
+
+      <!-- Module 4 -->
+      <article class="module" id="m4">
+        <div class="module-head">
+          <span class="module-num">04</span>
+          <div>
+            <h3>Exploratory Data Analysis</h3>
+            <p class="desc">Turning a clean dataset into an understanding of what's actually in it.</p>
+          </div>
+        </div>
+        <ul class="topics">
+          <li>Descriptive stats: mean, median, std, quantiles</li>
+          <li>Distributions &amp; correlation</li>
+          <li>Visual storytelling with charts</li>
+        </ul>
+        <div class="resources">
+          <a class="chip slide" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+            Slides <span class="missing">add Canva link</span>
+          </a>
+          <a class="chip doc" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M6 3h8l6 6v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/></svg>
+            Lesson doc
+          </a>
+          <a class="chip file" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6l2 2h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/></svg>
+            Notebook (.ipynb)
+          </a>
+        </div>
+      </article>
+
+      <!-- Module 5 -->
+      <article class="module" id="m5">
+        <div class="module-head">
+          <span class="module-num">05</span>
+          <div>
+            <h3>Basic Statistics</h3>
+            <p class="desc">Just enough statistical grounding to reason about data honestly.</p>
+          </div>
+        </div>
+        <ul class="topics">
+          <li>Probability basics &amp; distributions</li>
+          <li>Hypothesis testing (t-test, chi-square)</li>
+          <li>Correlation vs. causation</li>
+        </ul>
+        <div class="resources">
+          <a class="chip slide" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+            Slides <span class="missing">add Canva link</span>
+          </a>
+          <a class="chip doc" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M6 3h8l6 6v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/></svg>
+            Lesson doc
+          </a>
+        </div>
+      </article>
+
+      <!-- Module 6 -->
+      <article class="module" id="m6">
+        <div class="module-head">
+          <span class="module-num">06</span>
+          <div>
+            <h3>Intro to Modeling</h3>
+            <p class="desc">A first, gentle pass at machine learning concepts using scikit-learn.</p>
+          </div>
+        </div>
+        <ul class="topics">
+          <li>Train / test split &amp; overfitting</li>
+          <li>Simple linear regression</li>
+          <li>Evaluating a model (accuracy, RMSE)</li>
+        </ul>
+        <div class="resources">
+          <a class="chip slide" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+            Slides <span class="missing">add Canva link</span>
+          </a>
+          <a class="chip doc" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M6 3h8l6 6v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/></svg>
+            Lesson doc
+          </a>
+          <a class="chip file" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6l2 2h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/></svg>
+            Notebook (.ipynb)
+          </a>
+        </div>
+      </article>
+
+      <!-- Module 7 -->
+      <article class="module" id="m7">
+        <div class="module-head">
+          <span class="module-num">07</span>
+          <div>
+            <h3>Capstone Project</h3>
+            <p class="desc">A real, messy dataset — clean it, explore it, visualize it, and present the findings.</p>
+          </div>
+        </div>
+        <ul class="topics">
+          <li>Dataset: Titanic / housing prices (Kaggle)</li>
+          <li>End-to-end cleaning &amp; EDA</li>
+          <li>Final presentation of insights</li>
+        </ul>
+        <div class="resources">
+          <a class="chip slide" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+            Presentation template <span class="missing">add Canva link</span>
+          </a>
+          <a class="chip doc" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M6 3h8l6 6v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/></svg>
+            Project brief
+          </a>
+          <a class="chip file" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h6l2 2h8v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/></svg>
+            Rubric
+          </a>
+        </div>
+      </article>
+
+      <div class="note">
+        <strong>How to wire this up:</strong> every resource button is a plain <code>&lt;a href="#"&gt;</code> tag. Search this file for <code>href="#"</code>, and replace each one with your real Canva, Google Doc, or Drive folder link. Chips tagged <span class="missing" style="margin-left:0;">add Canva link</span> are the ones with no link yet.
+      </div>
+
+    </div>
+  </main>
+
+<script>
+  // Active link highlighting on scroll
+  const links = document.querySelectorAll('.nav-link');
+  const sections = [...links].map(l => document.getElementById(l.dataset.target));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = document.querySelector(`.nav-link[data-target="${entry.target.id}"]`);
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => s && io.observe(s));
+
+  // Sidebar search filter
+  document.getElementById('navSearch').addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    links.forEach(l => {
+      l.style.display = l.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+    });
+  });
+</script>
+
+</body>
+</html>
