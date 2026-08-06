@@ -1,0 +1,85 @@
+[
+    {
+        "id":"m1",
+        "number":"01",
+        "title":"Python Foundations",
+        "description":"Learn the Python fundamentals.",
+        "topics":[
+            "Variables",
+            "Data Types",
+            "Functions",
+            "Lists",
+            "Dictionaries"
+        ],
+        "resources":{
+            "slides":{
+                "title":"Slides",
+                "url":"https://google.com"
+            },
+            "doc":{
+                "title":"Lesson Doc",
+                "url":"#"
+            },
+            "file":{
+                "title":"Practice Files",
+                "url":"#"
+            }
+        }
+    },
+
+    {
+        "id":"m2",
+        "number":"02",
+        "title":"NumPy & Pandas",
+        "description":"Work with data efficiently.",
+        "topics":[
+            "NumPy Arrays",
+            "Pandas",
+            "Filtering",
+            "Grouping",
+            "Merge"
+        ],
+        "resources":{
+            "slides":{
+                "title":"Slides",
+                "url":"#"
+            },
+            "doc":{
+                "title":"Lesson Doc",
+                "url":"#"
+            },
+            "file":{
+                "title":"Notebook",
+                "url":"#"
+            }
+        }
+    },
+
+    {
+        "id":"m3",
+        "number":"03",
+        "title":"Visualization",
+        "description":"Create beautiful charts.",
+        "topics":[
+            "Matplotlib",
+            "Seaborn",
+            "Histograms",
+            "Scatter",
+            "Bar Charts"
+        ],
+        "resources":{
+            "slides":{
+                "title":"Slides",
+                "url":"#"
+            },
+            "doc":{
+                "title":"Lesson Doc",
+                "url":"#"
+            },
+            "file":{
+                "title":"Notebook",
+                "url":"#"
+            }
+        }
+    }
+]
