@@ -133,7 +133,7 @@ main {
 }
 
 .hero {
-  padding: 64px 56px 44px;
+  padding: 20px;
   border-bottom: 1px solid var(--line);
   background:
     radial-gradient(
