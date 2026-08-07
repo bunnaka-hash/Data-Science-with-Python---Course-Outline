@@ -18,8 +18,8 @@
       "title": "Pandas",
       "lead": "Pandas is where most of a data analyst's day is spent. It is NumPy with labels, missing-value handling, and tables.",
       "bullets": [
-        "Series — one labelled column",
-        "DataFrame — a whole labelled table",
+        "Series  one labelled column",
+        "DataFrame  a whole labelled table",
         "Load, clean, filter, group, join, summarise",
         "Import convention: import pandas as pd"
       ]
@@ -27,13 +27,13 @@
     {
       "topic": "Series",
       "layout": "content",
-      "title": "Series — a labelled 1D array",
+      "title": "Series  a labelled 1D array",
       "lead": "A Series is a NumPy array plus an index. Every column of a DataFrame is a Series.",
       "bullets": [
         "Created from a list, dict, or NumPy array",
         "The index labels each value and defaults to 0, 1, 2…",
         "Vectorised math works exactly as it does in NumPy",
-        ".value_counts() counts occurrences — the most used method in Pandas",
+        ".value_counts() counts occurrences  the most used method in Pandas",
         "Operations align on the index, not on position"
       ],
       "code": {
@@ -55,14 +55,14 @@
     {
       "topic": "DataFrame",
       "layout": "content",
-      "title": "DataFrame — the table",
+      "title": "DataFrame  the table",
       "lead": "A DataFrame is a dict of Series sharing one index. Rows are records, columns are fields.",
       "bullets": [
-        "df.head() / df.tail() — look at the ends",
-        "df.shape — (rows, columns)",
-        "df.info() — dtypes and non-null counts in one view",
-        "df.describe() — count, mean, std, quartiles for numeric columns",
-        "df.columns — the column labels"
+        "df.head() / df.tail()  look at the ends",
+        "df.shape  (rows, columns)",
+        "df.info()  dtypes and non-null counts in one view",
+        "df.describe()  count, mean, std, quartiles for numeric columns",
+        "df.columns  the column labels"
       ],
       "code": {
         "lang": "python",
@@ -81,7 +81,7 @@
           "print(df[[\"name\", \"score\"]]) # two columns -> DataFrame"
         ]
       },
-      "note": "df.info() is the first thing to run on any new dataset — it shows dtypes and missing counts together."
+      "note": "df.info() is the first thing to run on any new dataset  it shows dtypes and missing counts together."
     },
     {
       "topic": "Read CSV / Excel",
@@ -164,7 +164,7 @@
     {
       "topic": "GroupBy",
       "layout": "content",
-      "title": "GroupBy — split, apply, combine",
+      "title": "GroupBy  split, apply, combine",
       "lead": "Split rows into groups by a column, apply a summary to each group, then combine the results into a new table.",
       "bullets": [
         "df.groupby(\"class\")[\"score\"].mean()",
@@ -195,7 +195,7 @@
     {
       "topic": "Merge",
       "layout": "code",
-      "title": "Merge — joining two tables",
+      "title": "Merge  joining two tables",
       "lead": "merge is a SQL join. Pick the key column and the how, then always check the row count afterwards.",
       "code": {
         "lang": "python",
@@ -220,11 +220,11 @@
       "topic": "Missing Values",
       "layout": "content",
       "title": "Missing values",
-      "lead": "Real data has holes. Decide deliberately whether to drop them or fill them — never ignore them.",
+      "lead": "Real data has holes. Decide deliberately whether to drop them or fill them  never ignore them.",
       "bullets": [
-        "df.isna().sum() — count missing per column, run this first",
-        "df.dropna() — drop rows; subset= limits which columns count",
-        "df.fillna(value) — fill with a constant, mean, or median",
+        "df.isna().sum()  count missing per column, run this first",
+        "df.dropna()  drop rows; subset= limits which columns count",
+        "df.fillna(value)  fill with a constant, mean, or median",
         "ffill / bfill carry the previous or next value forward",
         "NaN is a float, so any column containing one becomes float"
       ],
@@ -268,7 +268,7 @@
           "             .mean())"
         ]
       },
-      "note": "errors=\"coerce\" turns unparseable dates into NaT instead of crashing — then df[\"enrolled_at\"].isna().sum() tells you how many were bad."
+      "note": "errors=\"coerce\" turns unparseable dates into NaT instead of crashing  then df[\"enrolled_at\"].isna().sum() tells you how many were bad."
     },
     {
       "topic": "Practice",
@@ -289,12 +289,12 @@
       "topic": "Recap",
       "layout": "recap",
       "title": "Module 04 recap",
-      "lead": "This is the core analyst skill set — everything after this is presentation.",
+      "lead": "This is the core analyst skill set  everything after this is presentation.",
       "bullets": [
         "Series is a column; DataFrame is a table",
         "Filter with boolean masks; assign through .loc",
         "groupby answers \"per category, what is the…\" questions",
-        "merge joins tables — always verify the row count after",
+        "merge joins tables  always verify the row count after",
         "Handle missing values on purpose, and record the decision"
       ],
       "note": "Next up, Module 05: turning these tables into charts people can read."

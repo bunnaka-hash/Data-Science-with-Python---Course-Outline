@@ -16,12 +16,12 @@
       "topic": "Overview",
       "layout": "title",
       "title": "Python Foundations",
-      "lead": "Everything in this course — NumPy, Pandas, Matplotlib — is built on plain Python. This module makes sure that base is solid.",
+      "lead": "Everything in this course NumPy, Pandas, Matplotlib is built on plain Python. This module makes sure that base is solid.",
       "bullets": [
-        "Python Review — types, variables, control flow",
-        "Functions — package logic so you can reuse it",
-        "Lists & Dictionaries — the two containers you will use every day",
-        "File Handling — get data in and out of your program"
+        "Python Review types, variables, control flow",
+        "Functions package logic so you can reuse it",
+        "Lists & Dictionaries the two containers you will use every day",
+        "File Handling get data in and out of your program"
       ]
     },
     {
@@ -41,12 +41,12 @@
       "topic": "Python Review",
       "layout": "content",
       "title": "Variables and core types",
-      "lead": "Python is dynamically typed — a variable is just a name pointing at a value, and the value carries the type.",
+      "lead": "Python is dynamically typed  a variable is just a name pointing at a value, and the value carries the type.",
       "bullets": [
-        "int — whole numbers: 42, -7",
-        "float — decimals: 3.14, 98.6",
-        "str — text in quotes: \"Sokha\"",
-        "bool — True or False",
+        "int: whole numbers: 42, -7",
+        "float: decimals: 3.14, 98.6",
+        "str: text in quotes: \"Sokha\"",
+        "bool: True or False",
         "Use type(x) to check, int(x) / float(x) / str(x) to convert"
       ],
       "code": {
@@ -66,7 +66,7 @@
       "topic": "Python Review",
       "layout": "code",
       "title": "Control flow: if / for / while",
-      "lead": "Indentation is the syntax. Four spaces define a block — there are no braces.",
+      "lead": "Indentation is the syntax. Four spaces define a block  there are no braces.",
       "code": {
         "lang": "python",
         "body": [
@@ -88,7 +88,7 @@
           "    count -= 1"
         ]
       },
-      "note": "range(1, 4) gives 1, 2, 3 — the stop value is never included. This off-by-one catches everyone once."
+      "note": "range(1, 4) gives 1, 2, 3  the stop value is never included. This off-by-one catches everyone once."
     },
     {
       "topic": "Python Review",
@@ -97,10 +97,10 @@
       "lead": "Most real data arrives as messy text. These few string tools clean up the majority of it.",
       "bullets": [
         "f-strings for formatting: f\"{name} scored {score:.1f}\"",
-        ".strip() — remove leading/trailing whitespace",
-        ".lower() / .upper() — normalise before comparing",
-        ".split(\",\") — turn one line into a list of fields",
-        ".replace(old, new) — swap out characters"
+        ".strip()  remove leading/trailing whitespace",
+        ".lower() / .upper()  normalise before comparing",
+        ".split(\",\")  turn one line into a list of fields",
+        ".replace(old, new)  swap out characters"
       ],
       "code": {
         "lang": "python",
@@ -157,7 +157,7 @@
           "# print(status)  -> NameError: status only exists inside grade()"
         ]
       },
-      "note": "Never use a mutable default like def f(items=[]) — the same list is shared across every call. Use None and create it inside."
+      "note": "Never use a mutable default like def f(items=[])  the same list is shared across every call. Use None and create it inside."
     },
     {
       "topic": "Functions",
@@ -165,20 +165,20 @@
       "title": "Practice: build three functions",
       "lead": "Write these in a single .py file and test each one with at least two inputs.",
       "bullets": [
-        "celsius_to_fahrenheit(c) — return c * 9 / 5 + 32",
-        "is_passing(score, passing=50) — return True or False",
-        "summarise(scores) — return the count, min, max, and average as a dict"
+        "celsius_to_fahrenheit(c)  return c * 9 / 5 + 32",
+        "is_passing(score, passing=50)  return True or False",
+        "summarise(scores)  return the count, min, max, and average as a dict"
       ],
       "note": "Expected: summarise([80, 92, 75]) -> {'count': 3, 'min': 75, 'max': 92, 'avg': 82.33}"
     },
     {
       "topic": "Lists & Dictionaries",
       "layout": "content",
-      "title": "Lists — ordered collections",
+      "title": "Lists  ordered collections",
       "lead": "A list holds items in order, indexed from 0, and can be changed after it is created.",
       "bullets": [
         "Index from the front with [0], from the back with [-1]",
-        "Slice a range with [1:3] — stop is excluded",
+        "Slice a range with [1:3]  stop is excluded",
         ".append(x) adds one item, .extend([...]) adds many",
         "len(), sum(), min(), max(), sorted() all work on lists",
         "Loop with for item in items:"
@@ -200,7 +200,7 @@
     {
       "topic": "Lists & Dictionaries",
       "layout": "content",
-      "title": "Dictionaries — key to value",
+      "title": "Dictionaries  key to value",
       "lead": "A dictionary looks things up by a key instead of a position. This is how a row of data is usually represented.",
       "bullets": [
         "Create with {\"key\": value}, read with d[\"key\"]",
@@ -223,7 +223,7 @@
           "    print(key, \"=\", value)"
         ]
       },
-      "note": "This student dict is one row. A list of these dicts is one table — which is exactly what a Pandas DataFrame wraps in Module 04."
+      "note": "This student dict is one row. A list of these dicts is one table  which is exactly what a Pandas DataFrame wraps in Module 04."
     },
     {
       "topic": "Lists & Dictionaries",
@@ -255,13 +255,13 @@
       "topic": "File Handling",
       "layout": "content",
       "title": "Reading and writing files",
-      "lead": "Always open files with the with statement — it closes the file for you, even if your code raises an error.",
+      "lead": "Always open files with the with statement  it closes the file for you, even if your code raises an error.",
       "bullets": [
         "\"r\" read (default), \"w\" overwrite, \"a\" append",
         "Always pass encoding=\"utf-8\" so Khmer text survives",
         ".read() gives one string, .readlines() gives a list",
-        "Looping over the file object reads line by line — best for big files",
-        "Lines keep their trailing \\n — strip it"
+        "Looping over the file object reads line by line  best for big files",
+        "Lines keep their trailing \\n  strip it"
       ],
       "code": {
         "lang": "python",
@@ -281,7 +281,7 @@
     {
       "topic": "File Handling",
       "layout": "code",
-      "title": "CSV — the format your data will arrive in",
+      "title": "CSV  the format your data will arrive in",
       "lead": "The csv module reads a spreadsheet export into exactly the list-of-dictionaries shape from the last topic.",
       "code": {
         "lang": "python",
@@ -307,10 +307,10 @@
       "title": "Module 01 recap",
       "lead": "You now have the vocabulary the rest of the course assumes.",
       "bullets": [
-        "Types and control flow — the grammar of Python",
-        "Functions — naming logic so it can be reused and tested",
-        "Lists and dictionaries — order versus lookup",
-        "Files — reading real data in with with open(...)"
+        "Types and control flow  the grammar of Python",
+        "Functions  naming logic so it can be reused and tested",
+        "Lists and dictionaries  order versus lookup",
+        "Files  reading real data in with with open(...)"
       ],
       "note": "Next up, Module 02: the working environment (Jupyter, venv) and the compact syntax data work relies on."
     }

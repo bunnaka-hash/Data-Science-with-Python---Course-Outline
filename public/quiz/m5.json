@@ -39,10 +39,10 @@
             "`dpi=150` for a sharp image",
             "`bbox_inches=\"tight\"` so nothing is clipped",
             "A filename with the format extension, such as `.png`",
-            "`figsize` — it must be passed to `savefig`"
+            "`figsize`  it must be passed to `savefig`"
           ],
           "answer": [0, 1, 2],
-          "explain": "`figsize` belongs to `plt.subplots()`, when the figure is created — not to `savefig`."
+          "explain": "`figsize` belongs to `plt.subplots()`, when the figure is created  not to `savefig`."
         }
       ]
     },
@@ -55,7 +55,7 @@
           "prompt": "Which chart shows change over time?",
           "options": ["Line", "Bar", "Scatter", "Histogram"],
           "answer": 0,
-          "explain": "Use a line only when the x axis has a natural order — usually time. Never for unordered categories."
+          "explain": "Use a line only when the x axis has a natural order  usually time. Never for unordered categories."
         },
         {
           "prompt": "You want the distribution of one numeric column. Which chart?",
@@ -152,7 +152,7 @@
         {
           "prompt": "How should a grid be styled?",
           "options": [
-            "Faint — low alpha, often on one axis only",
+            "Faint  low alpha, often on one axis only",
             "Bold, so values are easy to read off",
             "In the same colour as the bars",
             "Always on both axes"

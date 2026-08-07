@@ -15,7 +15,7 @@
           "brief": "Print the type of `score`, then the same value as a whole number, then one formatted sentence.",
           "steps": [
             "Use `type(score)` for the first line",
-            "Use `int(score)` for the second — it truncates rather than rounds",
+            "Use `int(score)` for the second  it truncates rather than rounds",
             "Use an f-string for the third line"
           ],
           "starter": [
@@ -38,7 +38,7 @@
             "print(int(score))",
             "print(f\"{name} scored {score}\")"
           ],
-          "explain": "`int()` drops the decimal part rather than rounding — `int(87.5)` is 87, not 88."
+          "explain": "`int()` drops the decimal part rather than rounding  `int(87.5)` is 87, not 88."
         },
         {
           "title": "Grade every score",
@@ -55,7 +55,7 @@
             "    pass"
           ],
           "expected": ["95 A", "84 B", "72 C", "90 A", "61 C"],
-          "hint": "Check the highest boundary first — an `elif` only runs when the branch above it did not.",
+          "hint": "Check the highest boundary first  an `elif` only runs when the branch above it did not.",
           "solution": [
             "scores = [95, 84, 72, 90, 61]",
             "",
@@ -100,7 +100,7 @@
             "print(is_passing(41))"
           ],
           "expected": ["69.8", "86.0", "True", "False"],
-          "hint": "Both functions need `return`, not `print` — the printing is already written for you.",
+          "hint": "Both functions need `return`, not `print`  the printing is already written for you.",
           "solution": [
             "def celsius_to_fahrenheit(c):",
             "    return c * 9 / 5 + 32",
@@ -115,7 +115,7 @@
             "print(is_passing(72))",
             "print(is_passing(41))"
           ],
-          "explain": "`score >= passing` already evaluates to True or False — an `if` that returns True or False around it would just be longer."
+          "explain": "`score >= passing` already evaluates to True or False  an `if` that returns True or False around it would just be longer."
         },
         {
           "title": "Summarise a list of scores",
@@ -151,7 +151,7 @@
             "print(summarise([80, 92, 75]))",
             "print(summarise([]))"
           ],
-          "explain": "Guarding the empty case first — a guard clause — keeps the main body free of nesting."
+          "explain": "Guarding the empty case first  a guard clause  keeps the main body free of nesting."
         }
       ]
     },
@@ -253,7 +253,7 @@
             "# 2. read it back and print: 1 load the data"
           ],
           "expected": ["1 load the data", "2 clean the data", "3 plot the data"],
-          "hint": "`f.write()` does not add a newline for you — append `\\n` yourself.",
+          "hint": "`f.write()` does not add a newline for you  append `\\n` yourself.",
           "solution": [
             "lines = [\"load the data\", \"clean the data\", \"plot the data\"]",
             "",
@@ -265,7 +265,7 @@
             "    for number, line in enumerate(f, start=1):",
             "        print(number, line.strip())"
           ],
-          "explain": "`enumerate(f, start=1)` counts as it loops, and looping over the file object reads it one line at a time — the right approach for a file too large to hold in memory."
+          "explain": "`enumerate(f, start=1)` counts as it loops, and looping over the file object reads it one line at a time  the right approach for a file too large to hold in memory."
         },
         {
           "title": "Read a CSV and fix the types",
@@ -306,7 +306,7 @@
             "top = max(rows, key=lambda r: r[\"score\"])",
             "print(\"top:\", top[\"name\"])"
           ],
-          "explain": "Without the conversion the scores stay strings, and `max` compares them as text — \"100\" would lose to \"87.5\" because \"1\" sorts before \"8\"."
+          "explain": "Without the conversion the scores stay strings, and `max` compares them as text  \"100\" would lose to \"87.5\" because \"1\" sorts before \"8\"."
         }
       ]
     }

@@ -9,7 +9,7 @@
     {
       "topic": "Jupyter Notebook",
       "title": "Cells, run order, and restarting",
-      "lead": "The notebook is where analysis happens — and where one specific trap costs people hours.",
+      "lead": "The notebook is where analysis happens  and where one specific trap costs people hours.",
       "questions": [
         {
           "prompt": "What is displayed automatically when you run a code cell?",
@@ -42,7 +42,7 @@
             "Saving the notebook clears the variables"
           ],
           "answer": [0, 1, 2],
-          "explain": "Saving does nothing to memory. Only a restart clears it — which is why you restart before sharing or submitting."
+          "explain": "Saving does nothing to memory. Only a restart clears it  which is why you restart before sharing or submitting."
         },
         {
           "prompt": "\"It worked before I restarted the kernel.\" What does that usually mean?",
@@ -60,7 +60,7 @@
     {
       "topic": "Virtual Environment (venv)",
       "title": "One environment per project",
-      "lead": "Isolation is what keeps Project A from breaking Project B — and what most \"module not found\" errors come down to.",
+      "lead": "Isolation is what keeps Project A from breaking Project B  and what most \"module not found\" errors come down to.",
       "questions": [
         {
           "prompt": "Which command creates a virtual environment in the current folder?",
@@ -168,18 +168,18 @@
             "A type of list comprehension"
           ],
           "answer": 0,
-          "explain": "`lambda args: expression` — the expression's value is returned automatically. No statements, no `if` blocks, no loops inside."
+          "explain": "`lambda args: expression`  the expression's value is returned automatically. No statements, no `if` blocks, no loops inside."
         },
         {
           "prompt": "Why does `print(map(float, [\"1.5\", \"2.5\"]))` show something like `<map object …>` instead of the numbers?",
           "options": [
-            "`map` returns a lazy iterator — wrap it in `list()` to see the values",
+            "`map` returns a lazy iterator  wrap it in `list()` to see the values",
             "`float` cannot be passed without a lambda",
             "The strings must be converted before mapping",
             "`map` only works on numbers"
           ],
           "answer": 0,
-          "explain": "`list(map(float, raw))` materialises the results. Passing an existing function by name — `float` — is clearer than wrapping it in a lambda."
+          "explain": "`list(map(float, raw))` materialises the results. Passing an existing function by name  `float`  is clearer than wrapping it in a lambda."
         },
         {
           "prompt": "`names = [\"Sokha\", \"\", \"Dara\", None]`. What does `list(filter(None, names))` return?",
@@ -196,7 +196,7 @@
           "prompt": "`names` has 4 items and `scores` has 3. How many pairs does `zip(names, scores)` produce?",
           "options": ["3", "4", "7", "It raises ValueError"],
           "answer": 0,
-          "explain": "zip pairs by position and stops at the shortest input. The extra name is silently dropped — check your lengths first."
+          "explain": "zip pairs by position and stops at the shortest input. The extra name is silently dropped  check your lengths first."
         }
       ]
     }

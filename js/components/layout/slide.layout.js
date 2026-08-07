@@ -146,24 +146,21 @@ function syncFullscreenBtn() {
 /* ---------- Print / save as PDF ---------- */
 
 /**
- * Renders every slide into the hidden print sheet — one page each.
+ * Renders every slide into the hidden print sheet — one frame per page.
  * Built on demand so normal browsing only ever holds one slide in the DOM.
+ *
+ * Each frame already carries its own footline (deck, institute, page number),
+ * so nothing is stacked around it: the sheet is the slide and nothing else.
  */
 function buildPrintSheet() {
   const { deck } = state;
   if (!deck) return;
-
-  const total = deck.slides.length;
 
   el("printSheet").innerHTML = deck.slides
     .map(
       (slide, index) => `
         <div class="print-page">
           ${renderSlide(slide, index, deck)}
-          <div class="print-foot">
-            <span>Module ${escapeHtml(deck.number)} · ${escapeHtml(deck.title)}</span>
-            <span>${index + 1} / ${total}</span>
-          </div>
         </div>
       `,
     )

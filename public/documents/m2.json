@@ -7,7 +7,7 @@
   "level": "Beginner",
   "objectives": [
     "Set up an isolated project environment with venv and install packages into it.",
-    "Work fluently in Jupyter Notebook — cells, run order, and restart.",
+    "Work fluently in Jupyter Notebook  cells, run order, and restart.",
     "Replace simple loops with list comprehensions.",
     "Use lambda with map(), filter(), and zip() to transform data."
   ],
@@ -18,10 +18,10 @@
       "title": "Python for Data Analysis",
       "lead": "Two things separate a script writer from an analyst: a clean environment to work in, and the compact syntax that data code is written in.",
       "bullets": [
-        "Jupyter Notebook — where analysis actually happens",
-        "Virtual environments — keeping projects from breaking each other",
-        "Comprehensions — loops in one line",
-        "lambda, map, filter, zip — the functional toolkit"
+        "Jupyter Notebook  where analysis actually happens",
+        "Virtual environments  keeping projects from breaking each other",
+        "Comprehensions  loops in one line",
+        "lambda, map, filter, zip  the functional toolkit"
       ]
     },
     {
@@ -52,7 +52,7 @@
       "topic": "Jupyter Notebook",
       "layout": "content",
       "title": "Run order is the one real trap",
-      "lead": "Cells share one memory space and run in whatever order you click them — not top to bottom.",
+      "lead": "Cells share one memory space and run in whatever order you click them  not top to bottom.",
       "bullets": [
         "The [ ] number shows the order cells actually ran",
         "A deleted cell's variables still exist in memory",
@@ -71,7 +71,7 @@
         "Created inside the project folder, usually named .venv",
         "Must be activated in each new terminal",
         "pip install then writes into that folder only",
-        "Add .venv/ to .gitignore — never commit it",
+        "Add .venv/ to .gitignore  never commit it",
         "Share requirements.txt instead of the folder"
       ],
       "code": {
@@ -110,7 +110,7 @@
           "deactivate      # leave the environment"
         ]
       },
-      "note": "In Jupyter, run !pip list inside a cell — that shows the packages the notebook's kernel can actually see."
+      "note": "In Jupyter, run !pip list inside a cell  that shows the packages the notebook's kernel can actually see."
     },
     {
       "topic": "List Comprehension",
@@ -147,7 +147,7 @@
       "topic": "Lambda Functions",
       "layout": "content",
       "title": "Small anonymous functions",
-      "lead": "A lambda is a one-expression function with no name — used where a function is expected for a moment and never again.",
+      "lead": "A lambda is a one-expression function with no name  used where a function is expected for a moment and never again.",
       "bullets": [
         "lambda args: expression",
         "The expression's value is returned automatically",
@@ -174,7 +174,7 @@
     {
       "topic": "map()",
       "layout": "code",
-      "title": "map() — apply a function to every item",
+      "title": "map()  apply a function to every item",
       "lead": "map returns a lazy iterator, so wrap it in list() when you want to see or reuse the result.",
       "code": {
         "lang": "python",
@@ -190,12 +190,12 @@
           "print(sum(scores) / len(scores))    # 67.33333333333333"
         ]
       },
-      "note": "map(float, raw) is the clearest version — pass an existing function by name, no lambda needed."
+      "note": "map(float, raw) is the clearest version  pass an existing function by name, no lambda needed."
     },
     {
       "topic": "filter()",
       "layout": "code",
-      "title": "filter() — keep the items that pass a test",
+      "title": "filter()  keep the items that pass a test",
       "lead": "The function you pass must return True or False. Items returning True are kept.",
       "code": {
         "lang": "python",
@@ -211,12 +211,12 @@
           "print(clean)                # ['Sokha', 'Dara', 'Mony']"
         ]
       },
-      "note": "[s for s in scores if s >= 50] does the same job and most Python teams prefer it. Know both — you will read both."
+      "note": "[s for s in scores if s >= 50] does the same job and most Python teams prefer it. Know both  you will read both."
     },
     {
       "topic": "zip()",
       "layout": "code",
-      "title": "zip() — walk two lists side by side",
+      "title": "zip()  walk two lists side by side",
       "lead": "zip pairs items by position and stops at the shortest list.",
       "code": {
         "lang": "python",
@@ -257,7 +257,7 @@
       "lead": "You have a working environment and the syntax that data code is written in.",
       "bullets": [
         "venv isolates a project; requirements.txt reproduces it",
-        "Jupyter runs cells in whatever order you click — restart to verify",
+        "Jupyter runs cells in whatever order you click  restart to verify",
         "Comprehensions replace build-a-list loops",
         "map / filter / zip with lambda transform sequences without loops"
       ],

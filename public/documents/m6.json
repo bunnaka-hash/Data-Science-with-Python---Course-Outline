@@ -18,11 +18,11 @@
       "title": "Mini Project",
       "lead": "Everything from Modules 01–05, applied end to end on one dataset of your choice.",
       "bullets": [
-        "Load — get real data into a DataFrame",
-        "Clean — handle missing values, duplicates, and types",
-        "Analyze — answer the question with groupby and aggregation",
-        "Visualize — three to five charts that carry the findings",
-        "Present — a notebook that reads as a report"
+        "Load  get real data into a DataFrame",
+        "Clean  handle missing values, duplicates, and types",
+        "Analyze  answer the question with groupby and aggregation",
+        "Visualize  three to five charts that carry the findings",
+        "Present  a notebook that reads as a report"
       ]
     },
     {
@@ -42,7 +42,7 @@
     {
       "topic": "Load Dataset",
       "layout": "code",
-      "title": "Step 1 — load and look",
+      "title": "Step 1  load and look",
       "lead": "Before anything else, understand the shape and quality of what you loaded.",
       "code": {
         "lang": "python",
@@ -67,7 +67,7 @@
     {
       "topic": "Clean Data",
       "layout": "code",
-      "title": "Step 2 — clean, with reasons",
+      "title": "Step 2  clean, with reasons",
       "lead": "Every cleaning decision needs a markdown cell underneath saying why you made it.",
       "code": {
         "lang": "python",
@@ -93,7 +93,7 @@
     {
       "topic": "Analyze Data",
       "layout": "code",
-      "title": "Step 3 — answer the question",
+      "title": "Step 3  answer the question",
       "lead": "Aggregate toward the question you wrote down. Resist exploring columns that cannot answer it.",
       "code": {
         "lang": "python",
@@ -118,7 +118,7 @@
     {
       "topic": "Visualize Results",
       "layout": "content",
-      "title": "Step 4 — three to five charts",
+      "title": "Step 4  three to five charts",
       "lead": "One chart per finding. More charts than findings means you are showing your process, not your conclusions.",
       "bullets": [
         "A trend line for the headline metric over time",
@@ -148,14 +148,14 @@
     {
       "topic": "Present Findings",
       "layout": "content",
-      "title": "Step 5 — the notebook as a report",
+      "title": "Step 5  the notebook as a report",
       "lead": "Structure the notebook so a reader who skips every code cell still gets the whole story.",
       "bullets": [
-        "1. Question — what you set out to answer and why it matters",
-        "2. Data — source, size, date range, and known limitations",
-        "3. Cleaning — what you changed, how many rows you lost",
-        "4. Findings — one heading per finding, chart directly beneath",
-        "5. Conclusion — the answer, plus what you would do with more time",
+        "1. Question  what you set out to answer and why it matters",
+        "2. Data  source, size, date range, and known limitations",
+        "3. Cleaning  what you changed, how many rows you lost",
+        "4. Findings  one heading per finding, chart directly beneath",
+        "5. Conclusion  the answer, plus what you would do with more time",
         "Finish with Kernel ▸ Restart & Run All so it runs top to bottom"
       ],
       "note": "State the limitations honestly. Naming what your data cannot show makes the parts it does show more credible, not less."
@@ -166,7 +166,7 @@
       "title": "Deliverables and marking",
       "lead": "Submit these three items. The marking weights tell you where to spend your remaining time.",
       "bullets": [
-        "project.ipynb — runs clean from a restarted kernel",
+        "project.ipynb  runs clean from a restarted kernel",
         "data/clean.csv and requirements.txt",
         "A 5-minute walkthrough of question, method, and findings",
         "Marking: cleaning 25% · analysis 30% · charts 25% · presentation 20%"
@@ -179,12 +179,12 @@
       "title": "Course recap",
       "lead": "Six modules, one pipeline you can now run on any dataset you meet.",
       "bullets": [
-        "01 — Python foundations: types, functions, containers, files",
-        "02 — Environment and the compact syntax of data code",
-        "03 — NumPy: vectorised numerical work",
-        "04 — Pandas: load, clean, filter, group, join",
-        "05 — Matplotlib: charts that make an argument",
-        "06 — The whole pipeline, applied and presented"
+        "01  Python foundations: types, functions, containers, files",
+        "02  Environment and the compact syntax of data code",
+        "03  NumPy: vectorised numerical work",
+        "04  Pandas: load, clean, filter, group, join",
+        "05  Matplotlib: charts that make an argument",
+        "06  The whole pipeline, applied and presented"
       ],
       "note": "Where to go next: statistics for analysts, SQL for pulling your own data, and scikit-learn for prediction."
     }

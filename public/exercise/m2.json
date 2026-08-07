@@ -12,7 +12,7 @@
       "tasks": [
         {
           "title": "Three comprehensions",
-          "brief": "Build the passing scores, a curved set of scores, and a lookup of name lengths — each as a single comprehension.",
+          "brief": "Build the passing scores, a curved set of scores, and a lookup of name lengths  each as a single comprehension.",
           "steps": [
             "Keep the scores of 50 and above",
             "Curve every score by 5 points, but never above 100",
@@ -72,14 +72,14 @@
             "",
             "print([place for place in cleaned if len(place.split()) == 2])"
           ],
-          "explain": "Naming the intermediate list is worth it here — the second comprehension reads from it instead of repeating the cleaning."
+          "explain": "Naming the intermediate list is worth it here  the second comprehension reads from it instead of repeating the cleaning."
         }
       ]
     },
     {
       "topic": "Lambda Functions",
       "title": "Small anonymous functions",
-      "lead": "A lambda is used where a function is expected for a moment and never again — most often as a `key=`.",
+      "lead": "A lambda is used where a function is expected for a moment and never again  most often as a `key=`.",
       "tasks": [
         {
           "title": "Rank the students",
@@ -100,7 +100,7 @@
             "# sort by score, highest first, then print the names"
           ],
           "expected": ["['Vira', 'Sokha', 'Mony', 'Dara']"],
-          "hint": "`sorted` gives you back whole dictionaries — pull the names out afterwards with a comprehension.",
+          "hint": "`sorted` gives you back whole dictionaries  pull the names out afterwards with a comprehension.",
           "solution": [
             "students = [",
             "    {\"name\": \"Sokha\", \"score\": 87.5},",
@@ -127,13 +127,13 @@
             "# sort by length, then alphabetically"
           ],
           "expected": ["['map', 'set', 'zip', 'list', 'filter', 'lambda']"],
-          "hint": "One `sorted` call is enough — the tuple key does both jobs.",
+          "hint": "One `sorted` call is enough  the tuple key does both jobs.",
           "solution": [
             "words = [\"zip\", \"map\", \"filter\", \"lambda\", \"list\", \"set\"]",
             "",
             "print(sorted(words, key=lambda w: (len(w), w)))"
           ],
-          "explain": "This is the standard way to sort by several fields — build a tuple in the order you want them compared."
+          "explain": "This is the standard way to sort by several fields  build a tuple in the order you want them compared."
         }
       ]
     },
@@ -146,7 +146,7 @@
           "title": "Fix the types coming out of a CSV",
           "brief": "Convert the raw strings to floats with `map`, then print the list and its average rounded to two places.",
           "steps": [
-            "`map(float, raw)` needs no lambda — pass the function by name",
+            "`map(float, raw)` needs no lambda  pass the function by name",
             "Wrap the result in `list()` before using it twice"
           ],
           "starter": [
@@ -157,7 +157,7 @@
             "# 2. their average, rounded to two places"
           ],
           "expected": ["[87.5, 41.0, 73.5, 92.0]", "73.5"],
-          "hint": "A map object can only be walked once — that is why `list()` matters when you need it twice.",
+          "hint": "A map object can only be walked once  that is why `list()` matters when you need it twice.",
           "solution": [
             "raw = [\"87.5\", \"41\", \"73.5\", \"92\"]",
             "",
@@ -183,7 +183,7 @@
             "# 2. the passing scores"
           ],
           "expected": ["['Sokha', 'Dara', 'Mony']", "[80, 92, 75, 88]"],
-          "hint": "`filter(None, ...)` is a shortcut — passing `None` as the function means \"keep what is truthy\".",
+          "hint": "`filter(None, ...)` is a shortcut  passing `None` as the function means \"keep what is truthy\".",
           "solution": [
             "names = [\"Sokha\", \"\", \"Dara\", None, \"Mony\"]",
             "scores = [80, 92, 75, 41, 88]",
@@ -191,7 +191,7 @@
             "print(list(filter(None, names)))",
             "print(list(filter(lambda s: s >= 50, scores)))"
           ],
-          "explain": "`[s for s in scores if s >= 50]` does the same job as the second line, and most Python teams prefer it. Know both — you will read both."
+          "explain": "`[s for s in scores if s >= 50]` does the same job as the second line, and most Python teams prefer it. Know both  you will read both."
         }
       ]
     },
@@ -235,7 +235,7 @@
         },
         {
           "title": "All four together",
-          "brief": "Convert, combine, filter, and sort — the whole toolkit on one small dataset.",
+          "brief": "Convert, combine, filter, and sort  the whole toolkit on one small dataset.",
           "steps": [
             "Convert the scores to floats with `map`",
             "Build a list of `{\"name\": …, \"score\": …}` dictionaries with `zip`",

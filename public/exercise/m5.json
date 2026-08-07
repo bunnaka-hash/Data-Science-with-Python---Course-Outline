@@ -2,13 +2,13 @@
   "id": "m5",
   "number": "05",
   "title": "Matplotlib",
-  "description": "Build charts that make an argument — and label them so nobody has to ask.",
+  "description": "Build charts that make an argument  and label them so nobody has to ask.",
   "duration": "70 min",
   "lessons": [
     {
       "topic": "Line Chart",
       "title": "Change over time",
-      "lead": "Every chart you draw here is rendered under the output panel. Matplotlib loads on the first run — give it a few seconds.",
+      "lead": "Every chart you draw here is rendered under the output panel. Matplotlib loads on the first run  give it a few seconds.",
       "packages": ["matplotlib", "numpy"],
       "tasks": [
         {
@@ -167,7 +167,7 @@
             "print(labels)",
             "print(values)"
           ],
-          "explain": "Sorting smallest first puts the longest bar at the top once matplotlib draws the first category at the bottom — which is the order a reader expects."
+          "explain": "Sorting smallest first puts the longest bar at the top once matplotlib draws the first category at the bottom  which is the order a reader expects."
         },
         {
           "title": "Label the bars, drop the box",
@@ -214,7 +214,7 @@
             "print([side for side in [\"left\", \"right\", \"top\", \"bottom\"]",
             "       if ax.spines[side].get_visible()])"
           ],
-          "explain": "With a handful of bars, a value at the end of each one beats a grid — the reader gets the exact number without tracing a line across the chart."
+          "explain": "With a handful of bars, a value at the end of each one beats a grid  the reader gets the exact number without tracing a line across the chart."
         }
       ]
     },
@@ -230,7 +230,7 @@
           "steps": [
             "`ax.scatter(x, y, alpha=0.6, s=40, edgecolor=\"white\")`",
             "`np.corrcoef(x, y)[0, 1]` is the correlation",
-            "Label both axes — a scatter with bare numbers says nothing"
+            "Label both axes  a scatter with bare numbers says nothing"
           ],
           "starter": [
             "import matplotlib.pyplot as plt",
@@ -284,7 +284,7 @@
             "# 3. print: 8 bins  then  mean 74.75"
           ],
           "expected": ["8 bins", "mean 74.75"],
-          "hint": "The mean is `sum(scores) / len(scores)` — no library needed.",
+          "hint": "The mean is `sum(scores) / len(scores)`  no library needed.",
           "solution": [
             "import matplotlib.pyplot as plt",
             "",
@@ -304,7 +304,7 @@
             "print(8, \"bins\")",
             "print(\"mean\", round(mean, 2))"
           ],
-          "explain": "Change `bins` to 4 and then to 20 and run it again. The data never moved, but the story the chart tells did — which is why the bin count is a decision, not a default."
+          "explain": "Change `bins` to 4 and then to 20 and run it again. The data never moved, but the story the chart tells did  which is why the bin count is a decision, not a default."
         }
       ]
     },
@@ -343,7 +343,7 @@
             "# 4. print: rotation 45"
           ],
           "expected": ["rotation 45"],
-          "hint": "`ax.get_xticklabels()[0].get_rotation()` reads the rotation back — wrap it in `int()` to print it cleanly.",
+          "hint": "`ax.get_xticklabels()[0].get_rotation()` reads the rotation back  wrap it in `int()` to print it cleanly.",
           "solution": [
             "import matplotlib.pyplot as plt",
             "",
@@ -389,7 +389,7 @@
             "# 3. print: 2 axes  then each title on its own line"
           ],
           "expected": ["2 axes", "Score distribution", "Hours vs score"],
-          "hint": "`axes[0].set_title(\"Score distribution\")` and `axes[1].set_title(\"Hours vs score\")` — then read them back with `get_title()`.",
+          "hint": "`axes[0].set_title(\"Score distribution\")` and `axes[1].set_title(\"Hours vs score\")`  then read them back with `get_title()`.",
           "solution": [
             "import matplotlib.pyplot as plt",
             "",

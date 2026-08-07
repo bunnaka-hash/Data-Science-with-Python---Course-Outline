@@ -2,12 +2,12 @@
   "id": "m6",
   "number": "06",
   "title": "Mini Project",
-  "description": "Run the whole pipeline — load, clean, analyse, visualise — on one small messy dataset.",
+  "description": "Run the whole pipeline  load, clean, analyse, visualise  on one small messy dataset.",
   "duration": "90 min",
   "lessons": [
     {
       "topic": "Load Dataset",
-      "title": "Step 1 — load and look",
+      "title": "Step 1  load and look",
       "lead": "Every task here starts from the same deliberately messy export. Understand it before you change any of it.",
       "packages": ["pandas"],
       "tasks": [
@@ -15,7 +15,7 @@
           "title": "What did you just load?",
           "brief": "Read the CSV and report its shape, its column names, the missing values per column, and how many rows are exact duplicates.",
           "steps": [
-            "The raw text is already in the starter — read it with `pd.read_csv(io.StringIO(RAW))`",
+            "The raw text is already in the starter  read it with `pd.read_csv(io.StringIO(RAW))`",
             "`df.isna().sum().to_dict()` counts the gaps per column",
             "`df.duplicated().sum()` counts the repeated rows"
           ],
@@ -51,7 +51,7 @@
             "{'Order ID': 0, 'Date ': 0, 'category': 0, 'Amount': 1, 'Region': 1}",
             "1 duplicate rows"
           ],
-          "hint": "Look closely at the second column name — it has a trailing space, which is exactly the kind of thing this step is for.",
+          "hint": "Look closely at the second column name  it has a trailing space, which is exactly the kind of thing this step is for.",
           "solution": [
             "import io",
             "import pandas as pd",
@@ -77,7 +77,7 @@
             "print(df.isna().sum().to_dict())",
             "print(df.duplicated().sum(), \"duplicate rows\")"
           ],
-          "explain": "Shape, columns, gaps, duplicates — four lines that tell you what kind of cleaning the next step has to do."
+          "explain": "Shape, columns, gaps, duplicates  four lines that tell you what kind of cleaning the next step has to do."
         },
         {
           "title": "Tidy the column names",
@@ -122,7 +122,7 @@
             "1 bad amounts",
             "1 negative amounts"
           ],
-          "hint": "Convert into a temporary Series first — `dates = pd.to_datetime(df[\"date\"], errors=\"coerce\")` — then count `dates.isna().sum()`.",
+          "hint": "Convert into a temporary Series first  `dates = pd.to_datetime(df[\"date\"], errors=\"coerce\")`  then count `dates.isna().sum()`.",
           "solution": [
             "import io",
             "import pandas as pd",
@@ -159,18 +159,18 @@
     },
     {
       "topic": "Clean Data",
-      "title": "Step 2 — clean, with reasons",
+      "title": "Step 2  clean, with reasons",
       "lead": "Every decision here throws data away, so every decision needs a reason you can say out loud.",
       "packages": ["pandas"],
       "tasks": [
         {
           "title": "The full cleaning pass",
-          "brief": "Run the whole sequence — dedupe, convert, drop, fill, filter — and report how many rows survive.",
+          "brief": "Run the whole sequence  dedupe, convert, drop, fill, filter  and report how many rows survive.",
           "steps": [
             "Drop exact duplicate rows first",
             "Convert `date` and `amount` with `errors=\"coerce\"`",
-            "Drop rows with no date or no amount — they cannot be analysed",
-            "Fill a missing region with `\"unknown\"` — the row is still usable",
+            "Drop rows with no date or no amount  they cannot be analysed",
+            "Fill a missing region with `\"unknown\"`  the row is still usable",
             "Drop the negative amounts; they are refunds and out of scope"
           ],
           "starter": [
@@ -243,7 +243,7 @@
             "print(sorted(df[\"region\"].unique().tolist()))",
             "print(\"total\", round(float(df[\"amount\"].sum()), 2))"
           ],
-          "explain": "Four of eleven rows are gone. On a real project that ratio goes in the report — an analysis that silently discards a third of the data is not trustworthy."
+          "explain": "Four of eleven rows are gone. On a real project that ratio goes in the report  an analysis that silently discards a third of the data is not trustworthy."
         },
         {
           "title": "Say what you dropped",
@@ -322,7 +322,7 @@
     },
     {
       "topic": "Analyze Data",
-      "title": "Step 3 — answer the question",
+      "title": "Step 3  answer the question",
       "lead": "The question: which category drives revenue, and how did revenue move month to month?",
       "packages": ["pandas"],
       "tasks": [
@@ -390,7 +390,7 @@
             "",
             "print(df.groupby(\"category\").size().to_dict())"
           ],
-          "explain": "Games leads on revenue with the fewest orders of any category — two facts that only mean something side by side. That contrast is a finding; either number alone is not."
+          "explain": "Games leads on revenue with the fewest orders of any category  two facts that only mean something side by side. That contrast is a finding; either number alone is not."
         },
         {
           "title": "Revenue month by month",
@@ -427,7 +427,7 @@
             "[57.5, 80.0, 25.0, 155.5, 55.0]",
             "best Apr 155.5"
           ],
-          "hint": "`monthly.idxmax()` returns a timestamp — format it with `.strftime(\"%b\")` the same way as the month names.",
+          "hint": "`monthly.idxmax()` returns a timestamp  format it with `.strftime(\"%b\")` the same way as the month names.",
           "solution": [
             "import io",
             "import pandas as pd",
@@ -458,7 +458,7 @@
     },
     {
       "topic": "Visualize & Present",
-      "title": "Steps 4 and 5 — charts and findings",
+      "title": "Steps 4 and 5  charts and findings",
       "lead": "One chart per finding, each title stating what the chart shows rather than which columns it used.",
       "packages": ["pandas", "matplotlib"],
       "tasks": [
@@ -526,7 +526,7 @@
             "print(ax.get_title())",
             "print(ax.get_xlabel(), \"|\", ax.get_ylabel())"
           ],
-          "explain": "Five months is a very short series — the chart shows a peak, not a trend. Saying so in the report is what separates a finding from an overclaim."
+          "explain": "Five months is a very short series  the chart shows a peak, not a trend. Saying so in the report is what separates a finding from an overclaim."
         },
         {
           "title": "The category chart and the write-up",

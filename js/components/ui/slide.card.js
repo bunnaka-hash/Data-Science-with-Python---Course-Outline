@@ -95,6 +95,42 @@ function renderObjectives(objectives) {
   `;
 }
 
+/** The institute cell of the footline. Decks may override it. */
+const INSTITUTE = "STJ";
+
+/**
+ * The Beamer headline: structure-blue bar carrying the frame title, with
+ * the topic trailing in the grey remainder. A title slide names its module
+ * here instead, so the big title in the body is not simply repeated.
+ */
+function renderHeadline(slide, deck, isTitle) {
+  const frameTitle = isTitle
+    ? `Module ${deck.number ?? ""}`.trim()
+    : slide.title;
+
+  return `
+    <div class="beamer-head">
+      <span class="beamer-frametitle">${escapeHtml(frameTitle)}</span>
+      <span class="beamer-headfill">${escapeHtml(slide.topic ?? "")}</span>
+    </div>
+  `;
+}
+
+/** The Beamer footline: deck · institute · page, in equal thirds. */
+function renderFootline(index, deck) {
+  const total = deck.slides?.length ?? 0;
+
+  return `
+    <div class="beamer-foot">
+      <span class="beamer-foot-cell beamer-foot-cell--deck">${escapeHtml(deck.title)}</span>
+      <span class="beamer-foot-cell beamer-foot-cell--institute">${escapeHtml(deck.institute ?? INSTITUTE)}</span>
+      <span class="beamer-foot-cell beamer-foot-cell--page">
+        ${index + 1}<span class="sep">&nbsp;/&nbsp;</span><span class="total">${total}</span>
+      </span>
+    </div>
+  `;
+}
+
 function renderSlide(slide, index, deck) {
   const meta = layoutMeta(slide.layout);
   const isTitle = slide.layout === "title";
@@ -108,30 +144,37 @@ function renderSlide(slide, index, deck) {
 
   return `
     <article
-      class="slide slide--${escapeHtml(slide.layout ?? "content")}${isSplit ? " is-split" : ""}"
+      class="slide beamer slide--${escapeHtml(slide.layout ?? "content")}${isSplit ? " is-split" : ""}"
       data-index="${index}"
     >
-      <header class="slide-head">
-        <span class="slide-kicker">
-          <i class="${meta.icon}"></i>
-          ${escapeHtml(slide.topic ?? meta.label)}
-        </span>
-        ${isTitle ? `<span class="slide-module-tag">Module ${escapeHtml(deck.number)}</span>` : ""}
-      </header>
+      ${renderHeadline(slide, deck, isTitle)}
 
-      <h2 class="slide-title">${escapeHtml(slide.title)}</h2>
-      ${slide.lead ? `<p class="slide-lead">${escapeHtml(slide.lead)}</p>` : ""}
+      <div class="beamer-body">
+        <header class="slide-head">
+          <!-- The topic already sits in the headline, so the kicker
+               carries the layout instead of repeating it. -->
+          <span class="slide-kicker">
+            <i class="${meta.icon}"></i>
+            ${escapeHtml(meta.label)}
+          </span>
+        </header>
 
-      <div class="slide-body">
-        ${
-          prose.trim()
-            ? `<div class="slide-col">${prose}</div>`
-            : ""
-        }
-        ${hasCode ? `<div class="slide-col slide-col--code">${renderCode(slide.code)}</div>` : ""}
+        <h2 class="slide-title">${escapeHtml(slide.title)}</h2>
+        ${slide.lead ? `<p class="slide-lead">${escapeHtml(slide.lead)}</p>` : ""}
+
+        <div class="slide-body">
+          ${
+            prose.trim()
+              ? `<div class="slide-col">${prose}</div>`
+              : ""
+          }
+          ${hasCode ? `<div class="slide-col slide-col--code">${renderCode(slide.code)}</div>` : ""}
+        </div>
+
+        ${renderNote(slide.note)}
       </div>
 
-      ${renderNote(slide.note)}
+      ${renderFootline(index, deck)}
     </article>
   `;
 }

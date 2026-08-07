@@ -2,7 +2,7 @@
   "id": "m4",
   "number": "04",
   "title": "Pandas",
-  "description": "Check the core analyst skill set — load, filter, group, join, and clean.",
+  "description": "Check the core analyst skill set  load, filter, group, join, and clean.",
   "duration": "25 min",
   "passing": 70,
   "lessons": [
@@ -31,12 +31,12 @@
             "Both return Series"
           ],
           "answer": 0,
-          "explain": "One column name gives a Series; a list of column names gives a DataFrame — even a list of one."
+          "explain": "One column name gives a Series; a list of column names gives a DataFrame  even a list of one."
         },
         {
           "prompt": "Which method should you run first on a dataset you have never seen?",
           "options": [
-            "`df.info()` — dtypes and non-null counts together",
+            "`df.info()`  dtypes and non-null counts together",
             "`df.sort_values()`",
             "`df.to_csv()`",
             "`df.merge()`"
@@ -53,7 +53,7 @@
             "`df.head()` permanently trims the DataFrame to 5 rows"
           ],
           "answer": [0, 1, 2],
-          "explain": "`.head()` only shows the first rows — it returns a view for you to look at and leaves `df` alone."
+          "explain": "`.head()` only shows the first rows  it returns a view for you to look at and leaves `df` alone."
         }
       ]
     },
@@ -87,13 +87,13 @@
         {
           "prompt": "Which `read_csv` arguments do what they say?",
           "options": [
-            "`parse_dates=[\"enrolled_at\"]` — read that column as datetimes",
-            "`na_values=[\"\", \"N/A\", \"-\"]` — treat those strings as missing",
-            "`encoding=\"utf-8\"` — read non-ASCII text correctly",
-            "`sheet_name=\"Term1\"` — pick a worksheet from a CSV"
+            "`parse_dates=[\"enrolled_at\"]`  read that column as datetimes",
+            "`na_values=[\"\", \"N/A\", \"-\"]`  treat those strings as missing",
+            "`encoding=\"utf-8\"`  read non-ASCII text correctly",
+            "`sheet_name=\"Term1\"`  pick a worksheet from a CSV"
           ],
           "answer": [0, 1, 2],
-          "explain": "`sheet_name` belongs to `read_excel` — a CSV is a single flat file with no sheets."
+          "explain": "`sheet_name` belongs to `read_excel`  a CSV is a single flat file with no sheets."
         },
         {
           "prompt": "What does `pd.read_excel` need that `read_csv` does not?",
@@ -127,13 +127,13 @@
         {
           "prompt": "Why does `df[df.score < 50][\"status\"] = \"retake\"` fail to change anything?",
           "options": [
-            "It assigns into a temporary copy — use a single `.loc` instead",
+            "It assigns into a temporary copy  use a single `.loc` instead",
             "`status` must exist before you can assign to it",
             "Chained brackets are a SyntaxError",
             "String values cannot be assigned this way"
           ],
           "answer": 0,
-          "explain": "That is the SettingWithCopyWarning. Write `df.loc[df[\"score\"] < 50, \"status\"] = \"retake\"` — one indexer, one operation."
+          "explain": "That is the SettingWithCopyWarning. Write `df.loc[df[\"score\"] < 50, \"status\"] = \"retake\"`  one indexer, one operation."
         },
         {
           "prompt": "What does `df.groupby(\"class\")[\"score\"].mean()` do?",
@@ -168,7 +168,7 @@
           "prompt": "`students` has ids 1, 2, 3 and `scores` has ids 1, 2, 4. How many rows does an inner merge on `id` return?",
           "options": ["2", "3", "4", "6"],
           "answer": 0,
-          "explain": "An inner join keeps only keys present on both sides — ids 1 and 2. `how=\"left\"` would keep all three students, with NaN for Mony."
+          "explain": "An inner join keeps only keys present on both sides  ids 1 and 2. `how=\"left\"` would keep all three students, with NaN for Mony."
         },
         {
           "prompt": "A merge returned more rows than you started with. What does that usually mean?",
@@ -201,7 +201,7 @@
             "Pandas fills missing numbers with 0 automatically"
           ],
           "answer": [0, 1, 2],
-          "explain": "Nothing is filled automatically — that is the point. Decide deliberately whether to drop or fill, and record the decision."
+          "explain": "Nothing is filled automatically  that is the point. Decide deliberately whether to drop or fill, and record the decision."
         }
       ]
     },
@@ -230,7 +230,7 @@
             "`year(df[\"date\"])`"
           ],
           "answer": 0,
-          "explain": "The `.dt` accessor is the gateway to every date part — `.dt.month`, `.dt.day_name()`, and the rest."
+          "explain": "The `.dt` accessor is the gateway to every date part  `.dt.month`, `.dt.day_name()`, and the rest."
         },
         {
           "prompt": "What does `df.set_index(\"date\").resample(\"ME\")[\"score\"].mean()` produce?",
