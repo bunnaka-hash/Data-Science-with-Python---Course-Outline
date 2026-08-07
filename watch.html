@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>STJ - References</title>
+    <title>STJ - Watch</title>
     <link rel="icon" type="image/png" href="./public/image/schoollogo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -18,12 +18,12 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body class="slide-page reference-page">
-    <!-- ===== Sidebar: every resource in this module ===== -->
+  <body class="slide-page reference-page watch-page">
+    <!-- ===== Sidebar: the same resource list, as a playlist ===== -->
     <aside class="sidebar">
-      <a class="back-link" href="./index.html">
+      <a class="back-link" id="backToRefs" href="./reference">
         <i class="fa-solid fa-arrow-left"></i>
-        Course outline
+        All references
       </a>
 
       <div class="brand">
@@ -36,20 +36,32 @@
       </div>
       <div class="progress-label" id="progressLabel"></div>
 
-      <nav id="referenceNav"></nav>
-
-      <div class="sidebar-footer" id="moduleSwitch"></div>
+      <nav id="watchNav"></nav>
     </aside>
 
-    <!-- ===== Main: the whole library on one page ===== -->
+    <!-- ===== Main: the player ===== -->
     <main class="deck">
       <header class="deck-top">
-        <span class="eyebrow" id="referenceKicker">loading…</span>
+        <span class="eyebrow" id="watchKicker">loading…</span>
 
         <div class="deck-controls">
-          <div class="ref-filters" id="referenceFilters"></div>
-          <span class="deck-divider"></span>
-          <span class="deck-counter" id="referenceCounter">–</span>
+          <button
+            class="deck-btn"
+            id="prevBtn"
+            type="button"
+            title="Previous resource (←)"
+          >
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <span class="deck-counter" id="watchCounter">– / –</span>
+          <button
+            class="deck-btn"
+            id="nextBtn"
+            type="button"
+            title="Next resource (→)"
+          >
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
         </div>
       </header>
 
@@ -58,6 +70,6 @@
       <footer class="deck-bottom" id="deckBottom"></footer>
     </main>
 
-    <script src="./js/reference.js" type="module"></script>
+    <script src="./js/watch.js" type="module"></script>
   </body>
 </html>

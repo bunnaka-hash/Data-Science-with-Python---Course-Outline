@@ -1,0 +1,389 @@
+/* ============================================================
+   References — reference.html and watch.html
+   Layered on slide.css: the sidebar, deck shell, and card chrome
+   are shared. Only the library and the player live here.
+   ============================================================ */
+
+:root {
+  --ref-video: #b5473a;
+  --ref-video-soft: #fbeae7;
+  --ref-doc: #2e7d63;
+  --ref-doc-soft: #e7f3ee;
+}
+
+.reference-page .slide-kicker i,
+.reference-page .slide-kicker svg {
+  color: var(--blue);
+}
+
+/* The library reads as one long list, so it takes the full stage the way
+   the workbook does rather than sitting in a narrow column. */
+.ref-card,
+.watch-card {
+  max-width: 100%;
+}
+
+.reference-page .stage {
+  justify-content: stretch;
+}
+
+/* ---------- Filter tabs ---------- */
+.ref-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ref-filter {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.ref-filter:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.ref-filter.active {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-weight: 500;
+}
+
+/* ---------- Groups ---------- */
+.ref-group {
+  margin-top: 34px;
+}
+.ref-group[hidden] {
+  display: none;
+}
+.ref-group-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.ref-group-head h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.ref-count {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.ref-group-blurb {
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 78ch;
+}
+
+/* ---------- One resource ---------- */
+.ref-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.ref-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--panel);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.4s ease;
+}
+.ref-item[hidden] {
+  display: none;
+}
+.ref-item:hover {
+  border-color: #c9dcea;
+  box-shadow: 0 2px 8px rgba(18, 22, 31, 0.06);
+}
+.ref-item.is-missing {
+  border-style: dashed;
+  background: var(--bg);
+}
+/* Flashes the row the sidebar just jumped to, then fades back. */
+.ref-item.is-flagged {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+
+.ref-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: var(--bg);
+  color: var(--slate);
+  font-size: 15px;
+}
+.ref-item[data-kind="video"] .ref-icon {
+  background: var(--ref-video-soft);
+  color: var(--ref-video);
+}
+.ref-item[data-kind="book"] .ref-icon,
+.ref-item[data-kind="pdf"] .ref-icon {
+  background: var(--ref-doc-soft);
+  color: var(--ref-doc);
+}
+.ref-item[data-kind="link"] .ref-icon,
+.ref-item[data-kind="slides"] .ref-icon {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.ref-body {
+  flex: 1;
+  min-width: 0;
+}
+.ref-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.ref-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.ref-kind {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.ref-note {
+  margin-top: 5px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 78ch;
+}
+
+.ref-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 9px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  color: var(--slate);
+}
+.ref-meta i,
+.ref-meta svg {
+  margin-right: 6px;
+  width: 11px;
+  height: 11px;
+}
+
+.ref-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.ref-todo {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: #b5473a;
+  background: #fbeae7;
+  padding: 5px 9px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.ref-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--blue);
+  border-radius: 9px;
+  background: var(--blue);
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--panel);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.1s ease;
+}
+.ref-btn:hover {
+  transform: translateY(-1px);
+}
+.ref-btn--ghost {
+  border-color: var(--line);
+  background: var(--panel);
+  color: var(--ink-soft);
+}
+.ref-btn--ghost:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.ref-empty {
+  margin-top: 30px;
+  padding: 22px;
+  border: 1px dashed var(--line);
+  border-radius: 11px;
+  background: var(--bg);
+  font-size: 14px;
+  color: var(--slate);
+  text-align: center;
+}
+
+/* ---------- The player ---------- */
+.watch-page .stage {
+  justify-content: stretch;
+}
+
+/* The frame leads the card — the title reads underneath it, the way it
+   does on a video page, so the player is what the eye lands on first. */
+.watch-frame {
+  position: relative;
+  margin: 4px 0 26px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0f1420;
+}
+.watch-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.watch-frame--video {
+  aspect-ratio: 16 / 9;
+  /* Keeps the whole player reachable without scrolling on short windows. */
+  max-height: calc(100vh - 300px);
+}
+.watch-frame--doc {
+  aspect-ratio: 4 / 3;
+  max-height: calc(100vh - 260px);
+  background: var(--bg);
+}
+
+.watch-blocked {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 4px 0 26px;
+  padding: 22px 24px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: var(--yellow-soft);
+}
+.watch-blocked.is-empty {
+  background: var(--bg);
+}
+.watch-blocked i,
+.watch-blocked svg {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  color: var(--yellow);
+  flex-shrink: 0;
+}
+.watch-blocked.is-empty i,
+.watch-blocked.is-empty svg {
+  color: var(--slate);
+}
+.watch-blocked strong {
+  display: block;
+  font-size: 14.5px;
+  margin-bottom: 4px;
+}
+.watch-blocked span {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.watch-blocked code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.88em;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+.watch-card .ref-meta {
+  margin-top: 14px;
+}
+
+.watch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+/* The playlist marks the kind rather than a slide number. */
+.reference-page .nav-slide .tag {
+  min-width: 14px;
+  text-align: center;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .ref-item {
+    flex-wrap: wrap;
+  }
+  .ref-actions {
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 53px;
+  }
+  .ref-filters {
+    order: 3;
+    width: 100%;
+  }
+  .watch-frame--video,
+  .watch-frame--doc {
+    max-height: none;
+  }
+}

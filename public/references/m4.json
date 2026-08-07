@@ -1,0 +1,79 @@
+{
+  "id": "m4",
+  "number": "04",
+  "title": "Pandas",
+  "intro": "Loading, cleaning and reshaping real datasets. Anything with a Watch here or Read here button plays inside this site.",
+  "groups": [
+    {
+      "topic": "Watch",
+      "blurb": "Paste any YouTube or Vimeo link into the url field and it plays in the course page.",
+      "items": [
+        {
+          "kind": "video",
+          "title": "Series and DataFrame basics",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "Reading a CSV, then selecting rows and columns."
+        },
+        {
+          "kind": "video",
+          "title": "GroupBy, merge and missing values",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "The three operations most of the exercises depend on."
+        }
+      ]
+    },
+    {
+      "topic": "Read",
+      "blurb": "Course handouts live on Drive. Paste the share link and the PDF opens inside the page.",
+      "items": [
+        {
+          "kind": "book",
+          "title": "Module 04 handout (PDF)",
+          "by": "STJ",
+          "pages": "add page range",
+          "url": "",
+          "note": "Paste the Drive share link, for example https://drive.google.com/file/d/FILEID/view"
+        },
+        {
+          "kind": "link",
+          "title": "10 minutes to pandas",
+          "by": "pandas",
+          "url": "https://pandas.pydata.org/docs/user_guide/10min.html",
+          "note": "The fastest tour of the whole library. Read it once before the exercises."
+        },
+        {
+          "kind": "link",
+          "title": "Group by: split, apply, combine",
+          "by": "pandas",
+          "url": "https://pandas.pydata.org/docs/user_guide/groupby.html",
+          "note": "The model behind groupby, with worked aggregation examples."
+        },
+        {
+          "kind": "link",
+          "title": "Merge, join and concatenate",
+          "by": "pandas",
+          "url": "https://pandas.pydata.org/docs/user_guide/merging.html",
+          "note": "Diagrams for inner, outer, left and right joins."
+        },
+        {
+          "kind": "link",
+          "title": "Working with missing data",
+          "by": "pandas",
+          "url": "https://pandas.pydata.org/docs/user_guide/missing_data.html",
+          "note": "What NaN means, and when to drop versus fill."
+        },
+        {
+          "kind": "link",
+          "title": "Time series and date functionality",
+          "by": "pandas",
+          "url": "https://pandas.pydata.org/docs/user_guide/timeseries.html",
+          "note": "Background for the DateTime introduction at the end of the module."
+        }
+      ]
+    }
+  ]
+}

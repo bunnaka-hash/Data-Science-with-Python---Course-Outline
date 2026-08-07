@@ -1,0 +1,84 @@
+{
+  "id": "m6",
+  "number": "06",
+  "title": "Mini Project",
+  "intro": "Briefs, datasets and worked examples for the capstone. Anything with a Watch here or Read here button plays inside this site.",
+  "groups": [
+    {
+      "topic": "Watch",
+      "blurb": "Paste any YouTube or Vimeo link into the url field and it plays in the course page.",
+      "items": [
+        {
+          "kind": "video",
+          "title": "An end to end data analysis walkthrough",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "Load, clean, analyse, visualise, present. The shape of the project."
+        },
+        {
+          "kind": "video",
+          "title": "Presenting your findings",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "How to talk about a chart without reading the numbers aloud."
+        }
+      ]
+    },
+    {
+      "topic": "Project brief",
+      "blurb": "The brief and the marking sheet. Drive links preview inside the page.",
+      "items": [
+        {
+          "kind": "book",
+          "title": "Mini project brief (PDF)",
+          "by": "STJ",
+          "url": "",
+          "note": "Paste the Drive share link, for example https://drive.google.com/file/d/FILEID/view"
+        },
+        {
+          "kind": "book",
+          "title": "Marking rubric (PDF)",
+          "by": "STJ",
+          "url": "",
+          "note": "What the project is assessed on."
+        },
+        {
+          "kind": "dataset",
+          "title": "Project dataset (CSV)",
+          "by": "STJ",
+          "url": "",
+          "note": "Paste the Drive link to the dataset students should analyse."
+        }
+      ]
+    },
+    {
+      "topic": "Find a dataset",
+      "blurb": "If students choose their own topic, these are safe places to look.",
+      "items": [
+        {
+          "kind": "link",
+          "title": "Kaggle Datasets",
+          "by": "Kaggle",
+          "url": "https://www.kaggle.com/datasets",
+          "note": "Large catalogue, mostly CSV, with a free account required to download."
+        },
+        {
+          "kind": "link",
+          "title": "UCI Machine Learning Repository",
+          "by": "UC Irvine",
+          "url": "https://archive.ics.uci.edu/",
+          "note": "Small, clean, classic teaching datasets."
+        },
+        {
+          "kind": "link",
+          "title": "Our World in Data",
+          "by": "Global Change Data Lab",
+          "url": "https://ourworldindata.org/",
+          "note": "Well documented global datasets, good for charts with a story."
+        }
+      ]
+    }
+  ]
+}

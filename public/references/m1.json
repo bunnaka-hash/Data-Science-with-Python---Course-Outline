@@ -1,0 +1,72 @@
+{
+  "id": "m1",
+  "number": "01",
+  "title": "Python Foundations",
+  "intro": "Everything here backs up Module 01. Anything with a Watch here or Read here button plays inside this site; the rest open at the source.",
+  "groups": [
+    {
+      "topic": "Watch",
+      "blurb": "Paste any YouTube or Vimeo link into the url field and it plays in the course page.",
+      "items": [
+        {
+          "kind": "video",
+          "title": "Python types, variables and control flow",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "Paste a YouTube watch link here, for example https://www.youtube.com/watch?v=VIDEOID"
+        },
+        {
+          "kind": "video",
+          "title": "Writing your first functions",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "Covers parameters, defaults and return values."
+        }
+      ]
+    },
+    {
+      "topic": "Read",
+      "blurb": "Course handouts live on Drive. A Drive share link is rewritten to its preview form automatically, so PDFs open inside the page.",
+      "items": [
+        {
+          "kind": "book",
+          "title": "Module 01 handout (PDF)",
+          "by": "STJ",
+          "pages": "add page range",
+          "url": "",
+          "note": "Paste the Drive share link, for example https://drive.google.com/file/d/FILEID/view"
+        },
+        {
+          "kind": "link",
+          "title": "The Python Tutorial",
+          "by": "Python Software Foundation",
+          "url": "https://docs.python.org/3/tutorial/",
+          "note": "The official walkthrough. Sections 3 to 5 line up with this module."
+        },
+        {
+          "kind": "link",
+          "title": "Automate the Boring Stuff with Python",
+          "by": "Al Sweigart",
+          "url": "https://automatetheboringstuff.com/",
+          "note": "Free to read online. Chapters 1 to 6 cover types, control flow, functions and lists."
+        },
+        {
+          "kind": "link",
+          "title": "Data structures: lists, dictionaries and sets",
+          "by": "docs.python.org",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html",
+          "note": "The reference for the two containers used every day in this course."
+        },
+        {
+          "kind": "link",
+          "title": "Reading and writing files",
+          "by": "docs.python.org",
+          "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+          "note": "Explains why the with statement is the safe way to open a file."
+        }
+      ]
+    }
+  ]
+}
