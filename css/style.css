@@ -228,40 +228,46 @@
   .chip{
     display:inline-flex;
     align-items:center;
-    gap:7px;
-    padding:8px 13px;
-    border-radius:8px;
+    gap:9px;
+    padding:10px 15px;
+    border-radius:10px;
     border:1px solid var(--line);
     background:var(--panel);
+    box-shadow:0 1px 2px rgba(18,22,31,.05);
     text-decoration:none;
-    font-size:13px;
-    font-weight:500;
+    font-size:14px;
+    font-weight:600;
     color:var(--ink);
-    transition:border-color .15s ease, transform .1s ease, background .15s ease;
+    transition:border-color .15s ease, transform .1s ease, background .15s ease, box-shadow .15s ease;
   }
-  .chip:hover{ transform:translateY(-1px); }
-  .chip svg{ width:14px; height:14px; flex-shrink:0; }
+  .chip:hover{ transform:translateY(-1px); box-shadow:0 3px 8px rgba(18,22,31,.08); }
 
   .chip.slide{ border-color:#EAD6A6; }
   .chip.slide:hover{ background:var(--yellow-soft); border-color:var(--yellow); }
-  .chip.slide svg{ color:var(--yellow); }
+  .chip.slide .resource-icon{ color:var(--yellow); }
 
   .chip.doc{ border-color:#C9DCEA; }
   .chip.doc:hover{ background:var(--blue-soft); border-color:var(--blue); }
-  .chip.doc svg{ color:var(--blue); }
+  .chip.doc .resource-icon{ color:var(--blue); }
 
   .chip.file{ border-color:var(--line); }
   .chip.file:hover{ background:#F1F2F5; border-color:var(--slate); }
-  .chip.file svg{ color:var(--slate); }
+  .chip.file .resource-icon{ color:var(--slate); }
 
-  .chip .missing{
+  .chip.is-missing{ cursor:default; }
+  .chip.is-missing:hover{ transform:none; }
+
+  .missing{
+    display:inline-block;
     font-family:'JetBrains Mono', monospace;
-    font-size:10.5px;
+    font-size:11px;
+    font-weight:500;
     color:#B5473A;
     background:#FBEAE7;
-    padding:2px 6px;
-    border-radius:4px;
-    margin-left:2px;
+    padding:3px 7px;
+    border-radius:5px;
+    margin-left:3px;
+    white-space:nowrap;
   }
 
   .note{
@@ -275,6 +281,14 @@
     line-height:1.7;
   }
   .note strong{ color:var(--ink); }
+  /* Font Awesome renders either an <i> webfont or a swapped-in <svg>,
+     depending on the kit's mode — size both off the same class. */
+  .resource-icon{
+    font-size:15px;
+    line-height:1;
+    flex-shrink:0;
+  }
+  svg.resource-icon{ width:15px; height:15px; }
 
   @media (max-width: 860px){
     body{ flex-direction:column; }
