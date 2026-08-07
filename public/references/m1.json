@@ -6,23 +6,55 @@
   "groups": [
     {
       "topic": "Watch",
-      "blurb": "Paste any YouTube or Vimeo link into the url field and it plays in the course page.",
+      "blurb": "",
       "items": [
         {
           "kind": "video",
-          "title": "Python types, variables and control flow",
-          "by": "Add the channel name",
-          "duration": "add length",
-          "url": "",
-          "note": "Paste a YouTube watch link here, for example https://www.youtube.com/watch?v=VIDEOID"
+          "title": "Python Full Course for free 🐍",
+          "by": "Bro Code",
+          "duration": "12h 00m",
+          "url": "https://www.youtube.com/embed/ix9cRaBkVe0",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
         },
         {
           "kind": "video",
-          "title": "Writing your first functions",
-          "by": "Add the channel name",
-          "duration": "add length",
-          "url": "",
-          "note": "Covers parameters, defaults and return values."
+          "title": "Learn Python - Full Course for Beginners [Tutorial]",
+          "by": "freeCodeCamp.org",
+          "duration": "4h 26m",
+          "url": "https://www.youtube.com/embed/rfscVS0vtbw",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Harvard CS50’s Introduction to Programming with Python – Full University Course",
+          "by": "freeCodeCamp.org and CS50",
+          "duration": "15h 57m",
+          "url": "https://www.youtube.com/embed/nLRL_NcnK-4",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Harvard CS50’s Introduction to Programming with Python – Full University Course",
+          "by": "freeCodeCamp.org and CS50",
+          "duration": "15h 57m",
+          "url": "https://www.youtube.com/embed/nLRL_NcnK-4",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Python Full Course for Beginners",
+          "by": "Programming with Mosh",
+          "duration": "6h 14m",
+          "url": "https://www.youtube.com/embed/_uQrJ0TkZlc",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Python Full Course for Beginners",
+          "by": "Programming with Mosh",
+          "duration": "2h 02m",
+          "url": "https://www.youtube.com/embed/K5KVEU3aaeQ",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
         }
       ]
     },

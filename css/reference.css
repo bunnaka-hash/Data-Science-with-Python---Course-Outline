@@ -125,6 +125,16 @@
   border-color: #c9dcea;
   box-shadow: 0 2px 8px rgba(18, 22, 31, 0.06);
 }
+
+/* A row with somewhere to go acts as one big link. */
+.ref-item[data-href] {
+  cursor: pointer;
+}
+.ref-item[data-href]:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-color: var(--blue);
+}
 .ref-item.is-missing {
   border-style: dashed;
   background: var(--bg);

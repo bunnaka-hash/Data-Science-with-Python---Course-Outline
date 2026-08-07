@@ -4,8 +4,16 @@ const KIND_META = {
   video: { icon: "fa-brands fa-youtube", label: "Video", open: "Watch here" },
   book: { icon: "fa-solid fa-book-open", label: "Book", open: "Read here" },
   pdf: { icon: "fa-regular fa-file-pdf", label: "PDF", open: "Read here" },
-  slides: { icon: "fa-regular fa-credit-card", label: "Slides", open: "Open here" },
-  dataset: { icon: "fa-solid fa-table", label: "Dataset", open: "Preview here" },
+  slides: {
+    icon: "fa-regular fa-credit-card",
+    label: "Slides",
+    open: "Open here",
+  },
+  dataset: {
+    icon: "fa-solid fa-table",
+    label: "Dataset",
+    open: "Preview here",
+  },
   link: { icon: "fa-solid fa-link", label: "Link", open: "Open here" },
 };
 
@@ -79,6 +87,44 @@ function embedFor(item) {
   return null;
 }
 
+/* ---------- Where a resource opens ----------
+   Reading is a different act from watching: an article or a book is read at
+   its own pace, in its own tab, alongside the course. So these kinds leave
+   the site even when they *could* be framed. A single item can overrule the
+   default either way with `"embed": true` or `"embed": false`. */
+
+const OPEN_EXTERNALLY = new Set(["book", "link"]);
+
+function opensExternally(item) {
+  // An explicit flag on the item always wins over the kind default.
+  if (typeof item.embed === "boolean") return !item.embed;
+
+  return OPEN_EXTERNALLY.has(item.kind);
+}
+
+/**
+ * The one destination for a resource — used for both the row click and its
+ * button, so the whole row behaves as the button says it will.
+ *
+ * An in-site destination carries `view`: the library swaps to the player in
+ * place rather than loading a page. `href` is still a real, working URL, so
+ * middle-click and "open in new tab" keep doing what a link should.
+ * Returns null for an item that has no link yet.
+ */
+function destinationFor(item, index, packId) {
+  if (!item.url) return null;
+
+  const embed = embedFor(item);
+
+  return opensExternally(item) || !embed
+    ? { href: item.url, external: true, view: null }
+    : {
+        href: `./reference?r=${packId}&v=${index + 1}`,
+        external: false,
+        view: index,
+      };
+}
+
 /** The bare host, for showing students where a link actually goes. */
 function hostOf(url) {
   try {
@@ -105,7 +151,8 @@ function buildItems(pack) {
 
 function renderMeta(item) {
   const bits = [
-    item.by && `<span><i class="fa-regular fa-user"></i>${escapeHtml(item.by)}</span>`,
+    item.by &&
+      `<span><i class="fa-regular fa-user"></i>${escapeHtml(item.by)}</span>`,
     item.duration &&
       `<span><i class="fa-regular fa-clock"></i>${escapeHtml(item.duration)}</span>`,
     item.pages &&
@@ -118,15 +165,21 @@ function renderMeta(item) {
   return bits.length ? `<div class="ref-meta">${bits.join("")}</div>` : "";
 }
 
-/** One row in the library. */
+
 function renderItem(entry, index, packId) {
   const { item } = entry;
   const meta = kindMeta(item.kind);
-  const embed = embedFor(item);
-  const missing = !item.url;
+  const to = destinationFor(item, index, packId);
 
   return `
-    <li class="ref-item${missing ? " is-missing" : ""}" data-kind="${escapeHtml(item.kind ?? "link")}">
+    <li
+      class="ref-item${to ? "" : " is-missing"}"
+      data-kind="${escapeHtml(item.kind ?? "link")}"
+      ${to ? `data-href="${escapeHtml(to.href)}"` : ""}
+      ${to?.external ? "data-external" : ""}
+      ${to?.view !== null && to ? `data-view="${to.view}"` : ""}
+      ${to ? 'role="link" tabindex="0"' : ""}
+    >
       <span class="ref-icon"><i class="${meta.icon}"></i></span>
 
       <div class="ref-body">
@@ -140,33 +193,24 @@ function renderItem(entry, index, packId) {
 
       <div class="ref-actions">
         ${
-          missing
-            ? `<span class="ref-todo">add link</span>`
-            : `
-              ${
-                embed
-                  ? `<a class="ref-btn" href="./watch?r=${escapeHtml(packId)}&v=${index + 1}">
-                       <i class="fa-solid fa-play"></i> ${escapeHtml(meta.open)}
-                     </a>`
-                  : ""
-              }
-              <a
-                class="ref-btn ref-btn--ghost"
-                href="${escapeHtml(item.url)}"
-                target="_blank"
-                rel="noopener"
-                title="Opens ${escapeHtml(hostOf(item.url))} in a new tab"
-              >
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                ${embed ? "Original" : "Open"}
-              </a>
-            `
+          to
+            ? `<a
+                 class="ref-btn"
+                 href="${escapeHtml(to.href)}"
+                 ${to.view !== null ? `data-view="${to.view}"` : ""}
+                 ${to.external ? 'target="_blank" rel="noopener"' : ""}
+                 ${to.external ? `title="Opens ${escapeHtml(hostOf(item.url))} in a new tab"` : ""}
+               >
+                 <i class="fa-solid fa-${to.external ? "arrow-up-right-from-square" : "play"}"></i>
+                 ${escapeHtml(meta.open)}
+               </a>`
+            : `<span class="ref-todo">add link</span>`
         }
       </div>
     </li>
   `;
 }
-
+              
 /**
  * Regroups the flat list back into its sections, carrying each item's flat
  * index along. The sidebar and the library both lay out by group but link
@@ -331,10 +375,10 @@ function renderWatchCard(entry, index, total, pack) {
                </a>`
             : ""
         }
-        <a class="ref-btn ref-btn--ghost" href="./reference?r=${escapeHtml(pack.id)}">
+        <button class="ref-btn ref-btn--ghost" type="button" data-action="library">
           <i class="fa-solid fa-list"></i>
           All references
-        </a>
+        </button>
       </div>
     </article>
   `;
@@ -342,6 +386,7 @@ function renderWatchCard(entry, index, total, pack) {
 
 export {
   buildItems,
+  destinationFor,
   embedFor,
   hostOf,
   kindMeta,

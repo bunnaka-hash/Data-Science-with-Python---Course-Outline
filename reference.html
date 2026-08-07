@@ -41,16 +41,15 @@
       <div class="sidebar-footer" id="moduleSwitch"></div>
     </aside>
 
-    <!-- ===== Main: the whole library on one page ===== -->
+    <!-- ===== Main: the library, or one resource playing in its place =====
+         Both views live here. ?v= in the url decides which one is drawn;
+         switching between them is a re-render, never a page load. -->
     <main class="deck">
       <header class="deck-top">
         <span class="eyebrow" id="referenceKicker">loading…</span>
 
-        <div class="deck-controls">
-          <div class="ref-filters" id="referenceFilters"></div>
-          <span class="deck-divider"></span>
-          <span class="deck-counter" id="referenceCounter">–</span>
-        </div>
+        <!-- Rebuilt per view: filters in the library, transport in the player -->
+        <div class="deck-controls" id="deckControls"></div>
       </header>
 
       <section class="stage" id="stage"></section>
