@@ -1,0 +1,318 @@
+{
+  "id": "m1",
+  "number": "01",
+  "title": "Python Foundations",
+  "description": "Build a strong Python foundation before moving into data analysis tools and libraries.",
+  "duration": "90 min",
+  "level": "Beginner",
+  "objectives": [
+    "Read and write Python using correct syntax, types, and indentation.",
+    "Write reusable functions with parameters, defaults, and return values.",
+    "Choose between a list and a dictionary for a given problem.",
+    "Read and write text and CSV files safely with the with statement."
+  ],
+  "slides": [
+    {
+      "topic": "Overview",
+      "layout": "title",
+      "title": "Python Foundations",
+      "lead": "Everything in this course — NumPy, Pandas, Matplotlib — is built on plain Python. This module makes sure that base is solid.",
+      "bullets": [
+        "Python Review — types, variables, control flow",
+        "Functions — package logic so you can reuse it",
+        "Lists & Dictionaries — the two containers you will use every day",
+        "File Handling — get data in and out of your program"
+      ]
+    },
+    {
+      "topic": "Overview",
+      "layout": "content",
+      "title": "What you will be able to do",
+      "lead": "By the end of this module you should be comfortable doing all of the following without looking anything up.",
+      "bullets": [
+        "Explain the difference between int, float, str, and bool",
+        "Write a function that takes arguments and returns a value",
+        "Loop over a list and over a dictionary's keys and values",
+        "Open a file, read its lines, and close it automatically"
+      ],
+      "note": "If any bullet feels shaky at the end, revisit that topic before moving to Module 02."
+    },
+    {
+      "topic": "Python Review",
+      "layout": "content",
+      "title": "Variables and core types",
+      "lead": "Python is dynamically typed — a variable is just a name pointing at a value, and the value carries the type.",
+      "bullets": [
+        "int — whole numbers: 42, -7",
+        "float — decimals: 3.14, 98.6",
+        "str — text in quotes: \"Sokha\"",
+        "bool — True or False",
+        "Use type(x) to check, int(x) / float(x) / str(x) to convert"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "name = \"Sokha\"        # str",
+          "age = 21               # int",
+          "score = 87.5           # float",
+          "is_enrolled = True     # bool",
+          "",
+          "print(type(score))     # <class 'float'>",
+          "print(int(score))      # 87  -> truncates, does not round"
+        ]
+      }
+    },
+    {
+      "topic": "Python Review",
+      "layout": "code",
+      "title": "Control flow: if / for / while",
+      "lead": "Indentation is the syntax. Four spaces define a block — there are no braces.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "score = 87.5",
+          "",
+          "if score >= 90:",
+          "    grade = \"A\"",
+          "elif score >= 80:",
+          "    grade = \"B\"",
+          "else:",
+          "    grade = \"C\"",
+          "",
+          "for n in range(1, 4):      # 1, 2, 3  -> stop is excluded",
+          "    print(n, n ** 2)",
+          "",
+          "count = 3",
+          "while count > 0:",
+          "    print(\"tick\", count)",
+          "    count -= 1"
+        ]
+      },
+      "note": "range(1, 4) gives 1, 2, 3 — the stop value is never included. This off-by-one catches everyone once."
+    },
+    {
+      "topic": "Python Review",
+      "layout": "content",
+      "title": "Strings you will actually use",
+      "lead": "Most real data arrives as messy text. These few string tools clean up the majority of it.",
+      "bullets": [
+        "f-strings for formatting: f\"{name} scored {score:.1f}\"",
+        ".strip() — remove leading/trailing whitespace",
+        ".lower() / .upper() — normalise before comparing",
+        ".split(\",\") — turn one line into a list of fields",
+        ".replace(old, new) — swap out characters"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "raw = \"  Phnom Penh , Cambodia \\n\"",
+          "city, country = [p.strip() for p in raw.strip().split(\",\")]",
+          "",
+          "print(f\"{city} is in {country}\")",
+          "# Phnom Penh is in Cambodia"
+        ]
+      }
+    },
+    {
+      "topic": "Functions",
+      "layout": "content",
+      "title": "Why functions",
+      "lead": "A function names a piece of logic so you can run it many times without repeating yourself.",
+      "bullets": [
+        "def declares it, the name is how you call it",
+        "Parameters are inputs, return sends a value back",
+        "No return means the function returns None",
+        "Default values make arguments optional",
+        "Keep one function responsible for one job"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "def average(numbers):",
+          "    \"\"\"Return the mean of a list of numbers.\"\"\"",
+          "    if not numbers:",
+          "        return 0",
+          "    return sum(numbers) / len(numbers)",
+          "",
+          "print(average([80, 92, 75]))   # 82.33333333333333"
+        ]
+      }
+    },
+    {
+      "topic": "Functions",
+      "layout": "code",
+      "title": "Arguments, defaults, and scope",
+      "lead": "Arguments can be passed by position or by name. Variables created inside a function do not leak outside it.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "def grade(score, passing=50, label=\"student\"):",
+          "    status = \"pass\" if score >= passing else \"fail\"",
+          "    return f\"{label}: {status}\"",
+          "",
+          "print(grade(72))                       # student: pass",
+          "print(grade(41, label=\"Dara\"))         # Dara: fail",
+          "print(grade(41, passing=40))           # student: pass",
+          "",
+          "# print(status)  -> NameError: status only exists inside grade()"
+        ]
+      },
+      "note": "Never use a mutable default like def f(items=[]) — the same list is shared across every call. Use None and create it inside."
+    },
+    {
+      "topic": "Functions",
+      "layout": "exercise",
+      "title": "Practice: build three functions",
+      "lead": "Write these in a single .py file and test each one with at least two inputs.",
+      "bullets": [
+        "celsius_to_fahrenheit(c) — return c * 9 / 5 + 32",
+        "is_passing(score, passing=50) — return True or False",
+        "summarise(scores) — return the count, min, max, and average as a dict"
+      ],
+      "note": "Expected: summarise([80, 92, 75]) -> {'count': 3, 'min': 75, 'max': 92, 'avg': 82.33}"
+    },
+    {
+      "topic": "Lists & Dictionaries",
+      "layout": "content",
+      "title": "Lists — ordered collections",
+      "lead": "A list holds items in order, indexed from 0, and can be changed after it is created.",
+      "bullets": [
+        "Index from the front with [0], from the back with [-1]",
+        "Slice a range with [1:3] — stop is excluded",
+        ".append(x) adds one item, .extend([...]) adds many",
+        "len(), sum(), min(), max(), sorted() all work on lists",
+        "Loop with for item in items:"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "scores = [80, 92, 75, 88]",
+          "",
+          "print(scores[0])      # 80",
+          "print(scores[-1])     # 88",
+          "print(scores[1:3])    # [92, 75]",
+          "",
+          "scores.append(95)",
+          "print(sorted(scores, reverse=True))   # [95, 92, 88, 80, 75]"
+        ]
+      }
+    },
+    {
+      "topic": "Lists & Dictionaries",
+      "layout": "content",
+      "title": "Dictionaries — key to value",
+      "lead": "A dictionary looks things up by a key instead of a position. This is how a row of data is usually represented.",
+      "bullets": [
+        "Create with {\"key\": value}, read with d[\"key\"]",
+        "d.get(\"key\", default) never raises KeyError",
+        ".keys(), .values(), .items() for looping",
+        "Assigning to a new key adds it",
+        "A list of dictionaries is effectively a table"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "student = {\"name\": \"Sokha\", \"score\": 87.5}",
+          "",
+          "print(student[\"name\"])            # Sokha",
+          "print(student.get(\"email\", \"-\"))  # -   (no KeyError)",
+          "",
+          "student[\"grade\"] = \"B\"            # adds a new key",
+          "",
+          "for key, value in student.items():",
+          "    print(key, \"=\", value)"
+        ]
+      },
+      "note": "This student dict is one row. A list of these dicts is one table — which is exactly what a Pandas DataFrame wraps in Module 04."
+    },
+    {
+      "topic": "Lists & Dictionaries",
+      "layout": "code",
+      "title": "Putting them together",
+      "lead": "A list of dictionaries is the most common shape of raw data you will meet before Pandas.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "students = [",
+          "    {\"name\": \"Sokha\", \"score\": 87.5},",
+          "    {\"name\": \"Dara\",  \"score\": 41.0},",
+          "    {\"name\": \"Mony\",  \"score\": 73.5},",
+          "]",
+          "",
+          "passing = []",
+          "for s in students:",
+          "    if s[\"score\"] >= 50:",
+          "        passing.append(s[\"name\"])",
+          "",
+          "print(passing)                                    # ['Sokha', 'Mony']",
+          "",
+          "avg = sum(s[\"score\"] for s in students) / len(students)",
+          "print(f\"class average: {avg:.1f}\")                # class average: 67.3"
+        ]
+      }
+    },
+    {
+      "topic": "File Handling",
+      "layout": "content",
+      "title": "Reading and writing files",
+      "lead": "Always open files with the with statement — it closes the file for you, even if your code raises an error.",
+      "bullets": [
+        "\"r\" read (default), \"w\" overwrite, \"a\" append",
+        "Always pass encoding=\"utf-8\" so Khmer text survives",
+        ".read() gives one string, .readlines() gives a list",
+        "Looping over the file object reads line by line — best for big files",
+        "Lines keep their trailing \\n — strip it"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "with open(\"notes.txt\", \"w\", encoding=\"utf-8\") as f:",
+          "    f.write(\"first line\\n\")",
+          "    f.write(\"second line\\n\")",
+          "",
+          "with open(\"notes.txt\", \"r\", encoding=\"utf-8\") as f:",
+          "    for line in f:",
+          "        print(line.strip())",
+          "",
+          "# file is closed automatically here"
+        ]
+      }
+    },
+    {
+      "topic": "File Handling",
+      "layout": "code",
+      "title": "CSV — the format your data will arrive in",
+      "lead": "The csv module reads a spreadsheet export into exactly the list-of-dictionaries shape from the last topic.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "import csv",
+          "",
+          "with open(\"students.csv\", newline=\"\", encoding=\"utf-8\") as f:",
+          "    rows = list(csv.DictReader(f))",
+          "",
+          "# rows -> [{'name': 'Sokha', 'score': '87.5'}, ...]",
+          "for row in rows:",
+          "    row[\"score\"] = float(row[\"score\"])   # CSV values are always str",
+          "",
+          "top = max(rows, key=lambda r: r[\"score\"])",
+          "print(top[\"name\"])"
+        ]
+      },
+      "note": "Everything read from a CSV is a string. Converting types on the way in prevents a whole category of bugs later."
+    },
+    {
+      "topic": "Recap",
+      "layout": "recap",
+      "title": "Module 01 recap",
+      "lead": "You now have the vocabulary the rest of the course assumes.",
+      "bullets": [
+        "Types and control flow — the grammar of Python",
+        "Functions — naming logic so it can be reused and tested",
+        "Lists and dictionaries — order versus lookup",
+        "Files — reading real data in with with open(...)"
+      ],
+      "note": "Next up, Module 02: the working environment (Jupyter, venv) and the compact syntax data work relies on."
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "id": "m6",
+  "number": "06",
+  "title": "Mini Project",
+  "description": "Apply Python data analysis skills to solve a real-world data problem from start to finish.",
+  "duration": "150 min",
+  "level": "Capstone",
+  "objectives": [
+    "Pick a dataset and state a question it can answer.",
+    "Clean the data and document every decision made.",
+    "Produce findings supported by aggregation and charts.",
+    "Present the work as a notebook someone else can follow."
+  ],
+  "slides": [
+    {
+      "topic": "Overview",
+      "layout": "title",
+      "title": "Mini Project",
+      "lead": "Everything from Modules 01–05, applied end to end on one dataset of your choice.",
+      "bullets": [
+        "Load — get real data into a DataFrame",
+        "Clean — handle missing values, duplicates, and types",
+        "Analyze — answer the question with groupby and aggregation",
+        "Visualize — three to five charts that carry the findings",
+        "Present — a notebook that reads as a report"
+      ]
+    },
+    {
+      "topic": "Overview",
+      "layout": "content",
+      "title": "Start with the question",
+      "lead": "A project without a question produces charts nobody asked for. Write the question in the first markdown cell and keep it visible.",
+      "bullets": [
+        "Good: \"Which product category drove the drop in Q2 revenue?\"",
+        "Weak: \"Analyse the sales data\"",
+        "The question must be answerable from columns you actually have",
+        "One main question, at most three supporting ones",
+        "Write the answer as a one-sentence hypothesis before you start"
+      ],
+      "note": "Datasets to try: Kaggle, data.gov, WHO, World Bank Open Data, or an export from a system you already use."
+    },
+    {
+      "topic": "Load Dataset",
+      "layout": "code",
+      "title": "Step 1 — load and look",
+      "lead": "Before anything else, understand the shape and quality of what you loaded.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "import pandas as pd",
+          "import numpy as np",
+          "import matplotlib.pyplot as plt",
+          "",
+          "df = pd.read_csv(\"data/raw.csv\", encoding=\"utf-8\")",
+          "",
+          "print(df.shape)",
+          "df.head()",
+          "df.info()",
+          "df.describe(include=\"all\")",
+          "",
+          "df.isna().sum().sort_values(ascending=False)",
+          "df.duplicated().sum()"
+        ]
+      },
+      "note": "Keep the raw file untouched in data/raw.csv and write your cleaned version to data/clean.csv. You will want to redo the cleaning at least once."
+    },
+    {
+      "topic": "Clean Data",
+      "layout": "code",
+      "title": "Step 2 — clean, with reasons",
+      "lead": "Every cleaning decision needs a markdown cell underneath saying why you made it.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "df.columns = df.columns.str.strip().str.lower().str.replace(\" \", \"_\")",
+          "",
+          "df = df.drop_duplicates()",
+          "",
+          "df[\"date\"]   = pd.to_datetime(df[\"date\"], errors=\"coerce\")",
+          "df[\"amount\"] = pd.to_numeric(df[\"amount\"], errors=\"coerce\")",
+          "",
+          "df = df.dropna(subset=[\"date\", \"amount\"])        # unusable without these",
+          "df[\"region\"] = df[\"region\"].fillna(\"unknown\")    # keep the row, flag the gap",
+          "",
+          "df = df[df[\"amount\"] >= 0]                       # negatives are refunds, out of scope",
+          "",
+          "df.to_csv(\"data/clean.csv\", index=False)",
+          "print(f\"{len(df)} rows kept\")"
+        ]
+      },
+      "note": "Report how many rows you dropped and why. An analysis that silently discards 40% of the data is not trustworthy."
+    },
+    {
+      "topic": "Analyze Data",
+      "layout": "code",
+      "title": "Step 3 — answer the question",
+      "lead": "Aggregate toward the question you wrote down. Resist exploring columns that cannot answer it.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "by_category = (df.groupby(\"category\")",
+          "                 .agg(orders=(\"id\", \"count\"),",
+          "                      revenue=(\"amount\", \"sum\"),",
+          "                      avg_order=(\"amount\", \"mean\"))",
+          "                 .sort_values(\"revenue\", ascending=False))",
+          "",
+          "monthly = (df.set_index(\"date\")",
+          "             .resample(\"ME\")[\"amount\"]",
+          "             .sum())",
+          "",
+          "growth = monthly.pct_change().mul(100).round(1)",
+          "",
+          "share = (by_category[\"revenue\"] / by_category[\"revenue\"].sum() * 100).round(1)"
+        ]
+      },
+      "note": "Each aggregation should map to a sentence you can say out loud. If it does not, it does not belong in the report."
+    },
+    {
+      "topic": "Visualize Results",
+      "layout": "content",
+      "title": "Step 4 — three to five charts",
+      "lead": "One chart per finding. More charts than findings means you are showing your process, not your conclusions.",
+      "bullets": [
+        "A trend line for the headline metric over time",
+        "A sorted bar chart of the top categories",
+        "A distribution or a relationship chart that supports the main claim",
+        "Every title states the finding, every axis is labelled",
+        "Save each one with fig.savefig(..., dpi=150, bbox_inches=\"tight\")"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "fig, ax = plt.subplots(figsize=(9, 4.5))",
+          "",
+          "monthly.plot(ax=ax, marker=\"o\", linewidth=2)",
+          "",
+          "ax.set_title(\"Revenue fell 22% after March\")",
+          "ax.set_xlabel(\"Month\")",
+          "ax.set_ylabel(\"Revenue (USD)\")",
+          "ax.grid(axis=\"y\", alpha=0.3)",
+          "ax.spines[[\"top\", \"right\"]].set_visible(False)",
+          "",
+          "plt.tight_layout()",
+          "fig.savefig(\"figures/revenue_trend.png\", dpi=150, bbox_inches=\"tight\")"
+        ]
+      }
+    },
+    {
+      "topic": "Present Findings",
+      "layout": "content",
+      "title": "Step 5 — the notebook as a report",
+      "lead": "Structure the notebook so a reader who skips every code cell still gets the whole story.",
+      "bullets": [
+        "1. Question — what you set out to answer and why it matters",
+        "2. Data — source, size, date range, and known limitations",
+        "3. Cleaning — what you changed, how many rows you lost",
+        "4. Findings — one heading per finding, chart directly beneath",
+        "5. Conclusion — the answer, plus what you would do with more time",
+        "Finish with Kernel ▸ Restart & Run All so it runs top to bottom"
+      ],
+      "note": "State the limitations honestly. Naming what your data cannot show makes the parts it does show more credible, not less."
+    },
+    {
+      "topic": "Present Findings",
+      "layout": "exercise",
+      "title": "Deliverables and marking",
+      "lead": "Submit these three items. The marking weights tell you where to spend your remaining time.",
+      "bullets": [
+        "project.ipynb — runs clean from a restarted kernel",
+        "data/clean.csv and requirements.txt",
+        "A 5-minute walkthrough of question, method, and findings",
+        "Marking: cleaning 25% · analysis 30% · charts 25% · presentation 20%"
+      ],
+      "note": "The most common lost marks: unlabelled charts, no statement of what was dropped during cleaning, and a notebook that fails on restart."
+    },
+    {
+      "topic": "Recap",
+      "layout": "recap",
+      "title": "Course recap",
+      "lead": "Six modules, one pipeline you can now run on any dataset you meet.",
+      "bullets": [
+        "01 — Python foundations: types, functions, containers, files",
+        "02 — Environment and the compact syntax of data code",
+        "03 — NumPy: vectorised numerical work",
+        "04 — Pandas: load, clean, filter, group, join",
+        "05 — Matplotlib: charts that make an argument",
+        "06 — The whole pipeline, applied and presented"
+      ],
+      "note": "Where to go next: statistics for analysts, SQL for pulling your own data, and scikit-learn for prediction."
+    }
+  ]
+}

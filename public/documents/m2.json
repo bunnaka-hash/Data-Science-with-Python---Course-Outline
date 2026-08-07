@@ -1,0 +1,267 @@
+{
+  "id": "m2",
+  "number": "02",
+  "title": "Python for Data Analysis",
+  "description": "Learn Python tools and programming techniques commonly used in data analysis workflows.",
+  "duration": "90 min",
+  "level": "Beginner",
+  "objectives": [
+    "Set up an isolated project environment with venv and install packages into it.",
+    "Work fluently in Jupyter Notebook — cells, run order, and restart.",
+    "Replace simple loops with list comprehensions.",
+    "Use lambda with map(), filter(), and zip() to transform data."
+  ],
+  "slides": [
+    {
+      "topic": "Overview",
+      "layout": "title",
+      "title": "Python for Data Analysis",
+      "lead": "Two things separate a script writer from an analyst: a clean environment to work in, and the compact syntax that data code is written in.",
+      "bullets": [
+        "Jupyter Notebook — where analysis actually happens",
+        "Virtual environments — keeping projects from breaking each other",
+        "Comprehensions — loops in one line",
+        "lambda, map, filter, zip — the functional toolkit"
+      ]
+    },
+    {
+      "topic": "Jupyter Notebook",
+      "layout": "content",
+      "title": "Why notebooks for data work",
+      "lead": "A notebook mixes code, output, and explanation in one document, and lets you re-run a single step without re-running everything.",
+      "bullets": [
+        "Code cells run with Shift + Enter",
+        "The value of the last line in a cell is displayed automatically",
+        "Markdown cells hold your notes and headings",
+        "Charts and tables render inline, right under the code",
+        "The whole file (.ipynb) is shareable as a report"
+      ],
+      "code": {
+        "lang": "bash",
+        "body": [
+          "pip install notebook",
+          "jupyter notebook          # opens in your browser",
+          "",
+          "# or the newer interface",
+          "pip install jupyterlab",
+          "jupyter lab"
+        ]
+      }
+    },
+    {
+      "topic": "Jupyter Notebook",
+      "layout": "content",
+      "title": "Run order is the one real trap",
+      "lead": "Cells share one memory space and run in whatever order you click them — not top to bottom.",
+      "bullets": [
+        "The [ ] number shows the order cells actually ran",
+        "A deleted cell's variables still exist in memory",
+        "Kernel ▸ Restart & Run All is the truth test",
+        "Do that before you share or submit any notebook",
+        "Shortcuts: Esc then A / B to add a cell, D D to delete, M for markdown"
+      ],
+      "note": "\"It worked before I restarted\" means the notebook depended on a cell you already changed. Restart & Run All catches it every time."
+    },
+    {
+      "topic": "Virtual Environment (venv)",
+      "layout": "content",
+      "title": "One environment per project",
+      "lead": "A virtual environment is a private folder of packages, so Project A on Pandas 1.5 cannot break Project B on Pandas 2.2.",
+      "bullets": [
+        "Created inside the project folder, usually named .venv",
+        "Must be activated in each new terminal",
+        "pip install then writes into that folder only",
+        "Add .venv/ to .gitignore — never commit it",
+        "Share requirements.txt instead of the folder"
+      ],
+      "code": {
+        "lang": "bash",
+        "body": [
+          "python -m venv .venv",
+          "",
+          "# Windows",
+          ".venv\\Scripts\\activate",
+          "",
+          "# macOS / Linux",
+          "source .venv/bin/activate",
+          "",
+          "pip install pandas numpy matplotlib jupyter",
+          "pip freeze > requirements.txt"
+        ]
+      }
+    },
+    {
+      "topic": "Virtual Environment (venv)",
+      "layout": "code",
+      "title": "Checking you are in the right one",
+      "lead": "Most \"module not found\" errors are really \"installed into a different environment\".",
+      "code": {
+        "lang": "bash",
+        "body": [
+          "# the prompt shows the active env",
+          "(.venv) C:\\projects\\data-course>",
+          "",
+          "# which python is running?",
+          "python -c \"import sys; print(sys.executable)\"",
+          "",
+          "# recreate an environment from a shared file",
+          "pip install -r requirements.txt",
+          "",
+          "deactivate      # leave the environment"
+        ]
+      },
+      "note": "In Jupyter, run !pip list inside a cell — that shows the packages the notebook's kernel can actually see."
+    },
+    {
+      "topic": "List Comprehension",
+      "layout": "content",
+      "title": "A loop that builds a list, in one line",
+      "lead": "Read it as: the expression, for each item, optionally where a condition holds.",
+      "bullets": [
+        "[expr for item in iterable]",
+        "[expr for item in iterable if condition]",
+        "Faster and shorter than append in a loop",
+        "Works for dicts too: {k: v for ...}",
+        "If it needs two conditions and a nested loop, use a normal loop instead"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "scores = [80, 92, 75, 41, 88]",
+          "",
+          "# the long way",
+          "passed = []",
+          "for s in scores:",
+          "    if s >= 50:",
+          "        passed.append(s)",
+          "",
+          "# the same thing",
+          "passed = [s for s in scores if s >= 50]",
+          "",
+          "curved = [min(s + 5, 100) for s in scores]",
+          "lookup = {name: len(name) for name in [\"Sokha\", \"Dara\"]}"
+        ]
+      }
+    },
+    {
+      "topic": "Lambda Functions",
+      "layout": "content",
+      "title": "Small anonymous functions",
+      "lead": "A lambda is a one-expression function with no name — used where a function is expected for a moment and never again.",
+      "bullets": [
+        "lambda args: expression",
+        "The expression's value is returned automatically",
+        "No statements, no if blocks, no loops inside",
+        "Most common use: the key= argument of sorted()",
+        "If you need a name for it, use def instead"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "double = lambda x: x * 2",
+          "print(double(21))            # 42",
+          "",
+          "students = [",
+          "    {\"name\": \"Sokha\", \"score\": 87.5},",
+          "    {\"name\": \"Dara\",  \"score\": 41.0},",
+          "]",
+          "",
+          "ranked = sorted(students, key=lambda s: s[\"score\"], reverse=True)",
+          "print([s[\"name\"] for s in ranked])   # ['Sokha', 'Dara']"
+        ]
+      }
+    },
+    {
+      "topic": "map()",
+      "layout": "code",
+      "title": "map() — apply a function to every item",
+      "lead": "map returns a lazy iterator, so wrap it in list() when you want to see or reuse the result.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "temps_c = [21, 25, 30]",
+          "",
+          "temps_f = list(map(lambda c: c * 9 / 5 + 32, temps_c))",
+          "print(temps_f)              # [69.8, 77.0, 86.0]",
+          "",
+          "# very common: fix types coming out of a CSV",
+          "raw = [\"87.5\", \"41.0\", \"73.5\"]",
+          "scores = list(map(float, raw))",
+          "print(sum(scores) / len(scores))    # 67.33333333333333"
+        ]
+      },
+      "note": "map(float, raw) is the clearest version — pass an existing function by name, no lambda needed."
+    },
+    {
+      "topic": "filter()",
+      "layout": "code",
+      "title": "filter() — keep the items that pass a test",
+      "lead": "The function you pass must return True or False. Items returning True are kept.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "scores = [80, 92, 75, 41, 88]",
+          "",
+          "passed = list(filter(lambda s: s >= 50, scores))",
+          "print(passed)               # [80, 92, 75, 88]",
+          "",
+          "# filter also drops empty / falsy values",
+          "names = [\"Sokha\", \"\", \"Dara\", None, \"Mony\"]",
+          "clean = list(filter(None, names))",
+          "print(clean)                # ['Sokha', 'Dara', 'Mony']"
+        ]
+      },
+      "note": "[s for s in scores if s >= 50] does the same job and most Python teams prefer it. Know both — you will read both."
+    },
+    {
+      "topic": "zip()",
+      "layout": "code",
+      "title": "zip() — walk two lists side by side",
+      "lead": "zip pairs items by position and stops at the shortest list.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "names = [\"Sokha\", \"Dara\", \"Mony\"]",
+          "scores = [87.5, 41.0, 73.5]",
+          "",
+          "for name, score in zip(names, scores):",
+          "    print(f\"{name:<6} {score:>5}\")",
+          "",
+          "# build a dict from two lists",
+          "report = dict(zip(names, scores))",
+          "# {'Sokha': 87.5, 'Dara': 41.0, 'Mony': 73.5}",
+          "",
+          "# unzip with the * operator",
+          "back_names, back_scores = zip(*report.items())"
+        ]
+      }
+    },
+    {
+      "topic": "Practice",
+      "layout": "exercise",
+      "title": "Practice: combine all four",
+      "lead": "Start from these two lists and produce the results below in a notebook, one cell per step.",
+      "bullets": [
+        "names = [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"] and scores = [\"87.5\", \"41\", \"73.5\", \"92\"]",
+        "1. Convert scores to floats with map()",
+        "2. Build a list of dicts with zip() and a comprehension",
+        "3. Keep only the passing students with filter()",
+        "4. Sort them by score, highest first, using a lambda key"
+      ],
+      "note": "Then run Kernel ▸ Restart & Run All to prove the notebook works from a clean start."
+    },
+    {
+      "topic": "Recap",
+      "layout": "recap",
+      "title": "Module 02 recap",
+      "lead": "You have a working environment and the syntax that data code is written in.",
+      "bullets": [
+        "venv isolates a project; requirements.txt reproduces it",
+        "Jupyter runs cells in whatever order you click — restart to verify",
+        "Comprehensions replace build-a-list loops",
+        "map / filter / zip with lambda transform sequences without loops"
+      ],
+      "note": "Next up, Module 03: NumPy, where these operations happen across whole arrays at once."
+    }
+  ]
+}
