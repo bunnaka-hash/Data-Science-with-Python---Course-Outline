@@ -1,0 +1,177 @@
+{
+  "id": "m5",
+  "number": "05",
+  "title": "Matplotlib",
+  "description": "Check that you can pick the right chart and label it so it reads on its own.",
+  "duration": "20 min",
+  "passing": 70,
+  "lessons": [
+    {
+      "topic": "Figure & Axes",
+      "title": "The pattern to learn first",
+      "lead": "`fig, ax = plt.subplots()` is the form that scales to several charts in one figure.",
+      "questions": [
+        {
+          "prompt": "In `fig, ax = plt.subplots()`, what are `fig` and `ax`?",
+          "options": [
+            "`fig` is the whole canvas; `ax` is one plotting area on it",
+            "`fig` is the chart; `ax` is the axis labels",
+            "`fig` is the x axis; `ax` is the y axis",
+            "They are two independent charts"
+          ],
+          "answer": 0,
+          "explain": "You draw on the axes and save the figure. That split is what makes multi-chart figures straightforward."
+        },
+        {
+          "prompt": "What does `plt.tight_layout()` fix?",
+          "options": [
+            "Labels and titles being cut off at the figure edges",
+            "Overlapping data points",
+            "The chart resolution when saving",
+            "The order in which series are drawn"
+          ],
+          "answer": 0,
+          "explain": "It recomputes the padding so nothing gets clipped. Call it after everything is drawn."
+        },
+        {
+          "prompt": "Which arguments matter when saving a chart to share?",
+          "options": [
+            "`dpi=150` for a sharp image",
+            "`bbox_inches=\"tight\"` so nothing is clipped",
+            "A filename with the format extension, such as `.png`",
+            "`figsize` — it must be passed to `savefig`"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "`figsize` belongs to `plt.subplots()`, when the figure is created — not to `savefig`."
+        }
+      ]
+    },
+    {
+      "topic": "Choosing the chart",
+      "title": "Chart type follows the question",
+      "lead": "The type you choose decides which comparison your reader can actually make.",
+      "questions": [
+        {
+          "prompt": "Which chart shows change over time?",
+          "options": ["Line", "Bar", "Scatter", "Histogram"],
+          "answer": 0,
+          "explain": "Use a line only when the x axis has a natural order — usually time. Never for unordered categories."
+        },
+        {
+          "prompt": "You want the distribution of one numeric column. Which chart?",
+          "options": ["Histogram", "Scatter", "Line", "Horizontal bar"],
+          "answer": 0,
+          "explain": "A histogram bins one numeric column and counts how many records land in each bin."
+        },
+        {
+          "prompt": "Which chart shows the relationship between two numeric columns?",
+          "options": ["Scatter", "Bar", "Histogram", "Pie"],
+          "answer": 0,
+          "explain": "Every point is one record. Scatter is how you see correlation, clusters, and outliers at once."
+        },
+        {
+          "prompt": "Which statements about bar charts are true?",
+          "options": [
+            "Bars must start at zero because the length is the comparison",
+            "Sort them by value unless the order carries meaning",
+            "`barh` keeps long category names readable without rotating them",
+            "A bar chart is the right choice for a time series with 200 points"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "200 bars over time is a line chart. Bars are for comparing a manageable number of categories."
+        }
+      ]
+    },
+    {
+      "topic": "Titles & Labels",
+      "title": "A chart nobody has to explain",
+      "lead": "If someone sees the chart with no caption and no presenter, they should still know what it says.",
+      "questions": [
+        {
+          "prompt": "Which is the better chart title?",
+          "options": [
+            "\"Sales grew 58% in Q1\"",
+            "\"Sales chart\"",
+            "\"sales_by_month.csv\"",
+            "\"Figure 1\""
+          ],
+          "answer": 0,
+          "explain": "The title states the finding. The columns are already visible on the axes."
+        },
+        {
+          "prompt": "The x tick labels overlap each other. What is the standard fix?",
+          "options": [
+            "`ax.tick_params(axis=\"x\", rotation=45)`",
+            "Remove the x axis label",
+            "Increase the dpi",
+            "Switch to a scatter plot"
+          ],
+          "answer": 0,
+          "explain": "Rotating them is the quick fix; switching to `barh` is often the better one when the names are long."
+        },
+        {
+          "prompt": "What belongs on a chart you are going to present?",
+          "options": [
+            "Both axes labelled, with units in brackets",
+            "The source and date somewhere on the figure",
+            "An annotation on the one point that matters",
+            "A label on every data point"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "Annotating everything is the same as annotating nothing. Point at the one thing your reader should take away."
+        }
+      ]
+    },
+    {
+      "topic": "Legends & Grid",
+      "title": "Everything that is not the data",
+      "lead": "Chart furniture should help the reader estimate values and then get out of the way.",
+      "questions": [
+        {
+          "prompt": "When is a legend needed?",
+          "options": [
+            "When one chart shows more than one series",
+            "On every chart, always",
+            "Only on bar charts",
+            "Only when the chart has a grid"
+          ],
+          "answer": 0,
+          "explain": "With a single series a legend is noise. With several, labelling the end of each line directly is often better still."
+        },
+        {
+          "prompt": "What does `ax.set_axisbelow(True)` do?",
+          "options": [
+            "Draws the grid behind the bars instead of on top of them",
+            "Moves the x axis to the bottom of the figure",
+            "Hides the axis spines",
+            "Puts the legend below the chart"
+          ],
+          "answer": 0,
+          "explain": "Grid lines crossing over the data look like part of it. Push them behind."
+        },
+        {
+          "prompt": "How should a grid be styled?",
+          "options": [
+            "Faint — low alpha, often on one axis only",
+            "Bold, so values are easy to read off",
+            "In the same colour as the bars",
+            "Always on both axes"
+          ],
+          "answer": 0,
+          "explain": "`ax.grid(axis=\"y\", alpha=0.3, linestyle=\"--\")` helps readers estimate values without competing with the data."
+        },
+        {
+          "prompt": "How do you put two charts side by side in one figure?",
+          "options": [
+            "`fig, axes = plt.subplots(1, 2)` then draw on `axes[0]` and `axes[1]`",
+            "Call `plt.plot()` twice",
+            "Save two files and combine them afterwards",
+            "`ax.twinx()`"
+          ],
+          "answer": 0,
+          "explain": "`subplots(rows, cols)` returns an array of axes. This is why the object-oriented form is worth learning from the start."
+        }
+      ]
+    }
+  ]
+}

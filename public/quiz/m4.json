@@ -1,0 +1,249 @@
+{
+  "id": "m4",
+  "number": "04",
+  "title": "Pandas",
+  "description": "Check the core analyst skill set — load, filter, group, join, and clean.",
+  "duration": "25 min",
+  "passing": 70,
+  "lessons": [
+    {
+      "topic": "Series & DataFrame",
+      "title": "The two objects everything else uses",
+      "lead": "A Series is one labelled column. A DataFrame is a dict of Series sharing one index.",
+      "questions": [
+        {
+          "prompt": "What is a Series?",
+          "options": [
+            "A 1D array of values plus an index that labels them",
+            "A table with rows and columns",
+            "A Python dictionary with a fixed key order",
+            "A NumPy array restricted to numbers"
+          ],
+          "answer": 0,
+          "explain": "Every column of a DataFrame is a Series, and operations between Series align on the index rather than on position."
+        },
+        {
+          "prompt": "What does `df[\"score\"]` return, and what does `df[[\"name\", \"score\"]]` return?",
+          "options": [
+            "A Series, then a DataFrame",
+            "A DataFrame, then a Series",
+            "Both return DataFrames",
+            "Both return Series"
+          ],
+          "answer": 0,
+          "explain": "One column name gives a Series; a list of column names gives a DataFrame — even a list of one."
+        },
+        {
+          "prompt": "Which method should you run first on a dataset you have never seen?",
+          "options": [
+            "`df.info()` — dtypes and non-null counts together",
+            "`df.sort_values()`",
+            "`df.to_csv()`",
+            "`df.merge()`"
+          ],
+          "answer": 0,
+          "explain": "`.info()` tells you the size, the type of every column, and where the missing values are, in one view. `.describe()` and `.head()` come next."
+        },
+        {
+          "prompt": "Which of these are true?",
+          "options": [
+            "`df.shape` returns (rows, columns)",
+            "`.value_counts()` counts how often each value occurs",
+            "`df.describe()` summarises numeric columns by default",
+            "`df.head()` permanently trims the DataFrame to 5 rows"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "`.head()` only shows the first rows — it returns a view for you to look at and leaves `df` alone."
+        }
+      ]
+    },
+    {
+      "topic": "Read CSV / Excel",
+      "title": "Loading real files",
+      "lead": "Reading the file is one line. Reading it correctly is the arguments you pass.",
+      "questions": [
+        {
+          "prompt": "Why pass `index=False` to `df.to_csv(...)`?",
+          "options": [
+            "Otherwise the index is written as an extra unnamed column",
+            "Otherwise the column headers are dropped",
+            "It makes the file smaller by compressing it",
+            "It is required whenever the file already exists"
+          ],
+          "answer": 0,
+          "explain": "Forgetting it is why exported files grow an `Unnamed: 0` column every time they round-trip."
+        },
+        {
+          "prompt": "A European CSV export shows every row crammed into one column. What is the likely fix?",
+          "options": [
+            "Pass `sep=\";\"` to `read_csv`",
+            "Pass `header=None`",
+            "Convert the file to Excel first",
+            "Pass `index_col=0`"
+          ],
+          "answer": 0,
+          "explain": "The separator is not always a comma. `sep=\";\"` handles the common European export."
+        },
+        {
+          "prompt": "Which `read_csv` arguments do what they say?",
+          "options": [
+            "`parse_dates=[\"enrolled_at\"]` — read that column as datetimes",
+            "`na_values=[\"\", \"N/A\", \"-\"]` — treat those strings as missing",
+            "`encoding=\"utf-8\"` — read non-ASCII text correctly",
+            "`sheet_name=\"Term1\"` — pick a worksheet from a CSV"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "`sheet_name` belongs to `read_excel` — a CSV is a single flat file with no sheets."
+        },
+        {
+          "prompt": "What does `pd.read_excel` need that `read_csv` does not?",
+          "options": [
+            "An extra engine package such as openpyxl",
+            "A virtual environment",
+            "The file to be under 10 MB",
+            "The columns to be typed in advance"
+          ],
+          "answer": 0,
+          "explain": "Excel formats need a reader library. `pip install openpyxl` covers .xlsx."
+        }
+      ]
+    },
+    {
+      "topic": "Filtering, Sorting & GroupBy",
+      "title": "Asking questions of a table",
+      "lead": "Select the rows you want, order them, then summarise them per category.",
+      "questions": [
+        {
+          "prompt": "How do you keep rows where score is at least 50 **and** class is \"A\"?",
+          "options": [
+            "`df[(df[\"score\"] >= 50) & (df[\"class\"] == \"A\")]`",
+            "`df[df[\"score\"] >= 50 and df[\"class\"] == \"A\"]`",
+            "`df.filter(score >= 50, class == \"A\")`",
+            "`df[df[\"score\"] >= 50][\"class\" == \"A\"]`"
+          ],
+          "answer": 0,
+          "explain": "Same rule as NumPy: `&` and `|`, with each condition in its own parentheses."
+        },
+        {
+          "prompt": "Why does `df[df.score < 50][\"status\"] = \"retake\"` fail to change anything?",
+          "options": [
+            "It assigns into a temporary copy — use a single `.loc` instead",
+            "`status` must exist before you can assign to it",
+            "Chained brackets are a SyntaxError",
+            "String values cannot be assigned this way"
+          ],
+          "answer": 0,
+          "explain": "That is the SettingWithCopyWarning. Write `df.loc[df[\"score\"] < 50, \"status\"] = \"retake\"` — one indexer, one operation."
+        },
+        {
+          "prompt": "What does `df.groupby(\"class\")[\"score\"].mean()` do?",
+          "options": [
+            "Splits rows by class, then returns the average score for each class",
+            "Sorts the table by class and then by score",
+            "Returns one overall average score",
+            "Removes duplicate classes"
+          ],
+          "answer": 0,
+          "explain": "Split, apply, combine. `.reset_index()` afterwards turns the group labels back into a normal column."
+        },
+        {
+          "prompt": "Which are true about sorting?",
+          "options": [
+            "`sort_values(\"score\", ascending=False)` puts the highest score first",
+            "The original index travels with the rows unless you reset it",
+            "`df.nlargest(3, \"score\")` is a shortcut for the top three",
+            "`sort_values` renumbers the index automatically"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "Add `.reset_index(drop=True)` when you want a clean 0..n index after sorting."
+        }
+      ]
+    },
+    {
+      "topic": "Merge & Missing Values",
+      "title": "Joining tables and handling gaps",
+      "lead": "Two operations where a silent mistake changes your numbers without any error message.",
+      "questions": [
+        {
+          "prompt": "`students` has ids 1, 2, 3 and `scores` has ids 1, 2, 4. How many rows does an inner merge on `id` return?",
+          "options": ["2", "3", "4", "6"],
+          "answer": 0,
+          "explain": "An inner join keeps only keys present on both sides — ids 1 and 2. `how=\"left\"` would keep all three students, with NaN for Mony."
+        },
+        {
+          "prompt": "A merge returned more rows than you started with. What does that usually mean?",
+          "options": [
+            "The key is not unique on one side",
+            "You used the wrong `how`",
+            "The two tables have different column names",
+            "Pandas added the missing rows as NaN"
+          ],
+          "answer": 0,
+          "explain": "Duplicate keys multiply rows. Check with `df[\"id\"].duplicated().any()` before merging, and always compare the row count afterwards."
+        },
+        {
+          "prompt": "Which command counts missing values per column?",
+          "options": [
+            "`df.isna().sum()`",
+            "`df.dropna().count()`",
+            "`df.describe()`",
+            "`df.fillna().sum()`"
+          ],
+          "answer": 0,
+          "explain": "`isna()` gives a boolean table; summing it counts the Trues in each column. Run it before deciding anything."
+        },
+        {
+          "prompt": "Which statements about missing values are true?",
+          "options": [
+            "`dropna(subset=[\"score\"])` drops rows only where score is missing",
+            "Filling with the median is safer than the mean when the data is skewed",
+            "A column containing NaN becomes a float column",
+            "Pandas fills missing numbers with 0 automatically"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "Nothing is filled automatically — that is the point. Decide deliberately whether to drop or fill, and record the decision."
+        }
+      ]
+    },
+    {
+      "topic": "DateTime Introduction",
+      "title": "Working with dates",
+      "lead": "Once a column is a real datetime, everything about it becomes available.",
+      "questions": [
+        {
+          "prompt": "What does `errors=\"coerce\"` do in `pd.to_datetime(col, errors=\"coerce\")`?",
+          "options": [
+            "Turns unparseable values into NaT instead of raising",
+            "Guesses the most likely date format",
+            "Drops the rows that cannot be parsed",
+            "Forces every date into UTC"
+          ],
+          "answer": 0,
+          "explain": "Then `col.isna().sum()` tells you exactly how many values were bad, instead of the load crashing on the first one."
+        },
+        {
+          "prompt": "How do you extract the year from a datetime column?",
+          "options": [
+            "`df[\"date\"].dt.year`",
+            "`df[\"date\"].year`",
+            "`df[\"date\"].get_year()`",
+            "`year(df[\"date\"])`"
+          ],
+          "answer": 0,
+          "explain": "The `.dt` accessor is the gateway to every date part — `.dt.month`, `.dt.day_name()`, and the rest."
+        },
+        {
+          "prompt": "What does `df.set_index(\"date\").resample(\"ME\")[\"score\"].mean()` produce?",
+          "options": [
+            "The average score for each month",
+            "The score sorted by date",
+            "One average for the whole table",
+            "The scores reindexed 0..n"
+          ],
+          "answer": 0,
+          "explain": "resample buckets a datetime index by a frequency. `\"ME\"` is month-end; the aggregation you chain decides what each bucket becomes."
+        }
+      ]
+    }
+  ]
+}

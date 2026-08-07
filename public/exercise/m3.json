@@ -1,0 +1,355 @@
+{
+  "id": "m3",
+  "number": "03",
+  "title": "NumPy",
+  "description": "Express calculations over whole arrays instead of looping.",
+  "duration": "60 min",
+  "lessons": [
+    {
+      "topic": "Arrays",
+      "title": "Creating and describing arrays",
+      "lead": "NumPy loads the first time you run a task here — give it a few seconds.",
+      "packages": ["numpy"],
+      "tasks": [
+        {
+          "title": "Four ways to build an array",
+          "brief": "Print the shape, size, and number of dimensions of `a`, then build the three arrays described in the comments.",
+          "steps": [
+            "`np.arange(start, stop, step)` excludes the stop value",
+            "`np.linspace(start, stop, count)` includes it",
+            "Print the linspace values with `.tolist()`",
+            "`np.zeros((rows, columns))` takes the shape as a tuple"
+          ],
+          "starter": [
+            "import numpy as np",
+            "",
+            "a = np.array([80, 92, 75, 88])",
+            "",
+            "# 1. a.shape, a.size and a.ndim on one line",
+            "",
+            "# 2. the even numbers below 10, as an array",
+            "",
+            "# 3. five evenly spaced values from 0 to 1, as a list",
+            "",
+            "# 4. the shape of a 2 by 3 grid of zeros"
+          ],
+          "expected": [
+            "(4,) 4 1",
+            "[0 2 4 6 8]",
+            "[0.0, 0.25, 0.5, 0.75, 1.0]",
+            "(2, 3)"
+          ],
+          "hint": "`print(a.shape, a.size, a.ndim)` puts all three on one line with spaces between them.",
+          "solution": [
+            "import numpy as np",
+            "",
+            "a = np.array([80, 92, 75, 88])",
+            "",
+            "print(a.shape, a.size, a.ndim)",
+            "print(np.arange(0, 10, 2))",
+            "print(np.linspace(0, 1, 5).tolist())",
+            "print(np.zeros((2, 3)).shape)"
+          ],
+          "explain": "`shape` is always a tuple — `(4,)` with the trailing comma is how Python writes a one-item tuple, which is what makes it a 1D array."
+        },
+        {
+          "title": "Array maths is element-wise",
+          "brief": "Add 5 to every score, express them as fractions of 100, then print the mean and the position of the highest score.",
+          "steps": [
+            "`scores + 5` applies to every element — no loop",
+            "Print the fractions as a list so they read cleanly",
+            "`argmax` gives the position, not the value"
+          ],
+          "starter": [
+            "import numpy as np",
+            "",
+            "scores = np.array([80, 92, 75, 88])",
+            "",
+            "# 1. every score plus 5",
+            "",
+            "# 2. every score divided by 100, as a list",
+            "",
+            "# 3. the mean, rounded to two places",
+            "",
+            "# 4. the position of the highest score"
+          ],
+          "expected": ["[85 97 80 93]", "[0.8, 0.92, 0.75, 0.88]", "83.75", "1"],
+          "hint": "Wrap the mean in `float(...)` before rounding so the printed value has no NumPy dressing around it.",
+          "solution": [
+            "import numpy as np",
+            "",
+            "scores = np.array([80, 92, 75, 88])",
+            "",
+            "print(scores + 5)",
+            "print((scores / 100).tolist())",
+            "print(round(float(scores.mean()), 2))",
+            "print(int(scores.argmax()))"
+          ],
+          "explain": "On a plain list, `scores + 5` would raise a TypeError and `scores * 2` would repeat the list. Arrays apply the operator to every element instead."
+        }
+      ]
+    },
+    {
+      "topic": "Indexing",
+      "title": "Boolean masks",
+      "lead": "Comparing an array to a value gives an array of True and False, which you can then use to select.",
+      "packages": ["numpy"],
+      "tasks": [
+        {
+          "title": "Select with a mask",
+          "brief": "Build the pass/fail mask, use it to select the passing scores, then print their mean and the scores between 50 and 90.",
+          "steps": [
+            "The pass mark is 50",
+            "Print the mask itself with `.tolist()`",
+            "Combine two conditions with `&`, each wrapped in its own brackets"
+          ],
+          "starter": [
+            "import numpy as np",
+            "",
+            "scores = np.array([80, 92, 75, 41, 88])",
+            "",
+            "# 1. the pass/fail mask, as a list",
+            "",
+            "# 2. the passing scores, as a list",
+            "",
+            "# 3. their mean, rounded to two places",
+            "",
+            "# 4. the scores above 50 and below 90, as a list"
+          ],
+          "expected": [
+            "[True, True, True, False, True]",
+            "[80, 92, 75, 88]",
+            "83.75",
+            "[80, 75, 88]"
+          ],
+          "hint": "`scores[(scores > 50) & (scores < 90)]` — the brackets around each condition are required, not decoration.",
+          "solution": [
+            "import numpy as np",
+            "",
+            "scores = np.array([80, 92, 75, 41, 88])",
+            "",
+            "mask = scores >= 50",
+            "print(mask.tolist())",
+            "print(scores[mask].tolist())",
+            "print(round(float(scores[mask].mean()), 2))",
+            "print(scores[(scores > 50) & (scores < 90)].tolist())"
+          ],
+          "explain": "Use `&` and `|`, never the keywords `and` / `or` — the keywords need a single True or False and raise a ValueError on an array."
+        },
+        {
+          "title": "Rows and columns",
+          "brief": "Pull one value, one whole column, and one whole row out of the 2D array.",
+          "steps": [
+            "The index is `[row, column]`",
+            "A bare colon means every position in that dimension"
+          ],
+          "starter": [
+            "import numpy as np",
+            "",
+            "grid = np.array([[1, 2, 3],",
+            "                 [4, 5, 6]])",
+            "",
+            "# 1. the value in row 1, column 2",
+            "",
+            "# 2. column 1 across every row, as a list",
+            "",
+            "# 3. row 0, as a list"
+          ],
+          "expected": ["6", "[2, 5]", "[1, 2, 3]"],
+          "hint": "`grid[:, 1]` reads as \"every row, column 1\".",
+          "solution": [
+            "import numpy as np",
+            "",
+            "grid = np.array([[1, 2, 3],",
+            "                 [4, 5, 6]])",
+            "",
+            "print(int(grid[1, 2]))",
+            "print(grid[:, 1].tolist())",
+            "print(grid[0].tolist())"
+          ],
+          "explain": "`grid[0]` and `grid[0, :]` mean the same thing. Rows are the default dimension, which is why the row index can stand alone."
+        }
+      ]
+    },
+    {
+      "topic": "Slicing & Reshaping",
+      "title": "Views, steps, and shapes",
+      "lead": "Slicing an array hands back a window onto the same memory — NumPy's biggest surprise.",
+      "packages": ["numpy"],
+      "tasks": [
+        {
+          "title": "Prove that a slice is a view",
+          "brief": "Print three slices, then write into one of them and print the original array.",
+          "steps": [
+            "`[1:4]` excludes position 4, `[::2]` takes every other item, `[::-1]` reverses",
+            "Assign 999 into position 0 of the slice, then print the original"
+          ],
+          "starter": [
+            "import numpy as np",
+            "",
+            "a = np.array([10, 20, 30, 40, 50])",
+            "",
+            "# 1. positions 1 up to 4, as a list",
+            "",
+            "# 2. every other item, as a list",
+            "",
+            "# 3. the array reversed, as a list",
+            "",
+            "# 4. write 999 into the first item of a[1:4], then print a"
+          ],
+          "expected": [
+            "[20, 30, 40]",
+            "[10, 30, 50]",
+            "[50, 40, 30, 20, 10]",
+            "[10, 999, 30, 40, 50]"
+          ],
+          "hint": "Give the slice a name first, then assign into it: `part = a[1:4]` and `part[0] = 999`.",
+          "solution": [
+            "import numpy as np",
+            "",
+            "a = np.array([10, 20, 30, 40, 50])",
+            "",
+            "print(a[1:4].tolist())",
+            "print(a[::2].tolist())",
+            "print(a[::-1].tolist())",
+            "",
+            "part = a[1:4]",
+            "part[0] = 999",
+            "print(a.tolist())"
+          ],
+          "explain": "The original changed because the slice never copied anything. Call `.copy()` when you need a slice that stands on its own."
+        },
+        {
+          "title": "Change the shape, keep the data",
+          "brief": "Reshape a flat array four ways and print the shape each time.",
+          "steps": [
+            "`-1` in a reshape means \"work this dimension out from the total\"",
+            "`.T` transposes, swapping rows and columns"
+          ],
+          "starter": [
+            "import numpy as np",
+            "",
+            "a = np.arange(12)",
+            "m = a.reshape(3, 4)",
+            "",
+            "# 1. the shape of m",
+            "",
+            "# 2. the shape of m transposed",
+            "",
+            "# 3. the shape of a.reshape(3, -1)",
+            "",
+            "# 4. the shape of a as a single column",
+            "",
+            "# 5. row 1 of m, as a list"
+          ],
+          "expected": ["(3, 4)", "(4, 3)", "(3, 4)", "(12, 1)", "[4, 5, 6, 7]"],
+          "hint": "A single column is `a.reshape(-1, 1)` — as many rows as it takes, one column wide.",
+          "solution": [
+            "import numpy as np",
+            "",
+            "a = np.arange(12)",
+            "m = a.reshape(3, 4)",
+            "",
+            "print(m.shape)",
+            "print(m.T.shape)",
+            "print(a.reshape(3, -1).shape)",
+            "print(a.reshape(-1, 1).shape)",
+            "print(m[1].tolist())"
+          ],
+          "explain": "`reshape(-1, 1)` turning a flat array into one column is the fix for most \"Expected 2D array\" errors from scikit-learn."
+        }
+      ]
+    },
+    {
+      "topic": "Aggregations & Broadcasting",
+      "title": "Collapsing and stretching arrays",
+      "lead": "`axis` decides which direction an aggregation collapses; broadcasting decides how two shapes meet.",
+      "packages": ["numpy"],
+      "tasks": [
+        {
+          "title": "Sum in three directions",
+          "brief": "Total the whole table, then per column, then per row, and finish with each row's average to one decimal place.",
+          "steps": [
+            "`axis=0` collapses the rows, giving one result per column",
+            "`axis=1` collapses the columns, giving one result per row",
+            "Round with `.round(1)` before converting to a list"
+          ],
+          "starter": [
+            "import numpy as np",
+            "",
+            "scores = np.array([[80, 92, 75],",
+            "                   [65, 88, 91]])",
+            "",
+            "# 1. the total of everything",
+            "",
+            "# 2. the total per column, as a list",
+            "",
+            "# 3. the total per row, as a list",
+            "",
+            "# 4. the mean per row to one decimal, as a list"
+          ],
+          "expected": ["491", "[145, 180, 166]", "[247, 244]", "[82.3, 81.3]"],
+          "hint": "Say it out loud: axis=0 collapses rows and leaves you one number per column.",
+          "solution": [
+            "import numpy as np",
+            "",
+            "scores = np.array([[80, 92, 75],",
+            "                   [65, 88, 91]])",
+            "",
+            "print(int(scores.sum()))",
+            "print(scores.sum(axis=0).tolist())",
+            "print(scores.sum(axis=1).tolist())",
+            "print(scores.mean(axis=1).round(1).tolist())"
+          ],
+          "explain": "The array has 2 rows and 3 columns, so `axis=0` returns three numbers and `axis=1` returns two. The length of the result tells you which axis you used."
+        },
+        {
+          "title": "Stretch a row and a column",
+          "brief": "Multiply the grid by a row of weights, add a column of offsets, then label every score pass or fail.",
+          "steps": [
+            "A shape `(3,)` row broadcasts across every row of a `(2, 3)` grid",
+            "A shape `(2, 1)` column broadcasts across every column",
+            "`np.where(condition, a, b)` picks element by element"
+          ],
+          "starter": [
+            "import numpy as np",
+            "",
+            "grid = np.array([[1, 2, 3],",
+            "                 [4, 5, 6]])",
+            "weights = np.array([1, 0.5, 2])",
+            "offsets = np.array([[10], [20]])",
+            "scores = np.array([[80, 92, 75],",
+            "                   [65, 88, 91]])",
+            "",
+            "# 1. grid scaled by the weights, as a list",
+            "",
+            "# 2. grid plus the offsets, as a list",
+            "",
+            "# 3. every score labelled pass (80 or more) or fail, as a list"
+          ],
+          "expected": [
+            "[[1.0, 1.0, 6.0], [4.0, 2.5, 12.0]]",
+            "[[11, 12, 13], [24, 25, 26]]",
+            "[['pass', 'pass', 'fail'], ['fail', 'pass', 'pass']]"
+          ],
+          "hint": "None of the three needs a loop or a reshape — the shapes already line up.",
+          "solution": [
+            "import numpy as np",
+            "",
+            "grid = np.array([[1, 2, 3],",
+            "                 [4, 5, 6]])",
+            "weights = np.array([1, 0.5, 2])",
+            "offsets = np.array([[10], [20]])",
+            "scores = np.array([[80, 92, 75],",
+            "                   [65, 88, 91]])",
+            "",
+            "print((grid * weights).tolist())",
+            "print((grid + offsets).tolist())",
+            "print(np.where(scores >= 80, \"pass\", \"fail\").tolist())"
+          ],
+          "explain": "Shapes are compared from the right, and match when they are equal or when one of them is 1. That single rule is all of broadcasting."
+        }
+      ]
+    }
+  ]
+}

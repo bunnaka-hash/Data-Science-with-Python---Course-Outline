@@ -176,4 +176,4 @@ function renderSlideNav(slides, activeIndex) {
     .join("");
 }
 
-export { renderSlide, renderSlideNav, escapeHtml };
+export { renderSlide, renderSlideNav, renderCode, escapeHtml };

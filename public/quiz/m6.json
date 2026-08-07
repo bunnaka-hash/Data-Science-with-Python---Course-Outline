@@ -1,0 +1,192 @@
+{
+  "id": "m6",
+  "number": "06",
+  "title": "Mini Project",
+  "description": "Check that you know how the full pipeline fits together before you run it yourself.",
+  "duration": "15 min",
+  "passing": 70,
+  "lessons": [
+    {
+      "topic": "Framing the project",
+      "title": "Start with the question",
+      "lead": "A project without a question produces charts nobody asked for.",
+      "questions": [
+        {
+          "prompt": "Which is a usable project question?",
+          "options": [
+            "\"Which product category drove the drop in Q2 revenue?\"",
+            "\"Analyse the sales data\"",
+            "\"Make some charts from this dataset\"",
+            "\"Find something interesting\""
+          ],
+          "answer": 0,
+          "explain": "A good question names what you are comparing and can be answered from columns you actually have."
+        },
+        {
+          "prompt": "How many questions should a mini project carry?",
+          "options": [
+            "One main question and at most three supporting ones",
+            "As many as the dataset can answer",
+            "Exactly one, with no supporting questions",
+            "One per column in the dataset"
+          ],
+          "answer": 0,
+          "explain": "Write the main question in the first markdown cell and keep it visible. Everything in the notebook should serve it."
+        },
+        {
+          "prompt": "What should you write down before starting the analysis?",
+          "options": [
+            "A one-sentence hypothesis — what you expect the answer to be",
+            "The conclusion you intend to present",
+            "The list of charts you will build",
+            "The libraries you plan to import"
+          ],
+          "answer": 0,
+          "explain": "A stated expectation makes it obvious when the data disagrees with you, which is the interesting case."
+        }
+      ]
+    },
+    {
+      "topic": "Load & Clean",
+      "title": "Steps 1 and 2 — load, look, and clean",
+      "lead": "Understand the shape and quality of the data before you change any of it.",
+      "questions": [
+        {
+          "prompt": "Which checks belong in the first cell after loading?",
+          "options": [
+            "`df.shape` and `df.info()`",
+            "`df.isna().sum()`",
+            "`df.duplicated().sum()`",
+            "`df.to_csv(\"clean.csv\")`"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "Exporting comes last. First understand what you loaded — size, types, gaps, and duplicates."
+        },
+        {
+          "prompt": "Why keep the original file at `data/raw.csv` and write to `data/clean.csv`?",
+          "options": [
+            "You will need to redo the cleaning at least once",
+            "Pandas cannot overwrite a file it has open",
+            "CSV files degrade when written repeatedly",
+            "It halves the memory used"
+          ],
+          "answer": 0,
+          "explain": "Cleaning is a rerunnable script from raw to clean. Overwriting the raw file makes that impossible."
+        },
+        {
+          "prompt": "What must accompany every cleaning decision?",
+          "options": [
+            "A markdown cell saying why you made it",
+            "A chart showing the effect",
+            "A backup copy of the DataFrame",
+            "A unit test"
+          ],
+          "answer": 0,
+          "explain": "An analysis that silently discards 40% of the data is not trustworthy. Report how many rows you dropped and why."
+        },
+        {
+          "prompt": "Which line normalises messy column names?",
+          "options": [
+            "`df.columns = df.columns.str.strip().str.lower().str.replace(\" \", \"_\")`",
+            "`df.columns = df.columns.sort_values()`",
+            "`df = df.rename(str.lower)`",
+            "`df.columns.clean()`"
+          ],
+          "answer": 0,
+          "explain": "Strip the whitespace, lowercase, and replace spaces — after that every column is reachable without guessing."
+        }
+      ]
+    },
+    {
+      "topic": "Analyze & Visualize",
+      "title": "Steps 3 and 4 — answer it, then show it",
+      "lead": "Aggregate toward the question you wrote down, and give each finding one chart.",
+      "questions": [
+        {
+          "prompt": "How many charts should the report carry?",
+          "options": [
+            "Three to five — one per finding",
+            "As many as you produced while exploring",
+            "Exactly one",
+            "One per column"
+          ],
+          "answer": 0,
+          "explain": "More charts than findings means you are showing your process rather than your conclusions."
+        },
+        {
+          "prompt": "What is the test of whether an aggregation belongs in the report?",
+          "options": [
+            "It maps to a sentence you can say out loud",
+            "It uses a groupby",
+            "It fits on one screen",
+            "It runs in under a second"
+          ],
+          "answer": 0,
+          "explain": "If you cannot state what the number means, the reader will not work it out for you."
+        },
+        {
+          "prompt": "Which chart carries the headline metric over time?",
+          "options": [
+            "A trend line",
+            "A sorted horizontal bar chart",
+            "A histogram",
+            "A scatter plot"
+          ],
+          "answer": 0,
+          "explain": "Time on the x axis, the metric on the y axis. Sorted bars are for comparing categories; a histogram is for one column's distribution."
+        }
+      ]
+    },
+    {
+      "topic": "Present Findings",
+      "title": "Step 5 — the notebook as a report",
+      "lead": "A reader who skips every code cell should still get the whole story.",
+      "questions": [
+        {
+          "prompt": "What is the correct order of sections in the notebook?",
+          "options": [
+            "Question · Data · Cleaning · Findings · Conclusion",
+            "Findings · Question · Data · Cleaning · Conclusion",
+            "Data · Charts · Code · Conclusion",
+            "Cleaning · Question · Conclusion · Findings"
+          ],
+          "answer": 0,
+          "explain": "State what you set out to answer, what you had to work with, what you changed, what you found, and what it means."
+        },
+        {
+          "prompt": "What is the last thing to do before submitting?",
+          "options": [
+            "Kernel ▸ Restart & Run All, so it runs top to bottom",
+            "Delete the code cells",
+            "Export to PDF",
+            "Clear all outputs"
+          ],
+          "answer": 0,
+          "explain": "A notebook that fails on restart is one of the most common sources of lost marks."
+        },
+        {
+          "prompt": "Why state the limitations of your data?",
+          "options": [
+            "Naming what the data cannot show makes the parts it does show more credible",
+            "It is required by the file format",
+            "It excuses mistakes in the analysis",
+            "It replaces the conclusion section"
+          ],
+          "answer": 0,
+          "explain": "Honest scoping is a mark of a careful analyst, not a weakness in the work."
+        },
+        {
+          "prompt": "Which are required deliverables for this project?",
+          "options": [
+            "`project.ipynb` that runs clean from a restarted kernel",
+            "`data/clean.csv` and `requirements.txt`",
+            "A 5-minute walkthrough of question, method, and findings",
+            "The raw dataset uploaded to a public site"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "Marking weights: cleaning 25%, analysis 30%, charts 25%, presentation 20%."
+        }
+      ]
+    }
+  ]
+}

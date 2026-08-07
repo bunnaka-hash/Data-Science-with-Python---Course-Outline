@@ -1,0 +1,425 @@
+{
+  "id": "m4",
+  "number": "04",
+  "title": "Pandas",
+  "description": "Load, filter, group, join, and clean a real table.",
+  "duration": "75 min",
+  "lessons": [
+    {
+      "topic": "Series & DataFrame",
+      "title": "The two objects everything else uses",
+      "lead": "Pandas loads the first time you run a task here — give it a few seconds.",
+      "packages": ["pandas"],
+      "tasks": [
+        {
+          "title": "A labelled column",
+          "brief": "Read one value out of the Series by its label, then print the mean, the labels that passed, and a count of the grades.",
+          "steps": [
+            "The index labels each value, so `s[\"Sokha\"]` works",
+            "`s[s >= 50].index.tolist()` gives the labels that passed",
+            "`.value_counts()` counts each grade — print it as a dictionary"
+          ],
+          "starter": [
+            "import pandas as pd",
+            "",
+            "s = pd.Series([87.5, 41.0, 73.5], index=[\"Sokha\", \"Dara\", \"Mony\"])",
+            "grades = pd.Series([\"B\", \"F\", \"C\", \"B\", \"C\", \"B\"])",
+            "",
+            "# 1. Sokha's score",
+            "",
+            "# 2. the mean, rounded to two places",
+            "",
+            "# 3. the labels of everyone who scored 50 or more",
+            "",
+            "# 4. how many of each grade, as a dictionary"
+          ],
+          "expected": [
+            "87.5",
+            "67.33",
+            "['Sokha', 'Mony']",
+            "{'B': 3, 'C': 2, 'F': 1}"
+          ],
+          "hint": "`float(s.mean())` before rounding keeps the printed value plain.",
+          "solution": [
+            "import pandas as pd",
+            "",
+            "s = pd.Series([87.5, 41.0, 73.5], index=[\"Sokha\", \"Dara\", \"Mony\"])",
+            "grades = pd.Series([\"B\", \"F\", \"C\", \"B\", \"C\", \"B\"])",
+            "",
+            "print(s[\"Sokha\"])",
+            "print(round(float(s.mean()), 2))",
+            "print(s[s >= 50].index.tolist())",
+            "print(grades.value_counts().to_dict())"
+          ],
+          "explain": "A Series is a NumPy array plus an index. The boolean mask works exactly as it did in Module 03 — what is new is that the labels travel with the values."
+        },
+        {
+          "title": "Look at a new table",
+          "brief": "Print the shape, the column names, one column as a list, and prove which selections give a Series and which give a DataFrame.",
+          "steps": [
+            "`df.shape` is `(rows, columns)`",
+            "`list(df.columns)` gives the labels",
+            "`type(x).__name__` prints the type name on its own"
+          ],
+          "starter": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\"],",
+            "})",
+            "",
+            "# 1. the shape",
+            "",
+            "# 2. the column names",
+            "",
+            "# 3. the score column as a list",
+            "",
+            "# 4. the type of df[\"score\"] and of df[[\"name\", \"score\"]]"
+          ],
+          "expected": [
+            "(4, 3)",
+            "['name', 'score', 'class']",
+            "[87.5, 41.0, 73.5, 92.0]",
+            "Series DataFrame"
+          ],
+          "hint": "Print both type names on one line: `print(type(a).__name__, type(b).__name__)`.",
+          "solution": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\"],",
+            "})",
+            "",
+            "print(df.shape)",
+            "print(list(df.columns))",
+            "print(df[\"score\"].tolist())",
+            "print(type(df[\"score\"]).__name__, type(df[[\"name\", \"score\"]]).__name__)"
+          ],
+          "explain": "One column name gives a Series; a list of column names gives a DataFrame — even a list holding a single name."
+        }
+      ]
+    },
+    {
+      "topic": "Filtering & Sorting",
+      "title": "Selecting rows and ordering them",
+      "lead": "Build a boolean Series, hand it to `df[...]`, and assign through a single `.loc`.",
+      "packages": ["pandas"],
+      "tasks": [
+        {
+          "title": "Filter on one and two conditions",
+          "brief": "Print the names who passed, the names who passed in class A, and then flag the failing rows with a new column.",
+          "steps": [
+            "The pass mark is 50",
+            "Combine conditions with `&`, each in its own brackets",
+            "Assign the flag through `df.loc[rows, column]`",
+            "Fill the rows that were not flagged with `\"ok\"` before printing"
+          ],
+          "starter": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\"],",
+            "})",
+            "",
+            "# 1. the names who passed",
+            "",
+            "# 2. the names who passed and are in class A",
+            "",
+            "# 3. set status to \"retake\" where the score is under 50,",
+            "#    then print the status column with the rest filled in as \"ok\""
+          ],
+          "expected": [
+            "['Sokha', 'Mony', 'Vira']",
+            "['Sokha', 'Mony']",
+            "['ok', 'retake', 'ok', 'ok']"
+          ],
+          "hint": "`df.loc[df[\"score\"] < 50, \"status\"] = \"retake\"` creates the column and fills only the matching rows.",
+          "solution": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\"],",
+            "})",
+            "",
+            "print(df[df[\"score\"] >= 50][\"name\"].tolist())",
+            "print(df[(df[\"score\"] >= 50) & (df[\"class\"] == \"A\")][\"name\"].tolist())",
+            "",
+            "df.loc[df[\"score\"] < 50, \"status\"] = \"retake\"",
+            "print(df[\"status\"].fillna(\"ok\").tolist())"
+          ],
+          "explain": "Assigning through one `.loc` is the whole point — `df[df.score < 50][\"status\"] = \"retake\"` writes into a temporary copy and silently changes nothing."
+        },
+        {
+          "title": "Order the table",
+          "brief": "Rank by score, then by class and score together, then take the top two and renumber the index.",
+          "steps": [
+            "`ascending=False` puts the highest score first",
+            "Sorting on two columns takes a list of column names and a list of directions",
+            "`nlargest(2, \"score\")` is the shortcut for a top two",
+            "`reset_index(drop=True)` renumbers 0..n after sorting"
+          ],
+          "starter": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\"],",
+            "})",
+            "",
+            "# 1. names by score, highest first",
+            "",
+            "# 2. names by class ascending, then score descending",
+            "",
+            "# 3. the top two names",
+            "",
+            "# 4. the index after sorting by score and resetting it"
+          ],
+          "expected": [
+            "['Vira', 'Sokha', 'Mony', 'Dara']",
+            "['Sokha', 'Mony', 'Vira', 'Dara']",
+            "['Vira', 'Sokha']",
+            "[0, 1, 2, 3]"
+          ],
+          "hint": "`df.sort_values([\"class\", \"score\"], ascending=[True, False])` reads exactly as it sorts.",
+          "solution": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\"],",
+            "})",
+            "",
+            "print(df.sort_values(\"score\", ascending=False)[\"name\"].tolist())",
+            "print(df.sort_values([\"class\", \"score\"], ascending=[True, False])[\"name\"].tolist())",
+            "print(df.nlargest(2, \"score\")[\"name\"].tolist())",
+            "",
+            "ranked = df.sort_values(\"score\", ascending=False).reset_index(drop=True)",
+            "print(ranked.index.tolist())"
+          ],
+          "explain": "Without `reset_index(drop=True)` the old row numbers travel with the sorted rows, so the index reads 3, 0, 2, 1 — fine to keep, confusing to publish."
+        }
+      ]
+    },
+    {
+      "topic": "GroupBy",
+      "title": "Split, apply, combine",
+      "lead": "Group the rows by a column, summarise each group, and put the results back together as a table.",
+      "packages": ["pandas"],
+      "tasks": [
+        {
+          "title": "Average score per class",
+          "brief": "Group by class and print the mean score, the number of students, and the top score in each group.",
+          "steps": [
+            "`df.groupby(\"class\")[\"score\"].mean()` gives a Series indexed by class",
+            "Print each result as a dictionary with `.to_dict()`",
+            "Round the mean to two places first"
+          ],
+          "starter": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\", \"Rith\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0, 66.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\", \"A\"],",
+            "})",
+            "",
+            "# 1. mean score per class, rounded to two places",
+            "",
+            "# 2. number of students per class",
+            "",
+            "# 3. top score per class"
+          ],
+          "expected": [
+            "{'A': 75.67, 'B': 66.5}",
+            "{'A': 3, 'B': 2}",
+            "{'A': 87.5, 'B': 92.0}"
+          ],
+          "hint": "`.size()` counts the rows in each group; `.max()` works the same way as `.mean()`.",
+          "solution": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\", \"Rith\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0, 66.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\", \"A\"],",
+            "})",
+            "",
+            "print(df.groupby(\"class\")[\"score\"].mean().round(2).to_dict())",
+            "print(df.groupby(\"class\").size().to_dict())",
+            "print(df.groupby(\"class\")[\"score\"].max().to_dict())"
+          ],
+          "explain": "The group labels become the index of the result. That is why `.to_dict()` reads as class to value with nothing extra."
+        },
+        {
+          "title": "Several summaries in one pass",
+          "brief": "Use `.agg()` to build a small table with one row per class and three summary columns.",
+          "steps": [
+            "Name each output column: `students=(\"name\", \"count\")`",
+            "Call `.reset_index()` so the class labels become a normal column",
+            "Print the column names, then each column as a list"
+          ],
+          "starter": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\", \"Rith\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0, 66.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\", \"A\"],",
+            "})",
+            "",
+            "# build a summary with students, avg_score and top_score per class",
+            "",
+            "# 1. the summary's column names",
+            "",
+            "# 2. the student counts",
+            "",
+            "# 3. the average scores, rounded to two places"
+          ],
+          "expected": [
+            "['class', 'students', 'avg_score', 'top_score']",
+            "[3, 2]",
+            "[75.67, 66.5]"
+          ],
+          "hint": "Each named argument is `new_name=(source_column, function)`.",
+          "solution": [
+            "import pandas as pd",
+            "",
+            "df = pd.DataFrame({",
+            "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\", \"Rith\"],",
+            "    \"score\": [87.5, 41.0, 73.5, 92.0, 66.0],",
+            "    \"class\": [\"A\", \"B\", \"A\", \"B\", \"A\"],",
+            "})",
+            "",
+            "summary = df.groupby(\"class\").agg(",
+            "    students=(\"name\", \"count\"),",
+            "    avg_score=(\"score\", \"mean\"),",
+            "    top_score=(\"score\", \"max\"),",
+            ").reset_index()",
+            "",
+            "print(list(summary.columns))",
+            "print(summary[\"students\"].tolist())",
+            "print(summary[\"avg_score\"].round(2).tolist())"
+          ],
+          "explain": "This shape — one row per category, one column per measure — is what most reports and most charts want as their input."
+        }
+      ]
+    },
+    {
+      "topic": "Missing Values & Merge",
+      "title": "Gaps and joins",
+      "lead": "Two operations where a silent mistake changes your numbers without raising anything.",
+      "packages": ["pandas"],
+      "tasks": [
+        {
+          "title": "Count the gaps, then close them",
+          "brief": "Report the missing values per column, drop the rows with no score, fill the missing class, and remove the duplicate id.",
+          "steps": [
+            "`df.isna().sum()` counts the gaps — print it as a dictionary",
+            "A row with no score is useless, so drop those rows",
+            "Fill a missing class with `\"unknown\"`",
+            "Drop duplicate ids, keeping the first"
+          ],
+          "starter": [
+            "import pandas as pd",
+            "import numpy as np",
+            "",
+            "df = pd.DataFrame({",
+            "    \"id\":    [1, 2, 3, 4, 4],",
+            "    \"score\": [87.5, np.nan, 73.5, 92.0, 92.0],",
+            "    \"class\": [\"A\", \"B\", None, \"B\", \"B\"],",
+            "})",
+            "",
+            "# 1. missing values per column, as a dictionary",
+            "",
+            "# 2. drop the rows with no score, then print how many rows are left",
+            "",
+            "# 3. fill the missing class with \"unknown\", then print the class column",
+            "",
+            "# 4. drop duplicate ids, then print the ids that remain"
+          ],
+          "expected": [
+            "{'id': 0, 'score': 1, 'class': 1}",
+            "4 rows",
+            "['A', 'unknown', 'B', 'B']",
+            "[1, 3, 4]"
+          ],
+          "hint": "Work on one DataFrame the whole way through, reassigning it each step: `df = df.dropna(subset=[\"score\"])`.",
+          "solution": [
+            "import pandas as pd",
+            "import numpy as np",
+            "",
+            "df = pd.DataFrame({",
+            "    \"id\":    [1, 2, 3, 4, 4],",
+            "    \"score\": [87.5, np.nan, 73.5, 92.0, 92.0],",
+            "    \"class\": [\"A\", \"B\", None, \"B\", \"B\"],",
+            "})",
+            "",
+            "print(df.isna().sum().to_dict())",
+            "",
+            "df = df.dropna(subset=[\"score\"])",
+            "print(len(df), \"rows\")",
+            "",
+            "df[\"class\"] = df[\"class\"].fillna(\"unknown\")",
+            "print(df[\"class\"].tolist())",
+            "",
+            "df = df.drop_duplicates(subset=[\"id\"], keep=\"first\")",
+            "print(df[\"id\"].tolist())"
+          ],
+          "explain": "Dropping and filling are both defensible; doing neither is not. Report which you chose for each column and why."
+        },
+        {
+          "title": "Three kinds of join",
+          "brief": "Merge the two tables three ways and print how many rows each join returns, then the names that came back with no score.",
+          "steps": [
+            "`how=\"inner\"` keeps only the ids present on both sides",
+            "`how=\"left\"` keeps every student",
+            "`how=\"outer\"` keeps everything from both",
+            "After the left join, the missing score shows up as NaN"
+          ],
+          "starter": [
+            "import pandas as pd",
+            "",
+            "students = pd.DataFrame({\"id\": [1, 2, 3], \"name\": [\"Sokha\", \"Dara\", \"Mony\"]})",
+            "scores = pd.DataFrame({\"id\": [1, 2, 4], \"score\": [87.5, 41.0, 66.0]})",
+            "",
+            "# 1. row count of the inner join",
+            "",
+            "# 2. row count of the left join",
+            "",
+            "# 3. row count of the outer join",
+            "",
+            "# 4. the names in the left join that have no score"
+          ],
+          "expected": ["inner 2", "left 3", "outer 4", "['Mony']"],
+          "hint": "`merged[merged[\"score\"].isna()][\"name\"].tolist()` picks out the rows the join could not fill.",
+          "solution": [
+            "import pandas as pd",
+            "",
+            "students = pd.DataFrame({\"id\": [1, 2, 3], \"name\": [\"Sokha\", \"Dara\", \"Mony\"]})",
+            "scores = pd.DataFrame({\"id\": [1, 2, 4], \"score\": [87.5, 41.0, 66.0]})",
+            "",
+            "print(\"inner\", len(pd.merge(students, scores, on=\"id\", how=\"inner\")))",
+            "",
+            "left = pd.merge(students, scores, on=\"id\", how=\"left\")",
+            "print(\"left\", len(left))",
+            "",
+            "print(\"outer\", len(pd.merge(students, scores, on=\"id\", how=\"outer\")))",
+            "",
+            "print(left[left[\"score\"].isna()][\"name\"].tolist())"
+          ],
+          "explain": "Id 4 has a score but no student, and id 3 has a student but no score. Which of them survives is entirely decided by `how` — always check the row count after a merge."
+        }
+      ]
+    }
+  ]
+}

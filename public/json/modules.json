@@ -17,14 +17,14 @@
         "url": "./slide?id=m1"
       },
       {
-        "type": "doc",
-        "label": "Lesson doc",
-        "url": "#"
+        "type": "exercise",
+        "label": "Exercises",
+        "url": "./exercise?e=m1"
       },
       {
-        "type": "file",
-        "label": "Practice files",
-        "url": "#"
+        "type": "quiz",
+        "label": "Quiz",
+        "url": "./quiz?q=m1"
       }
     ]
   },
@@ -49,14 +49,14 @@
         "url": "./slide?id=m2"
       },
       {
-        "type": "doc",
-        "label": "Lesson doc",
-        "url": "#"
+        "type": "exercise",
+        "label": "Exercises",
+        "url": "./exercise?e=m2"
       },
       {
-        "type": "file",
-        "label": "Notebook (.ipynb)",
-        "url": "#"
+        "type": "quiz",
+        "label": "Quiz",
+        "url": "./quiz?q=m2"
       }
     ]
   },
@@ -80,14 +80,14 @@
         "url": "./slide?id=m3"
       },
       {
-        "type": "doc",
-        "label": "Lesson doc",
-        "url": "#"
+        "type": "exercise",
+        "label": "Exercises",
+        "url": "./exercise?e=m3"
       },
       {
-        "type": "file",
-        "label": "Practice Notebook (.ipynb)",
-        "url": "#"
+        "type": "quiz",
+        "label": "Quiz",
+        "url": "./quiz?q=m3"
       }
     ]
   },
@@ -114,14 +114,14 @@
         "url": "./slide?id=m4"
       },
       {
-        "type": "doc",
-        "label": "Lesson doc",
-        "url": "#"
+        "type": "exercise",
+        "label": "Exercises",
+        "url": "./exercise?e=m4"
       },
       {
-        "type": "file",
-        "label": "Sample Dataset",
-        "url": "#"
+        "type": "quiz",
+        "label": "Quiz",
+        "url": "./quiz?q=m4"
       }
     ]
   },
@@ -146,14 +146,14 @@
         "url": "./slide?id=m5"
       },
       {
-        "type": "doc",
-        "label": "Lesson doc",
-        "url": "#"
+        "type": "exercise",
+        "label": "Exercises",
+        "url": "./exercise?e=m5"
       },
       {
-        "type": "file",
-        "label": "Visualization Notebook (.ipynb)",
-        "url": "#"
+        "type": "quiz",
+        "label": "Quiz",
+        "url": "./quiz?q=m5"
       }
     ]
   },
@@ -176,14 +176,14 @@
         "url": "./slide?id=m6"
       },
       {
-        "type": "doc",
-        "label": "Project Documentation",
-        "url": "#"
+        "type": "exercise",
+        "label": "Exercises",
+        "url": "./exercise?e=m6"
       },
       {
-        "type": "file",
-        "label": "Project Dataset",
-        "url": "#"
+        "type": "quiz",
+        "label": "Quiz",
+        "url": "./quiz?q=m6"
       }
     ]
   }
