@@ -1,85 +1,196 @@
 [
-    {
-        "id":"m1",
-        "number":"01",
-        "title":"Python Foundations",
-        "description":"Learn the Python fundamentals.",
-        "topics":[
-            "Variables",
-            "Data Types",
-            "Functions",
-            "Lists",
-            "Dictionaries"
-        ],
-        "resources":{
-            "slides":{
-                "title":"Slides",
-                "url":"https://google.com"
-            },
-            "doc":{
-                "title":"Lesson Doc",
-                "url":"#"
-            },
-            "file":{
-                "title":"Practice Files",
-                "url":"#"
-            }
-        }
-    },
-
-    {
-        "id":"m2",
-        "number":"02",
-        "title":"NumPy & Pandas",
-        "description":"Work with data efficiently.",
-        "topics":[
-            "NumPy Arrays",
-            "Pandas",
-            "Filtering",
-            "Grouping",
-            "Merge"
-        ],
-        "resources":{
-            "slides":{
-                "title":"Slides",
-                "url":"#"
-            },
-            "doc":{
-                "title":"Lesson Doc",
-                "url":"#"
-            },
-            "file":{
-                "title":"Notebook",
-                "url":"#"
-            }
-        }
-    },
-
-    {
-        "id":"m3",
-        "number":"03",
-        "title":"Visualization",
-        "description":"Create beautiful charts.",
-        "topics":[
-            "Matplotlib",
-            "Seaborn",
-            "Histograms",
-            "Scatter",
-            "Bar Charts"
-        ],
-        "resources":{
-            "slides":{
-                "title":"Slides",
-                "url":"#"
-            },
-            "doc":{
-                "title":"Lesson Doc",
-                "url":"#"
-            },
-            "file":{
-                "title":"Notebook",
-                "url":"#"
-            }
-        }
-    }
+  {
+    "id": "m1",
+    "number": "01",
+    "title": "Python Foundations",
+    "description": "Baseline Python fluency for anyone new to the language, before touching any data tools.",
+    "topics": [
+      "Variables, data types, control flow",
+      "Functions and scope",
+      "Lists, dicts, list comprehensions",
+      "Reading and writing CSV / JSON files"
+    ],
+    "resources": [
+      {
+        "type": "slide",
+        "label": "Slides",
+        "url": "https://canva.link/it2lcid8rvojnro"
+      },
+      {
+        "type": "doc",
+        "label": "Lesson doc",
+        "url": "#"
+      },
+      {
+        "type": "file",
+        "label": "Practice files",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "m2",
+    "number": "02",
+    "title": "Core Data Science Stack",
+    "description": "The three libraries that power almost everything downstream: NumPy, pandas, and plotting.",
+    "topics": [
+      "NumPy arrays, vectorized ops, broadcasting",
+      "pandas DataFrames, indexing, filtering",
+      "groupby, merging, missing data",
+      "Matplotlib & Seaborn basic plots"
+    ],
+    "resources": [
+      {
+        "type": "slide",
+        "label": "Slides",
+        "url": "#"
+      },
+      {
+        "type": "doc",
+        "label": "Lesson doc",
+        "url": "#"
+      },
+      {
+        "type": "file",
+        "label": "Notebook (.ipynb)",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "m3",
+    "number": "03",
+    "title": "Getting & Cleaning Data",
+    "description": "Real data is messy. This module covers ingesting it and getting it into a usable shape.",
+    "topics": [
+      "Reading CSV / Excel / API sources",
+      "Handling missing values & duplicates",
+      "Outlier detection",
+      "Type conversion & string cleaning"
+    ],
+    "resources": [
+      {
+        "type": "slide",
+        "label": "Slides",
+        "url": "#"
+      },
+      {
+        "type": "doc",
+        "label": "Lesson doc",
+        "url": "#"
+      },
+      {
+        "type": "file",
+        "label": "Sample dataset",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "m4",
+    "number": "04",
+    "title": "Exploratory Data Analysis",
+    "description": "Turning a clean dataset into an understanding of what's actually in it.",
+    "topics": [
+      "Descriptive stats: mean, median, std, quantiles",
+      "Distributions & correlation",
+      "Visual storytelling with charts"
+    ],
+    "resources": [
+      {
+        "type": "slide",
+        "label": "Slides",
+        "url": "#"
+      },
+      {
+        "type": "doc",
+        "label": "Lesson doc",
+        "url": "#"
+      },
+      {
+        "type": "file",
+        "label": "Notebook (.ipynb)",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "m5",
+    "number": "05",
+    "title": "Basic Statistics",
+    "description": "Just enough statistical grounding to reason about data honestly.",
+    "topics": [
+      "Probability basics & distributions",
+      "Hypothesis testing (t-test, chi-square)",
+      "Correlation vs. causation"
+    ],
+    "resources": [
+      {
+        "type": "slide",
+        "label": "Slides",
+        "url": "#"
+      },
+      {
+        "type": "doc",
+        "label": "Lesson doc",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "m6",
+    "number": "06",
+    "title": "Intro to Modeling",
+    "description": "A first, gentle pass at machine learning concepts using scikit-learn.",
+    "topics": [
+      "Train / test split & overfitting",
+      "Simple linear regression",
+      "Evaluating a model (accuracy, RMSE)"
+    ],
+    "resources": [
+      {
+        "type": "slide",
+        "label": "Slides",
+        "url": "#"
+      },
+      {
+        "type": "doc",
+        "label": "Lesson doc",
+        "url": "#"
+      },
+      {
+        "type": "file",
+        "label": "Notebook (.ipynb)",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "m7",
+    "number": "07",
+    "title": "Capstone Project",
+    "description": "A real, messy dataset — clean it, explore it, visualize it, and present the findings.",
+    "topics": [
+      "Dataset: Titanic / housing prices (Kaggle)",
+      "End-to-end cleaning & EDA",
+      "Final presentation of insights"
+    ],
+    "resources": [
+      {
+        "type": "slide",
+        "label": "Presentation template",
+        "url": "#"
+      },
+      {
+        "type": "doc",
+        "label": "Project brief",
+        "url": "#"
+      },
+      {
+        "type": "file",
+        "label": "Rubric",
+        "url": "#"
+      }
+    ]
+  }
 ]
