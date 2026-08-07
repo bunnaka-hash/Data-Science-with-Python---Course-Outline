@@ -25,6 +25,11 @@
         "type": "quiz",
         "label": "Quiz",
         "url": "./quiz?q=m1"
+      },
+      {
+        "type": "reference",
+        "label": "Reference",
+        "url": "./reference?r=m1"
       }
     ]
   },
@@ -57,6 +62,11 @@
         "type": "quiz",
         "label": "Quiz",
         "url": "./quiz?q=m2"
+      },
+      {
+        "type": "reference",
+        "label": "Reference",
+        "url": "./reference?r=m2"
       }
     ]
   },
@@ -88,6 +98,11 @@
         "type": "quiz",
         "label": "Quiz",
         "url": "./quiz?q=m3"
+      },
+      {
+        "type": "reference",
+        "label": "Reference",
+        "url": "./reference?r=m3"
       }
     ]
   },
@@ -122,6 +137,11 @@
         "type": "quiz",
         "label": "Quiz",
         "url": "./quiz?q=m4"
+      },
+      {
+        "type": "reference",
+        "label": "Reference",
+        "url": "./reference?r=m4"
       }
     ]
   },
@@ -154,6 +174,11 @@
         "type": "quiz",
         "label": "Quiz",
         "url": "./quiz?q=m5"
+      },
+      {
+        "type": "reference",
+        "label": "Reference",
+        "url": "./reference?r=m5"
       }
     ]
   },
@@ -184,6 +209,11 @@
         "type": "quiz",
         "label": "Quiz",
         "url": "./quiz?q=m6"
+      },
+      {
+        "type": "reference",
+        "label": "Reference",
+        "url": "./reference?r=m6"
       }
     ]
   }
