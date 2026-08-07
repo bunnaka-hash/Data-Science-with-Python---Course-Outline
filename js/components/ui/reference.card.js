@@ -15,6 +15,7 @@ const KIND_META = {
     open: "Preview here",
   },
   link: { icon: "fa-solid fa-link", label: "Link", open: "Open here" },
+  download: { icon: "fa-solid fa-download", label: "Download", open: "Download here" },
 };
 
 const DEFAULT_KIND = {

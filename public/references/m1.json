@@ -60,8 +60,24 @@
     },
     {
       "topic": "Read",
-      "blurb": "Course handouts live on Drive. A Drive share link is rewritten to its preview form automatically, so PDFs open inside the page.",
+      "blurb": "",
       "items": [
+        {
+          "kind": "download",
+          "title": "Windows Python Download & Install",
+          "by": "python.org",
+          "pages": "Download",
+          "url": "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe",
+          "note": "Versions 3.13.3"
+        },
+        {
+          "kind": "download",
+          "title": "MacOS Python Download & Install",
+          "by": "python.org",
+          "pages": "Download",
+          "url": "https://www.python.org/ftp/python/3.13.13/python-3.13.13-macos11.pkg",
+          "note": "Versions 3.13.3"
+        },
         {
           "kind": "book",
           "title": "Module 01 handout (PDF)",
