@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>STJ - Quiz</title>
+    <title>STJ - References</title>
     <link rel="icon" type="image/png" href="./public/image/schoollogo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -12,14 +12,14 @@
     />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/slide.css" />
-    <link rel="stylesheet" href="./css/quiz.css" />
+    <link rel="stylesheet" href="./css/reference.css" />
     <script
       src="https://kit.fontawesome.com/409239094a.js"
       crossorigin="anonymous"
     ></script>
   </head>
-  <body class="slide-page quiz-page">
-    <!-- ===== Sidebar: the lessons in this quiz ===== -->
+  <body class="slide-page reference-page">
+    <!-- ===== Sidebar: every resource in this module ===== -->
     <aside class="sidebar">
       <a class="back-link" href="./index.html">
         <i class="fa-solid fa-arrow-left"></i>
@@ -36,35 +36,20 @@
       </div>
       <div class="progress-label" id="progressLabel"></div>
 
-      <nav id="quizNav"></nav>
+      <nav id="referenceNav"></nav>
 
       <div class="sidebar-footer" id="moduleSwitch"></div>
     </aside>
 
-    <!-- ===== Main: one lesson card at a time ===== -->
+    <!-- ===== Main: the library, or one resource playing in its place =====
+         Both views live here. ?v= in the url decides which one is drawn;
+         switching between them is a re-render, never a page load. -->
     <main class="deck">
       <header class="deck-top">
-        <span class="eyebrow" id="quizKicker">loading…</span>
+        <span class="eyebrow" id="referenceKicker">loading…</span>
 
-        <div class="deck-controls">
-          <button
-            class="deck-btn"
-            id="prevBtn"
-            type="button"
-            title="Previous lesson (←)"
-          >
-            <i class="fa-solid fa-angle-left"></i>
-          </button>
-          <span class="deck-counter" id="lessonCounter">– / –</span>
-          <button
-            class="deck-btn"
-            id="nextBtn"
-            type="button"
-            title="Next lesson (→)"
-          >
-            <i class="fa-solid fa-angle-right"></i>
-          </button>
-        </div>
+        <!-- Rebuilt per view: filters in the library, transport in the player -->
+        <div class="deck-controls" id="deckControls"></div>
       </header>
 
       <section class="stage" id="stage"></section>
@@ -72,6 +57,6 @@
       <footer class="deck-bottom" id="deckBottom"></footer>
     </main>
 
-    <script src="./js/quiz.js" type="module"></script>
+    <script src="./js/reference.js" type="module"></script>
   </body>
 </html>

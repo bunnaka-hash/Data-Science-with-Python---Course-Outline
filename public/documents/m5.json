@@ -18,10 +18,10 @@
       "title": "Matplotlib",
       "lead": "A chart is an argument. The type you choose decides which comparison your reader can actually make.",
       "bullets": [
-        "Line — change over time",
-        "Bar — compare categories",
-        "Scatter — relationship between two numbers",
-        "Histogram — distribution of one number",
+        "Line  change over time",
+        "Bar  compare categories",
+        "Scatter  relationship between two numbers",
+        "Histogram  distribution of one number",
         "Import convention: import matplotlib.pyplot as plt"
       ]
     },
@@ -29,7 +29,7 @@
       "topic": "Overview",
       "layout": "code",
       "title": "The figure and axes pattern",
-      "lead": "Learn the object-oriented form from the start — it is the only one that scales to multiple charts in a figure.",
+      "lead": "Learn the object-oriented form from the start  it is the only one that scales to multiple charts in a figure.",
       "code": {
         "lang": "python",
         "body": [
@@ -53,7 +53,7 @@
     {
       "topic": "Line Chart",
       "layout": "code",
-      "title": "Line chart — change over time",
+      "title": "Line chart  change over time",
       "lead": "Use a line only when the x axis has a natural order, usually time. Never for unordered categories.",
       "code": {
         "lang": "python",
@@ -78,8 +78,8 @@
     {
       "topic": "Bar Chart",
       "layout": "code",
-      "title": "Bar chart — compare categories",
-      "lead": "Bars must start at zero — the length is the comparison. Sort them by value unless the order carries meaning.",
+      "title": "Bar chart  compare categories",
+      "lead": "Bars must start at zero  the length is the comparison. Sort them by value unless the order carries meaning.",
       "code": {
         "lang": "python",
         "body": [
@@ -99,12 +99,12 @@
           "plt.tight_layout()"
         ]
       },
-      "note": "Use barh when the category names are long — horizontal labels stay readable without rotating them."
+      "note": "Use barh when the category names are long  horizontal labels stay readable without rotating them."
     },
     {
       "topic": "Scatter Plot",
       "layout": "code",
-      "title": "Scatter plot — relationship between two numbers",
+      "title": "Scatter plot  relationship between two numbers",
       "lead": "Every point is one record. Use it to see correlation, clusters, and outliers.",
       "code": {
         "lang": "python",
@@ -126,7 +126,7 @@
     {
       "topic": "Histogram",
       "layout": "code",
-      "title": "Histogram — distribution of one number",
+      "title": "Histogram  distribution of one number",
       "lead": "A histogram bins one numeric column and counts how many records fall into each bin.",
       "code": {
         "lang": "python",
@@ -144,7 +144,7 @@
           "ax.legend()"
         ]
       },
-      "note": "Bin count changes the story. Try 10, 20, and 50 on the same data before you settle — too few hides shape, too many shows noise."
+      "note": "Bin count changes the story. Try 10, 20, and 50 on the same data before you settle  too few hides shape, too many shows noise."
     },
     {
       "topic": "Titles & Labels",
@@ -152,7 +152,7 @@
       "title": "A chart nobody has to explain",
       "lead": "If someone sees the chart with no caption and no presenter, they should still know what it says.",
       "bullets": [
-        "Title states the finding, not the columns — \"Sales grew 58% in Q1\", not \"Sales chart\"",
+        "Title states the finding, not the columns  \"Sales grew 58% in Q1\", not \"Sales chart\"",
         "Both axes labelled, with units in brackets",
         "Tick labels rotated if they overlap: ax.tick_params(axis=\"x\", rotation=45)",
         "Source and date somewhere on the figure",
@@ -177,7 +177,7 @@
     {
       "topic": "Legends",
       "layout": "code",
-      "title": "Legends — only when you need one",
+      "title": "Legends  only when you need one",
       "lead": "A legend is needed when one chart shows more than one series. With a single series it is noise.",
       "code": {
         "lang": "python",
@@ -196,7 +196,7 @@
           "ax.legend(loc=\"center left\", bbox_to_anchor=(1.02, 0.5))"
         ]
       },
-      "note": "Labelling the end of each line directly is usually better than a legend — the reader stops having to match colours."
+      "note": "Labelling the end of each line directly is usually better than a legend  the reader stops having to match colours."
     },
     {
       "topic": "Grid",
@@ -226,7 +226,7 @@
       "topic": "Practice",
       "layout": "exercise",
       "title": "Practice: four charts, one dataset",
-      "lead": "Using your cleaned dataset from Module 04, produce one of each chart type — fully labelled.",
+      "lead": "Using your cleaned dataset from Module 04, produce one of each chart type  fully labelled.",
       "bullets": [
         "A line chart of a value over time",
         "A sorted horizontal bar chart of a categorical count",
@@ -248,7 +248,7 @@
         "Legends only for multiple series; grids stay faint and behind",
         "savefig with bbox_inches=\"tight\" for anything you present"
       ],
-      "note": "Next up, Module 06: the capstone — one dataset, the full pipeline, and a set of findings you present."
+      "note": "Next up, Module 06: the capstone  one dataset, the full pipeline, and a set of findings you present."
     }
   ]
 }

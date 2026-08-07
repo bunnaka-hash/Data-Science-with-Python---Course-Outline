@@ -1,0 +1,120 @@
+{
+  "id": "m1",
+  "number": "01",
+  "title": "Python Foundations",
+  "intro": "Everything here backs up Module 01. Anything with a Watch here or Read here button plays inside this site; the rest open at the source.",
+  "groups": [
+    {
+      "topic": "Watch",
+      "blurb": "",
+      "items": [
+        {
+          "kind": "video",
+          "title": "Python Full Course for free 🐍",
+          "by": "Bro Code",
+          "duration": "12h 00m",
+          "url": "https://www.youtube.com/embed/ix9cRaBkVe0",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Learn Python - Full Course for Beginners [Tutorial]",
+          "by": "freeCodeCamp.org",
+          "duration": "4h 26m",
+          "url": "https://www.youtube.com/embed/rfscVS0vtbw",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Harvard CS50’s Introduction to Programming with Python – Full University Course",
+          "by": "freeCodeCamp.org and CS50",
+          "duration": "15h 57m",
+          "url": "https://www.youtube.com/embed/nLRL_NcnK-4",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Harvard CS50’s Introduction to Programming with Python – Full University Course",
+          "by": "freeCodeCamp.org and CS50",
+          "duration": "15h 57m",
+          "url": "https://www.youtube.com/embed/nLRL_NcnK-4",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Python Full Course for Beginners",
+          "by": "Programming with Mosh",
+          "duration": "6h 14m",
+          "url": "https://www.youtube.com/embed/_uQrJ0TkZlc",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        },
+        {
+          "kind": "video",
+          "title": "Python Full Course for Beginners",
+          "by": "Programming with Mosh",
+          "duration": "2h 02m",
+          "url": "https://www.youtube.com/embed/K5KVEU3aaeQ",
+          "note": "Beginners course, covering the basics of Python programming. Watch the first 2 hours for this module."
+        }
+      ]
+    },
+    {
+      "topic": "Read",
+      "blurb": "",
+      "items": [
+        {
+          "kind": "download",
+          "title": "Windows Python Download & Install",
+          "by": "python.org",
+          "pages": "Download",
+          "url": "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe",
+          "note": "Versions 3.13.3"
+        },
+        {
+          "kind": "download",
+          "title": "MacOS Python Download & Install",
+          "by": "python.org",
+          "pages": "Download",
+          "url": "https://www.python.org/ftp/python/3.13.13/python-3.13.13-macos11.pkg",
+          "note": "Versions 3.13.3"
+        },
+        {
+          "kind": "book",
+          "title": "Module 01 handout (PDF)",
+          "by": "STJ",
+          "pages": "add page range",
+          "url": "",
+          "note": "Paste the Drive share link, for example https://drive.google.com/file/d/FILEID/view"
+        },
+        {
+          "kind": "link",
+          "title": "The Python Tutorial",
+          "by": "Python Software Foundation",
+          "url": "https://docs.python.org/3/tutorial/",
+          "note": "The official walkthrough. Sections 3 to 5 line up with this module."
+        },
+        {
+          "kind": "link",
+          "title": "Automate the Boring Stuff with Python",
+          "by": "Al Sweigart",
+          "url": "https://automatetheboringstuff.com/",
+          "note": "Free to read online. Chapters 1 to 6 cover types, control flow, functions and lists."
+        },
+        {
+          "kind": "link",
+          "title": "Data structures: lists, dictionaries and sets",
+          "by": "docs.python.org",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html",
+          "note": "The reference for the two containers used every day in this course."
+        },
+        {
+          "kind": "link",
+          "title": "Reading and writing files",
+          "by": "docs.python.org",
+          "url": "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files",
+          "note": "Explains why the with statement is the safe way to open a file."
+        }
+      ]
+    }
+  ]
+}

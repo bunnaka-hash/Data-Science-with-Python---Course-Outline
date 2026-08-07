@@ -36,10 +36,10 @@
         {
           "prompt": "Which attributes describe a NumPy array?",
           "options": [
-            "`.shape` — the size of each dimension",
-            "`.dtype` — the single type of every element",
-            "`.ndim` — how many dimensions it has",
-            "`.length` — the number of elements"
+            "`.shape`  the size of each dimension",
+            "`.dtype`  the single type of every element",
+            "`.ndim`  how many dimensions it has",
+            "`.length`  the number of elements"
           ],
           "answer": [0, 1, 2],
           "explain": "There is no `.length`. The element count is `.size`, and `len()` gives the first dimension only."
@@ -48,14 +48,14 @@
           "prompt": "`scores = np.array([80, 92, 75, 88])`. What does `scores.argmax()` return?",
           "options": ["1", "92", "3", "[92]"],
           "answer": 0,
-          "explain": "`argmax` returns the position of the largest value, not the value itself — useful for looking up the matching name in a parallel array."
+          "explain": "`argmax` returns the position of the largest value, not the value itself  useful for looking up the matching name in a parallel array."
         }
       ]
     },
     {
       "topic": "Indexing & Slicing",
       "title": "Masks, slices, and views",
-      "lead": "How you select data — and NumPy's biggest surprise about what you get back.",
+      "lead": "How you select data  and NumPy's biggest surprise about what you get back.",
       "questions": [
         {
           "prompt": "`scores = np.array([80, 92, 75, 41, 88])`. What is `scores[scores >= 50]`?",
@@ -97,7 +97,7 @@
             "[999 30 40]"
           ],
           "answer": 0,
-          "explain": "A slice is a view onto the same memory, not a copy. Writing into it changes the original — use `.copy()` when you need independence."
+          "explain": "A slice is a view onto the same memory, not a copy. Writing into it changes the original  use `.copy()` when you need independence."
         },
         {
           "prompt": "For a 2D array `grid`, how do you select column 1 across every row?",
@@ -121,7 +121,7 @@
         {
           "prompt": "Which reshape fixes an \"Expected 2D array\" error from a flat array?",
           "options": [
-            "`a.reshape(-1, 1)` — one column",
+            "`a.reshape(-1, 1)`  one column",
             "`a.flatten()`",
             "`a.T`",
             "`a.reshape(1)`"
@@ -143,7 +143,7 @@
         {
           "prompt": "Does reshaping change the number of elements in an array?",
           "options": [
-            "No — the element count must stay the same",
+            "No  the element count must stay the same",
             "Yes, it pads with zeros when needed",
             "Yes, it truncates the extras",
             "Only for 1D arrays"
@@ -161,8 +161,8 @@
         {
           "prompt": "For a 2D array, what does `axis=0` mean in `scores.sum(axis=0)`?",
           "options": [
-            "Collapse the rows — one result per column",
-            "Collapse the columns — one result per row",
+            "Collapse the rows  one result per column",
+            "Collapse the columns  one result per row",
             "Sum everything into a single number",
             "Sum only the first row"
           ],

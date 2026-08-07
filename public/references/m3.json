@@ -1,0 +1,72 @@
+{
+  "id": "m3",
+  "number": "03",
+  "title": "NumPy",
+  "intro": "Arrays, shapes and vectorised maths. Anything with a Watch here or Read here button plays inside this site.",
+  "groups": [
+    {
+      "topic": "Watch",
+      "blurb": "Paste any YouTube or Vimeo link into the url field and it plays in the course page.",
+      "items": [
+        {
+          "kind": "video",
+          "title": "NumPy arrays, indexing and slicing",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "The mental model for axes and shapes."
+        },
+        {
+          "kind": "video",
+          "title": "Broadcasting explained",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "Why shapes line up from the right."
+        }
+      ]
+    },
+    {
+      "topic": "Read",
+      "blurb": "Course handouts live on Drive. Paste the share link and the PDF opens inside the page.",
+      "items": [
+        {
+          "kind": "book",
+          "title": "Module 03 handout (PDF)",
+          "by": "STJ",
+          "pages": "add page range",
+          "url": "",
+          "note": "Paste the Drive share link, for example https://drive.google.com/file/d/FILEID/view"
+        },
+        {
+          "kind": "link",
+          "title": "NumPy: the absolute basics for beginners",
+          "by": "NumPy",
+          "url": "https://numpy.org/doc/stable/user/absolute_beginners.html",
+          "note": "Start here. Covers creating, indexing and reshaping arrays."
+        },
+        {
+          "kind": "link",
+          "title": "Broadcasting",
+          "by": "NumPy",
+          "url": "https://numpy.org/doc/stable/user/basics.broadcasting.html",
+          "note": "The rules, with the shape tables worth memorising."
+        },
+        {
+          "kind": "link",
+          "title": "Indexing on ndarrays",
+          "by": "NumPy",
+          "url": "https://numpy.org/doc/stable/user/basics.indexing.html",
+          "note": "Basic slicing, boolean masks and fancy indexing in one place."
+        },
+        {
+          "kind": "link",
+          "title": "NumPy API reference",
+          "by": "NumPy",
+          "url": "https://numpy.org/doc/stable/reference/index.html",
+          "note": "Look-up reference for every function used in the exercises."
+        }
+      ]
+    }
+  ]
+}

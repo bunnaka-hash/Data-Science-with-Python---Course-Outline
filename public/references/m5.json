@@ -1,0 +1,72 @@
+{
+  "id": "m5",
+  "number": "05",
+  "title": "Matplotlib",
+  "intro": "Turning a table into a chart someone can read. Anything with a Watch here or Read here button plays inside this site.",
+  "groups": [
+    {
+      "topic": "Watch",
+      "blurb": "Paste any YouTube or Vimeo link into the url field and it plays in the course page.",
+      "items": [
+        {
+          "kind": "video",
+          "title": "Your first plots with pyplot",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "Line, bar and scatter, plus titles and labels."
+        },
+        {
+          "kind": "video",
+          "title": "Figures, axes and subplots",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "The distinction that makes every later chart easier."
+        }
+      ]
+    },
+    {
+      "topic": "Read",
+      "blurb": "Course handouts live on Drive. Paste the share link and the PDF opens inside the page.",
+      "items": [
+        {
+          "kind": "book",
+          "title": "Module 05 handout (PDF)",
+          "by": "STJ",
+          "pages": "add page range",
+          "url": "",
+          "note": "Paste the Drive share link, for example https://drive.google.com/file/d/FILEID/view"
+        },
+        {
+          "kind": "link",
+          "title": "Pyplot tutorial",
+          "by": "Matplotlib",
+          "url": "https://matplotlib.org/stable/tutorials/pyplot.html",
+          "note": "The interface used throughout this module."
+        },
+        {
+          "kind": "link",
+          "title": "Quick start guide",
+          "by": "Matplotlib",
+          "url": "https://matplotlib.org/stable/users/explain/quick_start.html",
+          "note": "Figure and axes explained properly, with the anatomy diagram."
+        },
+        {
+          "kind": "link",
+          "title": "Example gallery",
+          "by": "Matplotlib",
+          "url": "https://matplotlib.org/stable/gallery/index.html",
+          "note": "Find a chart that looks like what you want, then copy its code."
+        },
+        {
+          "kind": "link",
+          "title": "Cheat sheets",
+          "by": "Matplotlib",
+          "url": "https://matplotlib.org/cheatsheets/",
+          "note": "One page of everything. Worth printing for the lab."
+        }
+      ]
+    }
+  ]
+}

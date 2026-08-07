@@ -8,7 +8,7 @@
     {
       "topic": "Arrays",
       "title": "Creating and describing arrays",
-      "lead": "NumPy loads the first time you run a task here — give it a few seconds.",
+      "lead": "NumPy loads the first time you run a task here  give it a few seconds.",
       "packages": ["numpy"],
       "tasks": [
         {
@@ -50,13 +50,13 @@
             "print(np.linspace(0, 1, 5).tolist())",
             "print(np.zeros((2, 3)).shape)"
           ],
-          "explain": "`shape` is always a tuple — `(4,)` with the trailing comma is how Python writes a one-item tuple, which is what makes it a 1D array."
+          "explain": "`shape` is always a tuple  `(4,)` with the trailing comma is how Python writes a one-item tuple, which is what makes it a 1D array."
         },
         {
           "title": "Array maths is element-wise",
           "brief": "Add 5 to every score, express them as fractions of 100, then print the mean and the position of the highest score.",
           "steps": [
-            "`scores + 5` applies to every element — no loop",
+            "`scores + 5` applies to every element  no loop",
             "Print the fractions as a list so they read cleanly",
             "`argmax` gives the position, not the value"
           ],
@@ -122,7 +122,7 @@
             "83.75",
             "[80, 75, 88]"
           ],
-          "hint": "`scores[(scores > 50) & (scores < 90)]` — the brackets around each condition are required, not decoration.",
+          "hint": "`scores[(scores > 50) & (scores < 90)]`  the brackets around each condition are required, not decoration.",
           "solution": [
             "import numpy as np",
             "",
@@ -134,7 +134,7 @@
             "print(round(float(scores[mask].mean()), 2))",
             "print(scores[(scores > 50) & (scores < 90)].tolist())"
           ],
-          "explain": "Use `&` and `|`, never the keywords `and` / `or` — the keywords need a single True or False and raise a ValueError on an array."
+          "explain": "Use `&` and `|`, never the keywords `and` / `or`  the keywords need a single True or False and raise a ValueError on an array."
         },
         {
           "title": "Rows and columns",
@@ -174,7 +174,7 @@
     {
       "topic": "Slicing & Reshaping",
       "title": "Views, steps, and shapes",
-      "lead": "Slicing an array hands back a window onto the same memory — NumPy's biggest surprise.",
+      "lead": "Slicing an array hands back a window onto the same memory  NumPy's biggest surprise.",
       "packages": ["numpy"],
       "tasks": [
         {
@@ -243,7 +243,7 @@
             "# 5. row 1 of m, as a list"
           ],
           "expected": ["(3, 4)", "(4, 3)", "(3, 4)", "(12, 1)", "[4, 5, 6, 7]"],
-          "hint": "A single column is `a.reshape(-1, 1)` — as many rows as it takes, one column wide.",
+          "hint": "A single column is `a.reshape(-1, 1)`  as many rows as it takes, one column wide.",
           "solution": [
             "import numpy as np",
             "",
@@ -332,7 +332,7 @@
             "[[11, 12, 13], [24, 25, 26]]",
             "[['pass', 'pass', 'fail'], ['fail', 'pass', 'pass']]"
           ],
-          "hint": "None of the three needs a loop or a reshape — the shapes already line up.",
+          "hint": "None of the three needs a loop or a reshape  the shapes already line up.",
           "solution": [
             "import numpy as np",
             "",

@@ -1,0 +1,79 @@
+{
+  "id": "m2",
+  "number": "02",
+  "title": "Python for Data Analysis",
+  "intro": "The working environment and the compact syntax that data code leans on. Anything with a Watch here or Read here button plays inside this site.",
+  "groups": [
+    {
+      "topic": "Watch",
+      "blurb": "Paste any YouTube or Vimeo link into the url field and it plays in the course page.",
+      "items": [
+        {
+          "kind": "video",
+          "title": "Jupyter Notebook from zero",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "Cells, kernels and the run order that confuses everyone once."
+        },
+        {
+          "kind": "video",
+          "title": "List comprehensions and lambda",
+          "by": "Add the channel name",
+          "duration": "add length",
+          "url": "",
+          "note": "The compact forms you will read constantly in Pandas code."
+        }
+      ]
+    },
+    {
+      "topic": "Read",
+      "blurb": "Course handouts live on Drive. Paste the share link and the PDF opens inside the page.",
+      "items": [
+        {
+          "kind": "book",
+          "title": "Module 02 handout (PDF)",
+          "by": "STJ",
+          "pages": "add page range",
+          "url": "",
+          "note": "Paste the Drive share link, for example https://drive.google.com/file/d/FILEID/view"
+        },
+        {
+          "kind": "link",
+          "title": "Jupyter documentation",
+          "by": "Project Jupyter",
+          "url": "https://docs.jupyter.org/en/latest/",
+          "note": "Installing, running and the notebook interface."
+        },
+        {
+          "kind": "link",
+          "title": "venv: creating virtual environments",
+          "by": "docs.python.org",
+          "url": "https://docs.python.org/3/library/venv.html",
+          "note": "Why every project gets its own environment, and how to make one."
+        },
+        {
+          "kind": "link",
+          "title": "List comprehensions",
+          "by": "docs.python.org",
+          "url": "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions",
+          "note": "The official explanation, with nested examples at the end."
+        },
+        {
+          "kind": "link",
+          "title": "Lambda expressions",
+          "by": "docs.python.org",
+          "url": "https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions",
+          "note": "Small anonymous functions, and where they are worth using."
+        },
+        {
+          "kind": "link",
+          "title": "Built-in functions: map, filter, zip",
+          "by": "docs.python.org",
+          "url": "https://docs.python.org/3/library/functions.html",
+          "note": "Reference for the three builtins this module drills."
+        }
+      ]
+    }
+  ]
+}

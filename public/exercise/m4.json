@@ -8,7 +8,7 @@
     {
       "topic": "Series & DataFrame",
       "title": "The two objects everything else uses",
-      "lead": "Pandas loads the first time you run a task here — give it a few seconds.",
+      "lead": "Pandas loads the first time you run a task here  give it a few seconds.",
       "packages": ["pandas"],
       "tasks": [
         {
@@ -17,7 +17,7 @@
           "steps": [
             "The index labels each value, so `s[\"Sokha\"]` works",
             "`s[s >= 50].index.tolist()` gives the labels that passed",
-            "`.value_counts()` counts each grade — print it as a dictionary"
+            "`.value_counts()` counts each grade  print it as a dictionary"
           ],
           "starter": [
             "import pandas as pd",
@@ -51,7 +51,7 @@
             "print(s[s >= 50].index.tolist())",
             "print(grades.value_counts().to_dict())"
           ],
-          "explain": "A Series is a NumPy array plus an index. The boolean mask works exactly as it did in Module 03 — what is new is that the labels travel with the values."
+          "explain": "A Series is a NumPy array plus an index. The boolean mask works exactly as it did in Module 03  what is new is that the labels travel with the values."
         },
         {
           "title": "Look at a new table",
@@ -99,7 +99,7 @@
             "print(df[\"score\"].tolist())",
             "print(type(df[\"score\"]).__name__, type(df[[\"name\", \"score\"]]).__name__)"
           ],
-          "explain": "One column name gives a Series; a list of column names gives a DataFrame — even a list holding a single name."
+          "explain": "One column name gives a Series; a list of column names gives a DataFrame  even a list holding a single name."
         }
       ]
     },
@@ -155,7 +155,7 @@
             "df.loc[df[\"score\"] < 50, \"status\"] = \"retake\"",
             "print(df[\"status\"].fillna(\"ok\").tolist())"
           ],
-          "explain": "Assigning through one `.loc` is the whole point — `df[df.score < 50][\"status\"] = \"retake\"` writes into a temporary copy and silently changes nothing."
+          "explain": "Assigning through one `.loc` is the whole point  `df[df.score < 50][\"status\"] = \"retake\"` writes into a temporary copy and silently changes nothing."
         },
         {
           "title": "Order the table",
@@ -206,7 +206,7 @@
             "ranked = df.sort_values(\"score\", ascending=False).reset_index(drop=True)",
             "print(ranked.index.tolist())"
           ],
-          "explain": "Without `reset_index(drop=True)` the old row numbers travel with the sorted rows, so the index reads 3, 0, 2, 1 — fine to keep, confusing to publish."
+          "explain": "Without `reset_index(drop=True)` the old row numbers travel with the sorted rows, so the index reads 3, 0, 2, 1  fine to keep, confusing to publish."
         }
       ]
     },
@@ -310,7 +310,7 @@
             "print(summary[\"students\"].tolist())",
             "print(summary[\"avg_score\"].round(2).tolist())"
           ],
-          "explain": "This shape — one row per category, one column per measure — is what most reports and most charts want as their input."
+          "explain": "This shape  one row per category, one column per measure  is what most reports and most charts want as their input."
         }
       ]
     },
@@ -324,7 +324,7 @@
           "title": "Count the gaps, then close them",
           "brief": "Report the missing values per column, drop the rows with no score, fill the missing class, and remove the duplicate id.",
           "steps": [
-            "`df.isna().sum()` counts the gaps — print it as a dictionary",
+            "`df.isna().sum()` counts the gaps  print it as a dictionary",
             "A row with no score is useless, so drop those rows",
             "Fill a missing class with `\"unknown\"`",
             "Drop duplicate ids, keeping the first"
@@ -417,7 +417,7 @@
             "",
             "print(left[left[\"score\"].isna()][\"name\"].tolist())"
           ],
-          "explain": "Id 4 has a score but no student, and id 3 has a student but no score. Which of them survives is entirely decided by `how` — always check the row count after a merge."
+          "explain": "Id 4 has a score but no student, and id 3 has a student but no score. Which of them survives is entirely decided by `how`  always check the row count after a merge."
         }
       ]
     }

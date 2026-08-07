@@ -16,9 +16,6 @@
   color: var(--blue);
 }
 
-.quiz-card {
-  max-width: 900px;
-}
 
 /* ---------- Sidebar score badges ---------- */
 .nav-slide {
@@ -55,7 +52,7 @@
   padding: 20px 22px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: var(--bg);
+  background: var(--panel);
 }
 
 .quiz-q-head {

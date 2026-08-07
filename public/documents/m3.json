@@ -19,7 +19,7 @@
       "lead": "NumPy is the numerical engine underneath Pandas, Matplotlib, and every machine learning library in Python.",
       "bullets": [
         "One data type per array, stored in one contiguous block of memory",
-        "Operations apply to the whole array at once — no loops",
+        "Operations apply to the whole array at once  no loops",
         "10–100× faster than equivalent Python list code",
         "Import convention: import numpy as np"
       ]
@@ -32,8 +32,8 @@
       "bullets": [
         "np.array([...]) from an existing list",
         "np.zeros(n), np.ones(n), np.full(n, value)",
-        "np.arange(start, stop, step) — like range, but an array",
-        "np.linspace(start, stop, count) — evenly spaced, stop included",
+        "np.arange(start, stop, step)  like range, but an array",
+        "np.linspace(start, stop, count)  evenly spaced, stop included",
         "np.random.rand(n) / np.random.randint(low, high, n)"
       ],
       "code": {
@@ -54,11 +54,11 @@
     {
       "topic": "Arrays",
       "layout": "content",
-      "title": "Array vs list — the real difference",
+      "title": "Array vs list  the real difference",
       "lead": "The same expression means two different things depending on the type.",
       "bullets": [
-        "[1, 2] * 2 gives [1, 2, 1, 2] — the list repeats",
-        "np.array([1, 2]) * 2 gives [2, 4] — every element is multiplied",
+        "[1, 2] * 2 gives [1, 2, 1, 2]  the list repeats",
+        "np.array([1, 2]) * 2 gives [2, 4]  every element is multiplied",
         "Arrays have one dtype; a list can mix types",
         "Arrays are fixed size; append means building a new array",
         "Arrays support math operators element-wise"
@@ -75,7 +75,7 @@
           "print(scores.max(), scores.argmax())   # 92 1"
         ]
       },
-      "note": "argmax returns the position of the largest value, not the value — useful for looking up the matching name in another array."
+      "note": "argmax returns the position of the largest value, not the value  useful for looking up the matching name in another array."
     },
     {
       "topic": "Indexing",
@@ -102,7 +102,7 @@
           "print(grid[1, 2])                   # 6"
         ]
       },
-      "note": "Use & and | — not the keywords and / or. Python's keywords cannot work element-wise and will raise a ValueError."
+      "note": "Use & and |  not the keywords and / or. Python's keywords cannot work element-wise and will raise a ValueError."
     },
     {
       "topic": "Slicing",
@@ -157,7 +157,7 @@
     {
       "topic": "Broadcasting",
       "layout": "content",
-      "title": "Broadcasting — arrays of different shapes",
+      "title": "Broadcasting  arrays of different shapes",
       "lead": "NumPy stretches the smaller array across the larger one when their shapes are compatible, without copying memory.",
       "bullets": [
         "Shapes are compared from the right",
@@ -214,7 +214,7 @@
       "topic": "Practice",
       "layout": "exercise",
       "title": "Practice: exam analysis without loops",
-      "lead": "Given a (5, 3) array of scores — 5 students, 3 subjects — produce each result with a single NumPy expression.",
+      "lead": "Given a (5, 3) array of scores  5 students, 3 subjects  produce each result with a single NumPy expression.",
       "bullets": [
         "Each student's average across the 3 subjects",
         "Each subject's highest score",
@@ -232,7 +232,7 @@
       "bullets": [
         "shape, dtype, and ndim describe every array",
         "Boolean masks are how you filter numerical data",
-        "Slices are views — copy when you need independence",
+        "Slices are views  copy when you need independence",
         "Broadcasting removes the need to reshape by hand",
         "axis=0 collapses rows, axis=1 collapses columns"
       ],
