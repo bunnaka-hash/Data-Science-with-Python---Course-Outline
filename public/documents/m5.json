@@ -1,0 +1,254 @@
+{
+  "id": "m5",
+  "number": "05",
+  "title": "Matplotlib",
+  "description": "Visualize data effectively using different chart types and improve data storytelling.",
+  "duration": "90 min",
+  "level": "Intermediate",
+  "objectives": [
+    "Choose the right chart type for the question being asked.",
+    "Build line, bar, scatter, and histogram plots from a DataFrame.",
+    "Label every chart so it can be read without explanation.",
+    "Use legends, grids, and subplots to make comparisons clear."
+  ],
+  "slides": [
+    {
+      "topic": "Overview",
+      "layout": "title",
+      "title": "Matplotlib",
+      "lead": "A chart is an argument. The type you choose decides which comparison your reader can actually make.",
+      "bullets": [
+        "Line — change over time",
+        "Bar — compare categories",
+        "Scatter — relationship between two numbers",
+        "Histogram — distribution of one number",
+        "Import convention: import matplotlib.pyplot as plt"
+      ]
+    },
+    {
+      "topic": "Overview",
+      "layout": "code",
+      "title": "The figure and axes pattern",
+      "lead": "Learn the object-oriented form from the start — it is the only one that scales to multiple charts in a figure.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "import matplotlib.pyplot as plt",
+          "",
+          "fig, ax = plt.subplots(figsize=(8, 4.5))",
+          "",
+          "ax.plot([1, 2, 3], [10, 25, 18])",
+          "ax.set_title(\"Something measured over time\")",
+          "",
+          "plt.tight_layout()",
+          "plt.show()",
+          "",
+          "# fig  = the whole canvas",
+          "# ax   = one plotting area on it",
+          "fig.savefig(\"chart.png\", dpi=150, bbox_inches=\"tight\")"
+        ]
+      },
+      "note": "In a notebook, plt.show() is optional but keeps output clean. tight_layout stops labels from being cut off."
+    },
+    {
+      "topic": "Line Chart",
+      "layout": "code",
+      "title": "Line chart — change over time",
+      "lead": "Use a line only when the x axis has a natural order, usually time. Never for unordered categories.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\"]",
+          "sales  = [120, 145, 138, 172, 190]",
+          "target = [130, 140, 150, 160, 170]",
+          "",
+          "fig, ax = plt.subplots(figsize=(8, 4.5))",
+          "",
+          "ax.plot(months, sales,  marker=\"o\", linewidth=2, label=\"Actual\")",
+          "ax.plot(months, target, linestyle=\"--\", color=\"gray\", label=\"Target\")",
+          "",
+          "ax.set_title(\"Monthly sales vs target, 2026\")",
+          "ax.set_xlabel(\"Month\")",
+          "ax.set_ylabel(\"Sales (units)\")",
+          "ax.legend()",
+          "plt.tight_layout()"
+        ]
+      }
+    },
+    {
+      "topic": "Bar Chart",
+      "layout": "code",
+      "title": "Bar chart — compare categories",
+      "lead": "Bars must start at zero — the length is the comparison. Sort them by value unless the order carries meaning.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "counts = df[\"class\"].value_counts().sort_values()",
+          "",
+          "fig, ax = plt.subplots(figsize=(8, 4.5))",
+          "",
+          "ax.barh(counts.index, counts.values, color=\"#2C5F8A\")",
+          "ax.set_title(\"Students per class\")",
+          "ax.set_xlabel(\"Students\")",
+          "",
+          "# value labels beat a y-axis grid for a small number of bars",
+          "for i, v in enumerate(counts.values):",
+          "    ax.text(v + 0.3, i, str(v), va=\"center\")",
+          "",
+          "ax.spines[[\"top\", \"right\"]].set_visible(False)",
+          "plt.tight_layout()"
+        ]
+      },
+      "note": "Use barh when the category names are long — horizontal labels stay readable without rotating them."
+    },
+    {
+      "topic": "Scatter Plot",
+      "layout": "code",
+      "title": "Scatter plot — relationship between two numbers",
+      "lead": "Every point is one record. Use it to see correlation, clusters, and outliers.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "fig, ax = plt.subplots(figsize=(6, 6))",
+          "",
+          "ax.scatter(df[\"study_hours\"], df[\"score\"],",
+          "           alpha=0.6, s=40, edgecolor=\"white\")",
+          "",
+          "ax.set_title(\"Study hours vs exam score\")",
+          "ax.set_xlabel(\"Study hours per week\")",
+          "ax.set_ylabel(\"Exam score\")",
+          "",
+          "print(df[\"study_hours\"].corr(df[\"score\"]).round(2))   # e.g. 0.71"
+        ]
+      },
+      "note": "alpha below 1 reveals where points pile up. With thousands of records, overlapping dots otherwise hide the density."
+    },
+    {
+      "topic": "Histogram",
+      "layout": "code",
+      "title": "Histogram — distribution of one number",
+      "lead": "A histogram bins one numeric column and counts how many records fall into each bin.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "fig, ax = plt.subplots(figsize=(8, 4.5))",
+          "",
+          "ax.hist(df[\"score\"], bins=12, color=\"#2C5F8A\", edgecolor=\"white\")",
+          "",
+          "ax.axvline(df[\"score\"].mean(), color=\"#E8A93B\",",
+          "           linestyle=\"--\", linewidth=2, label=\"Mean\")",
+          "",
+          "ax.set_title(\"Distribution of exam scores\")",
+          "ax.set_xlabel(\"Score\")",
+          "ax.set_ylabel(\"Number of students\")",
+          "ax.legend()"
+        ]
+      },
+      "note": "Bin count changes the story. Try 10, 20, and 50 on the same data before you settle — too few hides shape, too many shows noise."
+    },
+    {
+      "topic": "Titles & Labels",
+      "layout": "content",
+      "title": "A chart nobody has to explain",
+      "lead": "If someone sees the chart with no caption and no presenter, they should still know what it says.",
+      "bullets": [
+        "Title states the finding, not the columns — \"Sales grew 58% in Q1\", not \"Sales chart\"",
+        "Both axes labelled, with units in brackets",
+        "Tick labels rotated if they overlap: ax.tick_params(axis=\"x\", rotation=45)",
+        "Source and date somewhere on the figure",
+        "Annotate the one point that matters instead of all of them"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "ax.set_title(\"Scores rose after the tutoring programme\", fontsize=14, pad=12)",
+          "ax.set_xlabel(\"Month\")",
+          "ax.set_ylabel(\"Average score (points)\")",
+          "ax.tick_params(axis=\"x\", rotation=45)",
+          "",
+          "ax.annotate(\"Programme starts\",",
+          "            xy=(\"Mar\", 138), xytext=(\"Jan\", 175),",
+          "            arrowprops=dict(arrowstyle=\"->\"))",
+          "",
+          "fig.text(0.01, 0.01, \"Source: school records, 2026\", fontsize=8, color=\"gray\")"
+        ]
+      }
+    },
+    {
+      "topic": "Legends",
+      "layout": "code",
+      "title": "Legends — only when you need one",
+      "lead": "A legend is needed when one chart shows more than one series. With a single series it is noise.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "ax.plot(months, class_a, label=\"Class A\")",
+          "ax.plot(months, class_b, label=\"Class B\")",
+          "",
+          "ax.legend(",
+          "    loc=\"upper left\",",
+          "    frameon=False,",
+          "    ncol=2,",
+          "    title=\"Class\",",
+          ")",
+          "",
+          "# outside the plot when the data fills the corners",
+          "ax.legend(loc=\"center left\", bbox_to_anchor=(1.02, 0.5))"
+        ]
+      },
+      "note": "Labelling the end of each line directly is usually better than a legend — the reader stops having to match colours."
+    },
+    {
+      "topic": "Grid",
+      "layout": "code",
+      "title": "Grid, styling, and subplots",
+      "lead": "A faint grid helps readers estimate values. Anything heavier competes with the data.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "ax.grid(axis=\"y\", alpha=0.3, linestyle=\"--\")",
+          "ax.set_axisbelow(True)          # grid behind the bars, not on top",
+          "ax.spines[[\"top\", \"right\"]].set_visible(False)",
+          "",
+          "plt.style.use(\"seaborn-v0_8-whitegrid\")   # a decent default",
+          "",
+          "# several charts on one figure",
+          "fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))",
+          "axes[0].hist(df[\"score\"], bins=12)",
+          "axes[0].set_title(\"Score distribution\")",
+          "axes[1].scatter(df[\"study_hours\"], df[\"score\"], alpha=0.6)",
+          "axes[1].set_title(\"Hours vs score\")",
+          "plt.tight_layout()"
+        ]
+      }
+    },
+    {
+      "topic": "Practice",
+      "layout": "exercise",
+      "title": "Practice: four charts, one dataset",
+      "lead": "Using your cleaned dataset from Module 04, produce one of each chart type — fully labelled.",
+      "bullets": [
+        "A line chart of a value over time",
+        "A sorted horizontal bar chart of a categorical count",
+        "A scatter plot of two numeric columns, with the correlation printed",
+        "A histogram with a mean line",
+        "Combine the best two into one figure with plt.subplots(1, 2)"
+      ],
+      "note": "Write the title of each chart as the finding it shows. If you cannot state a finding, the chart is not worth keeping."
+    },
+    {
+      "topic": "Recap",
+      "layout": "recap",
+      "title": "Module 05 recap",
+      "lead": "You can now take a question from data to a chart someone else can read.",
+      "bullets": [
+        "fig, ax = plt.subplots() is the pattern to learn",
+        "Chart type follows the question: trend, comparison, relationship, distribution",
+        "Titles state findings; axes always carry labels and units",
+        "Legends only for multiple series; grids stay faint and behind",
+        "savefig with bbox_inches=\"tight\" for anything you present"
+      ],
+      "note": "Next up, Module 06: the capstone — one dataset, the full pipeline, and a set of findings you present."
+    }
+  ]
+}

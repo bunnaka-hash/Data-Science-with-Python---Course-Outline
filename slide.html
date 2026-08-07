@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slides — Data Science with Python</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/slide.css" />
+    <script
+      src="https://kit.fontawesome.com/409239094a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="slide-page">
+    <!-- ===== Sidebar: deck table of contents ===== -->
+    <aside class="sidebar">
+      <a class="back-link" href="./index.html">
+        <i class="fa-solid fa-arrow-left"></i>
+        Course outline
+      </a>
+
+      <div class="brand">
+        <span class="prompt">&gt;&gt;&gt;</span>
+        <h1 id="moduleTitle">Loading…</h1>
+      </div>
+      <div class="brand-sub" id="moduleMeta"></div>
+
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-label" id="progressLabel"></div>
+
+      <nav id="slideNav"></nav>
+
+      <div class="sidebar-footer" id="moduleSwitch"></div>
+    </aside>
+
+    <!-- ===== Main: the deck ===== -->
+    <main class="deck">
+      <header class="deck-top">
+        <span class="eyebrow" id="deckKicker">loading…</span>
+
+        <div class="deck-controls">
+          <button class="deck-btn" id="prevBtn" type="button" title="Previous slide (←)">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <span class="deck-counter" id="slideCounter">– / –</span>
+          <button class="deck-btn" id="nextBtn" type="button" title="Next slide (→)">
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+
+          <span class="deck-divider"></span>
+
+          <button
+            class="deck-btn"
+            id="fullscreenBtn"
+            type="button"
+            title="Present full screen (F)"
+          >
+            <i class="fa-solid fa-expand"></i>
+          </button>
+          <button
+            class="deck-btn"
+            id="printBtn"
+            type="button"
+            title="Print the deck / save as PDF (Ctrl+P)"
+          >
+            <i class="fa-solid fa-file-pdf"></i>
+          </button>
+        </div>
+      </header>
+
+      <section class="stage" id="stage"></section>
+
+      <footer class="deck-bottom" id="deckBottom"></footer>
+    </main>
+
+    <!-- Every slide, rendered for print only. Populated on demand. -->
+    <section class="print-sheet" id="printSheet" aria-hidden="true"></section>
+
+    <script src="./js/slide.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,303 @@
+{
+  "id": "m4",
+  "number": "04",
+  "title": "Pandas",
+  "description": "Learn how to manipulate, clean, and analyze real-world datasets using Pandas.",
+  "duration": "120 min",
+  "level": "Intermediate",
+  "objectives": [
+    "Load data from CSV and Excel into a DataFrame and inspect it.",
+    "Select, filter, and sort rows and columns confidently.",
+    "Aggregate with groupby and combine tables with merge.",
+    "Detect and handle missing values, and work with datetime columns."
+  ],
+  "slides": [
+    {
+      "topic": "Overview",
+      "layout": "title",
+      "title": "Pandas",
+      "lead": "Pandas is where most of a data analyst's day is spent. It is NumPy with labels, missing-value handling, and tables.",
+      "bullets": [
+        "Series — one labelled column",
+        "DataFrame — a whole labelled table",
+        "Load, clean, filter, group, join, summarise",
+        "Import convention: import pandas as pd"
+      ]
+    },
+    {
+      "topic": "Series",
+      "layout": "content",
+      "title": "Series — a labelled 1D array",
+      "lead": "A Series is a NumPy array plus an index. Every column of a DataFrame is a Series.",
+      "bullets": [
+        "Created from a list, dict, or NumPy array",
+        "The index labels each value and defaults to 0, 1, 2…",
+        "Vectorised math works exactly as it does in NumPy",
+        ".value_counts() counts occurrences — the most used method in Pandas",
+        "Operations align on the index, not on position"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "import pandas as pd",
+          "",
+          "s = pd.Series([87.5, 41.0, 73.5], index=[\"Sokha\", \"Dara\", \"Mony\"])",
+          "",
+          "print(s[\"Sokha\"])          # 87.5",
+          "print(s.mean().round(2))   # 67.33",
+          "print(s[s >= 50])          # Sokha 87.5, Mony 73.5",
+          "",
+          "grades = pd.Series([\"B\", \"F\", \"C\", \"B\"])",
+          "print(grades.value_counts())   # B 2, F 1, C 1"
+        ]
+      }
+    },
+    {
+      "topic": "DataFrame",
+      "layout": "content",
+      "title": "DataFrame — the table",
+      "lead": "A DataFrame is a dict of Series sharing one index. Rows are records, columns are fields.",
+      "bullets": [
+        "df.head() / df.tail() — look at the ends",
+        "df.shape — (rows, columns)",
+        "df.info() — dtypes and non-null counts in one view",
+        "df.describe() — count, mean, std, quartiles for numeric columns",
+        "df.columns — the column labels"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "df = pd.DataFrame({",
+          "    \"name\":  [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"],",
+          "    \"score\": [87.5, 41.0, 73.5, 92.0],",
+          "    \"class\": [\"A\", \"B\", \"A\", \"B\"],",
+          "})",
+          "",
+          "print(df.shape)        # (4, 3)",
+          "df.info()",
+          "print(df.describe())",
+          "",
+          "print(df[\"score\"])           # one column -> Series",
+          "print(df[[\"name\", \"score\"]]) # two columns -> DataFrame"
+        ]
+      },
+      "note": "df.info() is the first thing to run on any new dataset — it shows dtypes and missing counts together."
+    },
+    {
+      "topic": "Read CSV / Excel",
+      "layout": "code",
+      "title": "Loading real files",
+      "lead": "Reading the file is one line. Reading it correctly is the arguments you pass.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "df = pd.read_csv(\"students.csv\")",
+          "",
+          "# common arguments",
+          "df = pd.read_csv(",
+          "    \"students.csv\",",
+          "    encoding=\"utf-8\",",
+          "    sep=\",\",                    # try sep=\";\" for European exports",
+          "    parse_dates=[\"enrolled_at\"],",
+          "    na_values=[\"\", \"N/A\", \"-\"],",
+          ")",
+          "",
+          "xl = pd.read_excel(\"scores.xlsx\", sheet_name=\"Term1\")   # needs openpyxl",
+          "",
+          "df.to_csv(\"clean.csv\", index=False)   # index=False or you gain a column"
+        ]
+      },
+      "note": "Forgetting index=False on to_csv is why exported files grow an Unnamed: 0 column every time they round-trip."
+    },
+    {
+      "topic": "Filtering",
+      "layout": "code",
+      "title": "Filtering rows",
+      "lead": "Build a boolean Series, then pass it to df[...]. Use .loc when you also want to pick columns.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "df[df[\"score\"] >= 50]",
+          "",
+          "# combine with & and |, each condition in ()",
+          "df[(df[\"score\"] >= 50) & (df[\"class\"] == \"A\")]",
+          "",
+          "# label-based selection: .loc[rows, columns]",
+          "df.loc[df[\"score\"] >= 50, [\"name\", \"score\"]]",
+          "",
+          "# position-based: .iloc[row_positions, col_positions]",
+          "df.iloc[0:3, 0:2]",
+          "",
+          "df[df[\"class\"].isin([\"A\", \"C\"])]",
+          "df[df[\"name\"].str.startswith(\"S\")]",
+          "",
+          "# assign through .loc, never through a chained []",
+          "df.loc[df[\"score\"] < 50, \"status\"] = \"retake\""
+        ]
+      },
+      "note": "df[df.score < 50][\"status\"] = \"retake\" silently fails with a SettingWithCopyWarning. Always assign through a single .loc."
+    },
+    {
+      "topic": "Sorting",
+      "layout": "code",
+      "title": "Sorting and ranking",
+      "lead": "sort_values reorders rows; the index travels with them unless you reset it.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "df.sort_values(\"score\", ascending=False)",
+          "",
+          "# sort by several columns at once",
+          "df.sort_values([\"class\", \"score\"], ascending=[True, False])",
+          "",
+          "# top / bottom shortcuts",
+          "df.nlargest(3, \"score\")",
+          "df.nsmallest(3, \"score\")",
+          "",
+          "# renumber 0..n after sorting",
+          "ranked = df.sort_values(\"score\", ascending=False).reset_index(drop=True)",
+          "",
+          "df.sort_index()          # back to original order"
+        ]
+      }
+    },
+    {
+      "topic": "GroupBy",
+      "layout": "content",
+      "title": "GroupBy — split, apply, combine",
+      "lead": "Split rows into groups by a column, apply a summary to each group, then combine the results into a new table.",
+      "bullets": [
+        "df.groupby(\"class\")[\"score\"].mean()",
+        "Group by several columns for a nested breakdown",
+        ".agg() applies different functions to different columns",
+        "Common: sum, mean, count, min, max, nunique",
+        "reset_index() turns the group labels back into columns"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "df.groupby(\"class\")[\"score\"].mean()",
+          "",
+          "df.groupby(\"class\").agg(",
+          "    students=(\"name\", \"count\"),",
+          "    avg_score=(\"score\", \"mean\"),",
+          "    top_score=(\"score\", \"max\"),",
+          ").reset_index()",
+          "",
+          "#   class  students  avg_score  top_score",
+          "# 0     A         2      80.50       87.5",
+          "# 1     B         2      66.50       92.0",
+          "",
+          "df.groupby([\"class\", \"status\"]).size()"
+        ]
+      }
+    },
+    {
+      "topic": "Merge",
+      "layout": "code",
+      "title": "Merge — joining two tables",
+      "lead": "merge is a SQL join. Pick the key column and the how, then always check the row count afterwards.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "students = pd.DataFrame({\"id\": [1, 2, 3], \"name\": [\"Sokha\", \"Dara\", \"Mony\"]})",
+          "scores   = pd.DataFrame({\"id\": [1, 2, 4], \"score\": [87.5, 41.0, 66.0]})",
+          "",
+          "pd.merge(students, scores, on=\"id\", how=\"inner\")   # only ids 1, 2",
+          "pd.merge(students, scores, on=\"id\", how=\"left\")    # all students, NaN for Mony",
+          "pd.merge(students, scores, on=\"id\", how=\"outer\")   # everything, ids 1-4",
+          "",
+          "# different key names on each side",
+          "pd.merge(students, scores, left_on=\"id\", right_on=\"student_id\", how=\"left\")",
+          "",
+          "# stacking instead of joining",
+          "pd.concat([term1, term2], ignore_index=True)"
+        ]
+      },
+      "note": "If a merge returns more rows than you started with, the key is not unique on one side. Check with df[\"id\"].duplicated().any()."
+    },
+    {
+      "topic": "Missing Values",
+      "layout": "content",
+      "title": "Missing values",
+      "lead": "Real data has holes. Decide deliberately whether to drop them or fill them — never ignore them.",
+      "bullets": [
+        "df.isna().sum() — count missing per column, run this first",
+        "df.dropna() — drop rows; subset= limits which columns count",
+        "df.fillna(value) — fill with a constant, mean, or median",
+        "ffill / bfill carry the previous or next value forward",
+        "NaN is a float, so any column containing one becomes float"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "print(df.isna().sum())",
+          "",
+          "df = df.dropna(subset=[\"score\"])          # a row with no score is useless",
+          "df[\"class\"] = df[\"class\"].fillna(\"unknown\")",
+          "df[\"score\"] = df[\"score\"].fillna(df[\"score\"].median())",
+          "",
+          "df = df.drop_duplicates(subset=[\"id\"], keep=\"first\")",
+          "",
+          "# tidy up column names while you are here",
+          "df.columns = df.columns.str.strip().str.lower().str.replace(\" \", \"_\")"
+        ]
+      },
+      "note": "Filling with the mean pulls the distribution toward the centre and shrinks the variance. Median is safer when the data is skewed."
+    },
+    {
+      "topic": "DateTime Introduction",
+      "layout": "code",
+      "title": "Working with dates",
+      "lead": "Once a column is a real datetime, the .dt accessor unlocks every part of it.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "df[\"enrolled_at\"] = pd.to_datetime(df[\"enrolled_at\"], errors=\"coerce\")",
+          "",
+          "df[\"year\"]    = df[\"enrolled_at\"].dt.year",
+          "df[\"month\"]   = df[\"enrolled_at\"].dt.month",
+          "df[\"weekday\"] = df[\"enrolled_at\"].dt.day_name()",
+          "",
+          "# filter by date range",
+          "df[df[\"enrolled_at\"] >= \"2026-01-01\"]",
+          "",
+          "# monthly counts: set the date as the index, then resample",
+          "monthly = (df.set_index(\"enrolled_at\")",
+          "             .resample(\"ME\")[\"score\"]",
+          "             .mean())"
+        ]
+      },
+      "note": "errors=\"coerce\" turns unparseable dates into NaT instead of crashing — then df[\"enrolled_at\"].isna().sum() tells you how many were bad."
+    },
+    {
+      "topic": "Practice",
+      "layout": "exercise",
+      "title": "Practice: a full cleaning pass",
+      "lead": "Take any CSV with at least 200 rows and run this sequence in a notebook.",
+      "bullets": [
+        "Load it, then run .shape, .info(), and .describe()",
+        "Normalise the column names to lowercase with underscores",
+        "Report missing values per column and decide drop or fill for each",
+        "Remove duplicate rows on the identifier column",
+        "Group by one categorical column and report count, mean, and max",
+        "Export the cleaned table with to_csv(..., index=False)"
+      ],
+      "note": "Write one sentence under each step explaining why you made that choice. That commentary is what turns a notebook into a report."
+    },
+    {
+      "topic": "Recap",
+      "layout": "recap",
+      "title": "Module 04 recap",
+      "lead": "This is the core analyst skill set — everything after this is presentation.",
+      "bullets": [
+        "Series is a column; DataFrame is a table",
+        "Filter with boolean masks; assign through .loc",
+        "groupby answers \"per category, what is the…\" questions",
+        "merge joins tables — always verify the row count after",
+        "Handle missing values on purpose, and record the decision"
+      ],
+      "note": "Next up, Module 05: turning these tables into charts people can read."
+    }
+  ]
+}

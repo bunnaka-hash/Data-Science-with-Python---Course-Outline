@@ -9,12 +9,15 @@ const DEFAULT_META = { icon: "fa-regular fa-file", missing: "add link" };
 function renderResource(resource) {
   const meta = RESOURCE_META[resource.type] ?? DEFAULT_META;
   const isMissing = !resource.url || resource.url === "#";
+  // Internal pages (the slide deck) navigate in place; only external
+  // links — Canva, Docs, Drive — open in a new tab.
+  const isExternal = /^https?:\/\//i.test(resource.url ?? "");
 
   return `
     <a
         class="chip ${resource.type}${isMissing ? " is-missing" : ""}"
         href="${resource.url || "#"}"
-        ${isMissing ? "" : 'target="_blank" rel="noopener"'}
+        ${isExternal ? 'target="_blank" rel="noopener"' : ""}
     >
         <i class="${meta.icon} resource-icon"></i>
         ${resource.label}

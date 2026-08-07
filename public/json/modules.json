@@ -14,7 +14,7 @@
       {
         "type": "slide",
         "label": "Slides",
-        "url": "#"
+        "url": "./slide?id=m1"
       },
       {
         "type": "doc",
@@ -46,7 +46,7 @@
       {
         "type": "slide",
         "label": "Slides",
-        "url": "#"
+        "url": "./slide?id=m2"
       },
       {
         "type": "doc",
@@ -77,7 +77,7 @@
       {
         "type": "slide",
         "label": "Slides",
-        "url": "#"
+        "url": "./slide?id=m3"
       },
       {
         "type": "doc",
@@ -111,7 +111,7 @@
       {
         "type": "slide",
         "label": "Slides",
-        "url": "#"
+        "url": "./slide?id=m4"
       },
       {
         "type": "doc",
@@ -143,7 +143,7 @@
       {
         "type": "slide",
         "label": "Slides",
-        "url": "#"
+        "url": "./slide?id=m5"
       },
       {
         "type": "doc",
@@ -173,7 +173,7 @@
       {
         "type": "slide",
         "label": "Project Guide",
-        "url": "#"
+        "url": "./slide?id=m6"
       },
       {
         "type": "doc",

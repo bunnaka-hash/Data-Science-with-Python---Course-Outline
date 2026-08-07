@@ -1,0 +1,242 @@
+{
+  "id": "m3",
+  "number": "03",
+  "title": "NumPy",
+  "description": "Learn numerical computing with NumPy arrays and perform efficient mathematical operations on data.",
+  "duration": "90 min",
+  "level": "Intermediate",
+  "objectives": [
+    "Create NumPy arrays and inspect shape, dtype, and size.",
+    "Select data with indexing, slicing, and boolean masks.",
+    "Reshape arrays without copying the underlying data.",
+    "Use broadcasting and vectorised math instead of Python loops."
+  ],
+  "slides": [
+    {
+      "topic": "Overview",
+      "layout": "title",
+      "title": "NumPy",
+      "lead": "NumPy is the numerical engine underneath Pandas, Matplotlib, and every machine learning library in Python.",
+      "bullets": [
+        "One data type per array, stored in one contiguous block of memory",
+        "Operations apply to the whole array at once — no loops",
+        "10–100× faster than equivalent Python list code",
+        "Import convention: import numpy as np"
+      ]
+    },
+    {
+      "topic": "Arrays",
+      "layout": "content",
+      "title": "Creating arrays",
+      "lead": "An ndarray is a grid of values, all of the same type, with a shape describing its dimensions.",
+      "bullets": [
+        "np.array([...]) from an existing list",
+        "np.zeros(n), np.ones(n), np.full(n, value)",
+        "np.arange(start, stop, step) — like range, but an array",
+        "np.linspace(start, stop, count) — evenly spaced, stop included",
+        "np.random.rand(n) / np.random.randint(low, high, n)"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "import numpy as np",
+          "",
+          "a = np.array([80, 92, 75, 88])",
+          "b = np.arange(0, 10, 2)          # [0 2 4 6 8]",
+          "c = np.linspace(0, 1, 5)         # [0.   0.25 0.5  0.75 1.  ]",
+          "grid = np.zeros((2, 3))          # 2 rows, 3 columns of 0.0",
+          "",
+          "print(a.shape, a.dtype, a.size)  # (4,) int64 4",
+          "print(grid.ndim)                 # 2"
+        ]
+      }
+    },
+    {
+      "topic": "Arrays",
+      "layout": "content",
+      "title": "Array vs list — the real difference",
+      "lead": "The same expression means two different things depending on the type.",
+      "bullets": [
+        "[1, 2] * 2 gives [1, 2, 1, 2] — the list repeats",
+        "np.array([1, 2]) * 2 gives [2, 4] — every element is multiplied",
+        "Arrays have one dtype; a list can mix types",
+        "Arrays are fixed size; append means building a new array",
+        "Arrays support math operators element-wise"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "scores = np.array([80, 92, 75, 88])",
+          "",
+          "print(scores + 5)         # [85 97 80 93]",
+          "print(scores / 100)       # [0.8  0.92 0.75 0.88]",
+          "print(scores.mean())      # 83.75",
+          "print(scores.std())       # 6.5717...",
+          "print(scores.max(), scores.argmax())   # 92 1"
+        ]
+      },
+      "note": "argmax returns the position of the largest value, not the value — useful for looking up the matching name in another array."
+    },
+    {
+      "topic": "Indexing",
+      "layout": "code",
+      "title": "Indexing, including boolean masks",
+      "lead": "Comparing an array to a value gives an array of True/False, which you can use to select rows.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "scores = np.array([80, 92, 75, 41, 88])",
+          "",
+          "print(scores[0], scores[-1])        # 80 88",
+          "",
+          "mask = scores >= 50",
+          "print(mask)                         # [ True True True False True]",
+          "print(scores[mask])                 # [80 92 75 88]",
+          "print(scores[scores >= 50].mean())  # 83.75",
+          "",
+          "# combine conditions with & and |, wrap each in ()",
+          "print(scores[(scores > 50) & (scores < 90)])   # [80 75 88]",
+          "",
+          "# 2D: [row, column]",
+          "grid = np.array([[1, 2, 3], [4, 5, 6]])",
+          "print(grid[1, 2])                   # 6"
+        ]
+      },
+      "note": "Use & and | — not the keywords and / or. Python's keywords cannot work element-wise and will raise a ValueError."
+    },
+    {
+      "topic": "Slicing",
+      "layout": "code",
+      "title": "Slicing returns a view, not a copy",
+      "lead": "This is NumPy's biggest surprise: writing into a slice changes the original array.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "a = np.array([10, 20, 30, 40, 50])",
+          "",
+          "print(a[1:4])       # [20 30 40]   stop excluded",
+          "print(a[:3])        # [10 20 30]",
+          "print(a[::2])       # [10 30 50]   every other item",
+          "print(a[::-1])      # [50 40 30 20 10]  reversed",
+          "",
+          "part = a[1:4]",
+          "part[0] = 999",
+          "print(a)            # [ 10 999  30  40  50]  <- original changed!",
+          "",
+          "safe = a[1:4].copy()   # take a copy when you need independence",
+          "",
+          "grid = np.array([[1, 2, 3], [4, 5, 6]])",
+          "print(grid[:, 1])   # [2 5]   column 1, all rows"
+        ]
+      }
+    },
+    {
+      "topic": "Reshaping",
+      "layout": "code",
+      "title": "Changing shape without changing data",
+      "lead": "reshape rearranges how the same values are indexed. The element count must stay the same.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "a = np.arange(12)             # 0..11",
+          "",
+          "m = a.reshape(3, 4)          # 3 rows, 4 columns",
+          "print(m)",
+          "",
+          "print(a.reshape(3, -1).shape)  # (3, 4)  -1 = 'work it out'",
+          "",
+          "print(m.T.shape)             # (4, 3)   transpose",
+          "print(m.flatten().shape)     # (12,)    back to 1D",
+          "",
+          "# add an axis - needed when a library expects 2D input",
+          "col = a.reshape(-1, 1)       # shape (12, 1)"
+        ]
+      },
+      "note": "reshape(-1, 1) turning a flat array into a single column is the fix for most \"Expected 2D array\" errors in scikit-learn."
+    },
+    {
+      "topic": "Broadcasting",
+      "layout": "content",
+      "title": "Broadcasting — arrays of different shapes",
+      "lead": "NumPy stretches the smaller array across the larger one when their shapes are compatible, without copying memory.",
+      "bullets": [
+        "Shapes are compared from the right",
+        "Dimensions match if they are equal, or if one of them is 1",
+        "A single number broadcasts to any shape",
+        "A row of shape (3,) broadcasts across every row of a (2, 3) array",
+        "Incompatible shapes raise ValueError: operands could not be broadcast"
+      ],
+      "code": {
+        "lang": "python",
+        "body": [
+          "grid = np.array([[1, 2, 3],",
+          "                 [4, 5, 6]])      # shape (2, 3)",
+          "",
+          "print(grid * 10)                  # scalar broadcasts",
+          "",
+          "weights = np.array([1, 0.5, 2])   # shape (3,)",
+          "print(grid * weights)             # applied to each row",
+          "# [[ 1.  1.  6.]",
+          "#  [ 4.  2.5 12.]]",
+          "",
+          "col = np.array([[10], [20]])      # shape (2, 1)",
+          "print(grid + col)                 # applied to each column"
+        ]
+      }
+    },
+    {
+      "topic": "Mathematical Operations",
+      "layout": "code",
+      "title": "Vectorised math and aggregations",
+      "lead": "Aggregations collapse an array to a summary. On 2D arrays, axis picks the direction.",
+      "code": {
+        "lang": "python",
+        "body": [
+          "scores = np.array([[80, 92, 75],",
+          "                   [65, 88, 91]])",
+          "",
+          "print(scores.sum())            # 491   everything",
+          "print(scores.sum(axis=0))      # [145 180 166]  down each column",
+          "print(scores.sum(axis=1))      # [247 244]      across each row",
+          "",
+          "print(scores.mean(axis=1).round(1))   # [82.3 81.3]",
+          "",
+          "print(np.sqrt(scores).round(2))",
+          "print(np.where(scores >= 80, \"pass\", \"fail\"))",
+          "",
+          "# normalise each column to 0-1",
+          "norm = (scores - scores.min(axis=0)) / (scores.ptp(axis=0))"
+        ]
+      },
+      "note": "axis=0 means \"collapse the rows\", giving one result per column. axis=1 is the opposite. Say it out loud until it sticks."
+    },
+    {
+      "topic": "Practice",
+      "layout": "exercise",
+      "title": "Practice: exam analysis without loops",
+      "lead": "Given a (5, 3) array of scores — 5 students, 3 subjects — produce each result with a single NumPy expression.",
+      "bullets": [
+        "Each student's average across the 3 subjects",
+        "Each subject's highest score",
+        "A boolean mask of students whose average is at least 75",
+        "The scores array with every failing score (< 50) replaced by 50",
+        "The whole array rescaled so each subject runs 0 to 1"
+      ],
+      "note": "Build the data with np.random.randint(35, 100, (5, 3)) and set np.random.seed(0) first so your numbers are reproducible."
+    },
+    {
+      "topic": "Recap",
+      "layout": "recap",
+      "title": "Module 03 recap",
+      "lead": "You can now express calculations over whole datasets without writing a loop.",
+      "bullets": [
+        "shape, dtype, and ndim describe every array",
+        "Boolean masks are how you filter numerical data",
+        "Slices are views — copy when you need independence",
+        "Broadcasting removes the need to reshape by hand",
+        "axis=0 collapses rows, axis=1 collapses columns"
+      ],
+      "note": "Next up, Module 04: Pandas, which puts labels on these arrays and turns them into tables."
+    }
+  ]
+}
