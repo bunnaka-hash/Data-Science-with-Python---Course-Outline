@@ -3,18 +3,18 @@
     "id": "m1",
     "number": "01",
     "title": "Python Foundations",
-    "description": "Baseline Python fluency for anyone new to the language, before touching any data tools.",
+    "description": "Build a strong Python foundation before moving into data analysis tools and libraries.",
     "topics": [
-      "Variables, data types, control flow",
-      "Functions and scope",
-      "Lists, dicts, list comprehensions",
-      "Reading and writing CSV / JSON files"
+      "Python Review",
+      "Functions",
+      "Lists & Dictionaries",
+      "File Handling"
     ],
     "resources": [
       {
         "type": "slide",
         "label": "Slides",
-        "url": "https://canva.link/it2lcid8rvojnro"
+        "url": "#"
       },
       {
         "type": "doc",
@@ -31,13 +31,16 @@
   {
     "id": "m2",
     "number": "02",
-    "title": "Core Data Science Stack",
-    "description": "The three libraries that power almost everything downstream: NumPy, pandas, and plotting.",
+    "title": "Python for Data Analysis",
+    "description": "Learn Python tools and programming techniques commonly used in data analysis workflows.",
     "topics": [
-      "NumPy arrays, vectorized ops, broadcasting",
-      "pandas DataFrames, indexing, filtering",
-      "groupby, merging, missing data",
-      "Matplotlib & Seaborn basic plots"
+      "Jupyter Notebook",
+      "Virtual Environment (venv)",
+      "List Comprehension",
+      "Lambda Functions",
+      "map()",
+      "filter()",
+      "zip()"
     ],
     "resources": [
       {
@@ -60,13 +63,15 @@
   {
     "id": "m3",
     "number": "03",
-    "title": "Getting & Cleaning Data",
-    "description": "Real data is messy. This module covers ingesting it and getting it into a usable shape.",
+    "title": "NumPy",
+    "description": "Learn numerical computing with NumPy arrays and perform efficient mathematical operations on data.",
     "topics": [
-      "Reading CSV / Excel / API sources",
-      "Handling missing values & duplicates",
-      "Outlier detection",
-      "Type conversion & string cleaning"
+      "Arrays",
+      "Indexing",
+      "Slicing",
+      "Reshaping",
+      "Broadcasting",
+      "Mathematical Operations"
     ],
     "resources": [
       {
@@ -81,7 +86,7 @@
       },
       {
         "type": "file",
-        "label": "Sample dataset",
+        "label": "Practice Notebook (.ipynb)",
         "url": "#"
       }
     ]
@@ -89,12 +94,18 @@
   {
     "id": "m4",
     "number": "04",
-    "title": "Exploratory Data Analysis",
-    "description": "Turning a clean dataset into an understanding of what's actually in it.",
+    "title": "Pandas",
+    "description": "Learn how to manipulate, clean, and analyze real-world datasets using Pandas.",
     "topics": [
-      "Descriptive stats: mean, median, std, quantiles",
-      "Distributions & correlation",
-      "Visual storytelling with charts"
+      "Series",
+      "DataFrame",
+      "Read CSV / Excel",
+      "Filtering",
+      "Sorting",
+      "GroupBy",
+      "Merge",
+      "Missing Values",
+      "DateTime Introduction"
     ],
     "resources": [
       {
@@ -109,7 +120,7 @@
       },
       {
         "type": "file",
-        "label": "Notebook (.ipynb)",
+        "label": "Sample Dataset",
         "url": "#"
       }
     ]
@@ -117,12 +128,16 @@
   {
     "id": "m5",
     "number": "05",
-    "title": "Basic Statistics",
-    "description": "Just enough statistical grounding to reason about data honestly.",
+    "title": "Matplotlib",
+    "description": "Visualize data effectively using different chart types and improve data storytelling.",
     "topics": [
-      "Probability basics & distributions",
-      "Hypothesis testing (t-test, chi-square)",
-      "Correlation vs. causation"
+      "Line Chart",
+      "Bar Chart",
+      "Scatter Plot",
+      "Histogram",
+      "Titles & Labels",
+      "Legends",
+      "Grid"
     ],
     "resources": [
       {
@@ -133,6 +148,11 @@
       {
         "type": "doc",
         "label": "Lesson doc",
+        "url": "#"
+      },
+      {
+        "type": "file",
+        "label": "Visualization Notebook (.ipynb)",
         "url": "#"
       }
     ]
@@ -140,55 +160,29 @@
   {
     "id": "m6",
     "number": "06",
-    "title": "Intro to Modeling",
-    "description": "A first, gentle pass at machine learning concepts using scikit-learn.",
+    "title": "Mini Project",
+    "description": "Apply Python data analysis skills to solve a real-world data problem from start to finish.",
     "topics": [
-      "Train / test split & overfitting",
-      "Simple linear regression",
-      "Evaluating a model (accuracy, RMSE)"
+      "Load Dataset",
+      "Clean Data",
+      "Analyze Data",
+      "Visualize Results",
+      "Present Findings"
     ],
     "resources": [
       {
         "type": "slide",
-        "label": "Slides",
+        "label": "Project Guide",
         "url": "#"
       },
       {
         "type": "doc",
-        "label": "Lesson doc",
+        "label": "Project Documentation",
         "url": "#"
       },
       {
         "type": "file",
-        "label": "Notebook (.ipynb)",
-        "url": "#"
-      }
-    ]
-  },
-  {
-    "id": "m7",
-    "number": "07",
-    "title": "Capstone Project",
-    "description": "A real, messy dataset — clean it, explore it, visualize it, and present the findings.",
-    "topics": [
-      "Dataset: Titanic / housing prices (Kaggle)",
-      "End-to-end cleaning & EDA",
-      "Final presentation of insights"
-    ],
-    "resources": [
-      {
-        "type": "slide",
-        "label": "Presentation template",
-        "url": "#"
-      },
-      {
-        "type": "doc",
-        "label": "Project brief",
-        "url": "#"
-      },
-      {
-        "type": "file",
-        "label": "Rubric",
+        "label": "Project Dataset",
         "url": "#"
       }
     ]
