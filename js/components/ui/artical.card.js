@@ -1,7 +1,7 @@
 const RESOURCE_META = {
   slide: { icon: "fa-regular fa-credit-card", missing: "add Canva link" },
-  doc: { icon: "fa-regular fa-file", missing: "add doc link" },
-  file: { icon: "fa-regular fa-folder", missing: "add file link" },
+  quiz: { icon: "fa-regular fa-circle-question", missing: "add quiz link" },
+  exercise: { icon: "fa-regular fa-folder", missing: "add file link" },
 };
 
 const DEFAULT_META = { icon: "fa-regular fa-file", missing: "add link" };

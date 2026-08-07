@@ -1,0 +1,204 @@
+{
+  "id": "m2",
+  "number": "02",
+  "title": "Python for Data Analysis",
+  "description": "Check your grip on the working environment and the compact syntax data code is written in.",
+  "duration": "20 min",
+  "passing": 70,
+  "lessons": [
+    {
+      "topic": "Jupyter Notebook",
+      "title": "Cells, run order, and restarting",
+      "lead": "The notebook is where analysis happens — and where one specific trap costs people hours.",
+      "questions": [
+        {
+          "prompt": "What is displayed automatically when you run a code cell?",
+          "options": [
+            "The value of the last line in the cell",
+            "Every variable assigned in the cell",
+            "Nothing unless you call `print()`",
+            "The value of the first line in the cell"
+          ],
+          "answer": 0,
+          "explain": "The last expression in a cell is echoed. Everything else needs an explicit `print()`."
+        },
+        {
+          "prompt": "What does the number in `In [7]` next to a cell tell you?",
+          "options": [
+            "The order in which cells actually ran",
+            "The cell's position in the notebook",
+            "How many seconds the cell took",
+            "How many times the notebook has been saved"
+          ],
+          "answer": 0,
+          "explain": "Cells run in whatever order you click them, not top to bottom. The counter is the only record of the real order."
+        },
+        {
+          "prompt": "Which are true about a notebook's kernel?",
+          "options": [
+            "All cells share one memory space",
+            "Variables from a deleted cell still exist in memory",
+            "Kernel ▸ Restart & Run All proves the notebook works from a clean start",
+            "Saving the notebook clears the variables"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "Saving does nothing to memory. Only a restart clears it — which is why you restart before sharing or submitting."
+        },
+        {
+          "prompt": "\"It worked before I restarted the kernel.\" What does that usually mean?",
+          "options": [
+            "The notebook depended on a cell you had already changed or deleted",
+            "The kernel is corrupted and must be reinstalled",
+            "Jupyter needs more memory",
+            "The .ipynb file was saved incorrectly"
+          ],
+          "answer": 0,
+          "explain": "State left over from an old version of a cell was holding the notebook together. Restart & Run All catches this every time."
+        }
+      ]
+    },
+    {
+      "topic": "Virtual Environment (venv)",
+      "title": "One environment per project",
+      "lead": "Isolation is what keeps Project A from breaking Project B — and what most \"module not found\" errors come down to.",
+      "questions": [
+        {
+          "prompt": "Which command creates a virtual environment in the current folder?",
+          "options": [
+            "`python -m venv .venv`",
+            "`pip install venv`",
+            "`python venv --new .venv`",
+            "`pip freeze > .venv`"
+          ],
+          "answer": 0,
+          "explain": "`-m venv` runs the built-in venv module; `.venv` is the folder it creates."
+        },
+        {
+          "prompt": "You installed pandas but the import still fails. What is the most likely cause?",
+          "options": [
+            "It was installed into a different environment from the one running your code",
+            "pandas is incompatible with your Python version",
+            "You need to restart the computer",
+            "pandas must be installed globally to be importable"
+          ],
+          "answer": 0,
+          "explain": "Check with `python -c \"import sys; print(sys.executable)\"`, or run `!pip list` inside a notebook cell to see what the kernel can actually see."
+        },
+        {
+          "prompt": "Which of these should you do with a virtual environment?",
+          "options": [
+            "Activate it in every new terminal you open",
+            "Add `.venv/` to `.gitignore`",
+            "Share `requirements.txt` instead of the folder itself",
+            "Commit the `.venv` folder so teammates get the exact packages"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "The folder holds platform-specific binaries and is large. `pip freeze > requirements.txt` captures everything a teammate needs."
+        },
+        {
+          "prompt": "What does `pip install -r requirements.txt` do?",
+          "options": [
+            "Installs every package listed in the file into the active environment",
+            "Writes the active environment's packages into the file",
+            "Upgrades pip itself",
+            "Creates a new virtual environment"
+          ],
+          "answer": 0,
+          "explain": "`-r` reads the file. Writing it is the other direction: `pip freeze > requirements.txt`."
+        }
+      ]
+    },
+    {
+      "topic": "List Comprehension",
+      "title": "Loops in one line",
+      "lead": "The single most recognisable piece of Python syntax in data code.",
+      "questions": [
+        {
+          "prompt": "Given `scores = [80, 92, 75, 41, 88]`, what does `[s for s in scores if s >= 50]` produce?",
+          "options": [
+            "[80, 92, 75, 88]",
+            "[True, True, True, False, True]",
+            "[41]",
+            "[80, 92, 75, 41, 88]"
+          ],
+          "answer": 0,
+          "explain": "The `if` clause filters; the expression before `for` is what gets collected. 41 is dropped."
+        },
+        {
+          "prompt": "What is the result of `[s * 2 for s in [1, 2, 3]]`?",
+          "options": ["[2, 4, 6]", "[1, 2, 3, 1, 2, 3]", "[1, 4, 9]", "[6]"],
+          "answer": 0,
+          "explain": "The expression runs once per item. Repeating the list would be `[1, 2, 3] * 2`."
+        },
+        {
+          "prompt": "Which comprehension builds a dictionary?",
+          "options": [
+            "`{name: len(name) for name in names}`",
+            "`[name: len(name) for name in names]`",
+            "`(name: len(name) for name in names)`",
+            "`dict[name for name in names]`"
+          ],
+          "answer": 0,
+          "explain": "Braces plus a `key: value` expression gives a dict comprehension. Braces without the colon would build a set."
+        },
+        {
+          "prompt": "When should you use a normal loop instead of a comprehension?",
+          "options": [
+            "When it needs several conditions and nested loops to stay readable",
+            "Whenever the list has more than 100 items",
+            "When the result is a list of numbers",
+            "Comprehensions should always be preferred"
+          ],
+          "answer": 0,
+          "explain": "A comprehension is for the simple build-a-list case. Once it stops reading as one sentence, a loop is clearer."
+        }
+      ]
+    },
+    {
+      "topic": "lambda, map, filter, zip",
+      "title": "The functional toolkit",
+      "lead": "Four tools you will read constantly in other people's data code.",
+      "questions": [
+        {
+          "prompt": "What is a `lambda`?",
+          "options": [
+            "A small anonymous function of one expression",
+            "A loop that runs in the background",
+            "A way to import a module lazily",
+            "A type of list comprehension"
+          ],
+          "answer": 0,
+          "explain": "`lambda args: expression` — the expression's value is returned automatically. No statements, no `if` blocks, no loops inside."
+        },
+        {
+          "prompt": "Why does `print(map(float, [\"1.5\", \"2.5\"]))` show something like `<map object …>` instead of the numbers?",
+          "options": [
+            "`map` returns a lazy iterator — wrap it in `list()` to see the values",
+            "`float` cannot be passed without a lambda",
+            "The strings must be converted before mapping",
+            "`map` only works on numbers"
+          ],
+          "answer": 0,
+          "explain": "`list(map(float, raw))` materialises the results. Passing an existing function by name — `float` — is clearer than wrapping it in a lambda."
+        },
+        {
+          "prompt": "`names = [\"Sokha\", \"\", \"Dara\", None]`. What does `list(filter(None, names))` return?",
+          "options": [
+            "['Sokha', 'Dara']",
+            "['', None]",
+            "[None, None]",
+            "It raises TypeError"
+          ],
+          "answer": 0,
+          "explain": "Passing `None` as the function keeps every item that is truthy, which drops empty strings and `None`."
+        },
+        {
+          "prompt": "`names` has 4 items and `scores` has 3. How many pairs does `zip(names, scores)` produce?",
+          "options": ["3", "4", "7", "It raises ValueError"],
+          "answer": 0,
+          "explain": "zip pairs by position and stops at the shortest input. The extra name is silently dropped — check your lengths first."
+        }
+      ]
+    }
+  ]
+}

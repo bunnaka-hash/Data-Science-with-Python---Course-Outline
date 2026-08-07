@@ -1,0 +1,423 @@
+{
+  "id": "m5",
+  "number": "05",
+  "title": "Matplotlib",
+  "description": "Build charts that make an argument — and label them so nobody has to ask.",
+  "duration": "70 min",
+  "lessons": [
+    {
+      "topic": "Line Chart",
+      "title": "Change over time",
+      "lead": "Every chart you draw here is rendered under the output panel. Matplotlib loads on the first run — give it a few seconds.",
+      "packages": ["matplotlib", "numpy"],
+      "tasks": [
+        {
+          "title": "Actual against target",
+          "brief": "Draw both series as lines on one axes, label everything, and print the labels back to prove they are set.",
+          "steps": [
+            "Start from `fig, ax = plt.subplots(figsize=(8, 4.5))`",
+            "Plot `sales` with a marker, and `target` dashed and grey",
+            "Give both a `label=` so the legend has something to show",
+            "Title it `Monthly sales vs target, 2026`, with axes `Month` and `Sales (units)`"
+          ],
+          "starter": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\"]",
+            "sales = [120, 145, 138, 172, 190]",
+            "target = [130, 140, 150, 160, 170]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "",
+            "# draw both lines, set the title and both axis labels, add a legend",
+            "",
+            "print(ax.get_title())",
+            "print(ax.get_xlabel(), \"|\", ax.get_ylabel())",
+            "print(len(ax.lines), \"lines\")"
+          ],
+          "expected": [
+            "Monthly sales vs target, 2026",
+            "Month | Sales (units)",
+            "2 lines"
+          ],
+          "hint": "`ax.plot(months, target, linestyle=\"--\", color=\"gray\", label=\"Target\")` gives the reference line its own look.",
+          "solution": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\"]",
+            "sales = [120, 145, 138, 172, 190]",
+            "target = [130, 140, 150, 160, 170]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "",
+            "ax.plot(months, sales, marker=\"o\", linewidth=2, label=\"Actual\")",
+            "ax.plot(months, target, linestyle=\"--\", color=\"gray\", label=\"Target\")",
+            "",
+            "ax.set_title(\"Monthly sales vs target, 2026\")",
+            "ax.set_xlabel(\"Month\")",
+            "ax.set_ylabel(\"Sales (units)\")",
+            "ax.legend()",
+            "plt.tight_layout()",
+            "",
+            "print(ax.get_title())",
+            "print(ax.get_xlabel(), \"|\", ax.get_ylabel())",
+            "print(len(ax.lines), \"lines\")"
+          ],
+          "explain": "`fig` is the canvas and `ax` is the one plotting area on it. Learning this form now is what makes the two-chart figure in the last lesson straightforward."
+        },
+        {
+          "title": "Point at the peak",
+          "brief": "Find the best month, annotate it on the chart, and print which month it was.",
+          "steps": [
+            "`np.argmax(sales)` gives the position of the highest value",
+            "Use that position to look up the month name",
+            "Annotate the point with `ax.annotate(text, xy=(month, value), xytext=(...), arrowprops=dict(arrowstyle=\"->\"))`"
+          ],
+          "starter": [
+            "import matplotlib.pyplot as plt",
+            "import numpy as np",
+            "",
+            "months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\"]",
+            "sales = [120, 145, 138, 172, 190]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "ax.plot(months, sales, marker=\"o\", linewidth=2)",
+            "ax.set_title(\"Sales grew 58% between January and May\")",
+            "ax.set_xlabel(\"Month\")",
+            "ax.set_ylabel(\"Sales (units)\")",
+            "",
+            "# find the best month, annotate it, then print: peak May 190"
+          ],
+          "expected": ["peak May 190"],
+          "hint": "`int(np.argmax(sales))` gives a plain integer you can use as a list index.",
+          "solution": [
+            "import matplotlib.pyplot as plt",
+            "import numpy as np",
+            "",
+            "months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\"]",
+            "sales = [120, 145, 138, 172, 190]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "ax.plot(months, sales, marker=\"o\", linewidth=2)",
+            "ax.set_title(\"Sales grew 58% between January and May\")",
+            "ax.set_xlabel(\"Month\")",
+            "ax.set_ylabel(\"Sales (units)\")",
+            "",
+            "at = int(np.argmax(sales))",
+            "",
+            "ax.annotate(",
+            "    \"Best month\",",
+            "    xy=(months[at], sales[at]),",
+            "    xytext=(months[1], sales[at]),",
+            "    arrowprops=dict(arrowstyle=\"->\"),",
+            ")",
+            "plt.tight_layout()",
+            "",
+            "print(\"peak\", months[at], sales[at])"
+          ],
+          "explain": "The title states the finding rather than naming the columns, and the annotation points at the single thing the reader should take away."
+        }
+      ]
+    },
+    {
+      "topic": "Bar Chart",
+      "title": "Comparing categories",
+      "lead": "Bars start at zero and are sorted by value, unless their order carries meaning of its own.",
+      "packages": ["matplotlib", "numpy"],
+      "tasks": [
+        {
+          "title": "A sorted horizontal bar chart",
+          "brief": "Sort the classes by size, draw them as horizontal bars, and print the order you drew them in.",
+          "steps": [
+            "Sort the dictionary items by their value, smallest first",
+            "`ax.barh(labels, values)` draws horizontally",
+            "Print the sorted labels, then the sorted values"
+          ],
+          "starter": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "counts = {\"Class A\": 12, \"Class B\": 7, \"Class C\": 15, \"Class D\": 4}",
+            "",
+            "# 1. sort the items by count, smallest first",
+            "",
+            "# 2. draw a horizontal bar chart with a title and an x label",
+            "",
+            "# 3. print the labels, then the values"
+          ],
+          "expected": [
+            "['Class D', 'Class B', 'Class A', 'Class C']",
+            "[4, 7, 12, 15]"
+          ],
+          "hint": "`sorted(counts.items(), key=lambda kv: kv[1])` gives the pairs in size order.",
+          "solution": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "counts = {\"Class A\": 12, \"Class B\": 7, \"Class C\": 15, \"Class D\": 4}",
+            "",
+            "ordered = sorted(counts.items(), key=lambda kv: kv[1])",
+            "labels = [name for name, _ in ordered]",
+            "values = [count for _, count in ordered]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "ax.barh(labels, values, color=\"#2C5F8A\")",
+            "ax.set_title(\"Class C has the most students\")",
+            "ax.set_xlabel(\"Students\")",
+            "plt.tight_layout()",
+            "",
+            "print(labels)",
+            "print(values)"
+          ],
+          "explain": "Sorting smallest first puts the longest bar at the top once matplotlib draws the first category at the bottom — which is the order a reader expects."
+        },
+        {
+          "title": "Label the bars, drop the box",
+          "brief": "Write each value at the end of its bar and hide the top and right spines, then print which spines are still visible.",
+          "steps": [
+            "Loop with `enumerate(values)` and call `ax.text(value + 0.3, i, str(value), va=\"center\")`",
+            "`ax.spines[[\"top\", \"right\"]].set_visible(False)` hides two at once",
+            "Print the visible spine names as a list"
+          ],
+          "starter": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "labels = [\"Class D\", \"Class B\", \"Class A\", \"Class C\"]",
+            "values = [4, 7, 12, 15]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "ax.barh(labels, values, color=\"#2C5F8A\")",
+            "ax.set_title(\"Students per class\")",
+            "",
+            "# 1. write each value at the end of its bar",
+            "",
+            "# 2. hide the top and right spines",
+            "",
+            "# 3. print the spines that are still visible"
+          ],
+          "expected": ["['left', 'bottom']"],
+          "hint": "`[side for side in [\"left\", \"right\", \"top\", \"bottom\"] if ax.spines[side].get_visible()]` builds the list to print.",
+          "solution": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "labels = [\"Class D\", \"Class B\", \"Class A\", \"Class C\"]",
+            "values = [4, 7, 12, 15]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "ax.barh(labels, values, color=\"#2C5F8A\")",
+            "ax.set_title(\"Students per class\")",
+            "",
+            "for i, value in enumerate(values):",
+            "    ax.text(value + 0.3, i, str(value), va=\"center\")",
+            "",
+            "ax.spines[[\"top\", \"right\"]].set_visible(False)",
+            "plt.tight_layout()",
+            "",
+            "print([side for side in [\"left\", \"right\", \"top\", \"bottom\"]",
+            "       if ax.spines[side].get_visible()])"
+          ],
+          "explain": "With a handful of bars, a value at the end of each one beats a grid — the reader gets the exact number without tracing a line across the chart."
+        }
+      ]
+    },
+    {
+      "topic": "Scatter & Histogram",
+      "title": "Relationships and distributions",
+      "lead": "One chart for how two numbers move together, one for how a single number is spread out.",
+      "packages": ["matplotlib", "numpy"],
+      "tasks": [
+        {
+          "title": "Hours against score",
+          "brief": "Draw the scatter plot and print the correlation between the two columns, rounded to two places.",
+          "steps": [
+            "`ax.scatter(x, y, alpha=0.6, s=40, edgecolor=\"white\")`",
+            "`np.corrcoef(x, y)[0, 1]` is the correlation",
+            "Label both axes — a scatter with bare numbers says nothing"
+          ],
+          "starter": [
+            "import matplotlib.pyplot as plt",
+            "import numpy as np",
+            "",
+            "hours = [2, 3, 5, 5, 7, 8, 9, 10, 12, 14, 15, 16]",
+            "score = [48, 61, 55, 70, 66, 81, 72, 88, 79, 92, 85, 97]",
+            "",
+            "# 1. draw the scatter plot with a title and both axis labels",
+            "",
+            "# 2. print: correlation 0.91"
+          ],
+          "expected": ["correlation 0.91"],
+          "hint": "`round(float(np.corrcoef(hours, score)[0, 1]), 2)` gives a plain number to print.",
+          "solution": [
+            "import matplotlib.pyplot as plt",
+            "import numpy as np",
+            "",
+            "hours = [2, 3, 5, 5, 7, 8, 9, 10, 12, 14, 15, 16]",
+            "score = [48, 61, 55, 70, 66, 81, 72, 88, 79, 92, 85, 97]",
+            "",
+            "fig, ax = plt.subplots(figsize=(6, 6))",
+            "ax.scatter(hours, score, alpha=0.6, s=40, edgecolor=\"white\")",
+            "",
+            "ax.set_title(\"More study hours, higher scores\")",
+            "ax.set_xlabel(\"Study hours per week\")",
+            "ax.set_ylabel(\"Exam score\")",
+            "plt.tight_layout()",
+            "",
+            "print(\"correlation\", round(float(np.corrcoef(hours, score)[0, 1]), 2))"
+          ],
+          "explain": "A correlation of 0.91 is strong, but the scatter is what tells you whether it is a straight line, a curve, or two clusters pretending to be a trend."
+        },
+        {
+          "title": "The shape of the scores",
+          "brief": "Draw a histogram with a dashed line at the mean, then print the number of bins and the mean.",
+          "steps": [
+            "`ax.hist(scores, bins=8, edgecolor=\"white\")`",
+            "`ax.axvline(mean, color=\"#E8A93B\", linestyle=\"--\", linewidth=2, label=\"Mean\")`",
+            "Print the bin count, then the mean rounded to two places"
+          ],
+          "starter": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "scores = [58, 62, 65, 67, 70, 71, 73, 74, 75, 77, 78, 80, 82, 85, 88, 91]",
+            "",
+            "# 1. draw a histogram of 8 bins, with a title and both axis labels",
+            "",
+            "# 2. add a dashed line at the mean, and a legend",
+            "",
+            "# 3. print: 8 bins  then  mean 74.75"
+          ],
+          "expected": ["8 bins", "mean 74.75"],
+          "hint": "The mean is `sum(scores) / len(scores)` — no library needed.",
+          "solution": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "scores = [58, 62, 65, 67, 70, 71, 73, 74, 75, 77, 78, 80, 82, 85, 88, 91]",
+            "mean = sum(scores) / len(scores)",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "ax.hist(scores, bins=8, color=\"#2C5F8A\", edgecolor=\"white\")",
+            "ax.axvline(mean, color=\"#E8A93B\", linestyle=\"--\", linewidth=2, label=\"Mean\")",
+            "",
+            "ax.set_title(\"Distribution of exam scores\")",
+            "ax.set_xlabel(\"Score\")",
+            "ax.set_ylabel(\"Number of students\")",
+            "ax.legend()",
+            "plt.tight_layout()",
+            "",
+            "print(8, \"bins\")",
+            "print(\"mean\", round(mean, 2))"
+          ],
+          "explain": "Change `bins` to 4 and then to 20 and run it again. The data never moved, but the story the chart tells did — which is why the bin count is a decision, not a default."
+        }
+      ]
+    },
+    {
+      "topic": "Labels & Subplots",
+      "title": "Finishing a figure",
+      "lead": "The last few lines are what turn a plot into something you can put in front of someone.",
+      "packages": ["matplotlib", "numpy"],
+      "tasks": [
+        {
+          "title": "Rotate, grid, and source",
+          "brief": "Rotate the crowded x labels, add a faint grid behind the bars, and print the rotation you applied.",
+          "steps": [
+            "`ax.tick_params(axis=\"x\", rotation=45)` rotates the tick labels",
+            "`ax.grid(axis=\"y\", alpha=0.3, linestyle=\"--\")` then `ax.set_axisbelow(True)`",
+            "Add the source with `fig.text(0.01, 0.01, \"Source: school records, 2026\", fontsize=8, color=\"gray\")`",
+            "Print the rotation of the first x tick label"
+          ],
+          "starter": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "regions = [\"Phnom Penh\", \"Siem Reap\", \"Battambang\", \"Sihanoukville\", \"Kampot\"]",
+            "students = [128, 74, 66, 41, 33]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "ax.bar(regions, students, color=\"#2C5F8A\")",
+            "ax.set_title(\"Phnom Penh has twice the enrolment of anywhere else\")",
+            "ax.set_ylabel(\"Students\")",
+            "",
+            "# 1. rotate the x tick labels by 45 degrees",
+            "",
+            "# 2. add a faint dashed grid on the y axis, behind the bars",
+            "",
+            "# 3. add the source line to the figure",
+            "",
+            "# 4. print: rotation 45"
+          ],
+          "expected": ["rotation 45"],
+          "hint": "`ax.get_xticklabels()[0].get_rotation()` reads the rotation back — wrap it in `int()` to print it cleanly.",
+          "solution": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "regions = [\"Phnom Penh\", \"Siem Reap\", \"Battambang\", \"Sihanoukville\", \"Kampot\"]",
+            "students = [128, 74, 66, 41, 33]",
+            "",
+            "fig, ax = plt.subplots(figsize=(8, 4.5))",
+            "ax.bar(regions, students, color=\"#2C5F8A\")",
+            "ax.set_title(\"Phnom Penh has twice the enrolment of anywhere else\")",
+            "ax.set_ylabel(\"Students\")",
+            "",
+            "ax.tick_params(axis=\"x\", rotation=45)",
+            "ax.grid(axis=\"y\", alpha=0.3, linestyle=\"--\")",
+            "ax.set_axisbelow(True)",
+            "ax.spines[[\"top\", \"right\"]].set_visible(False)",
+            "",
+            "fig.text(0.01, 0.01, \"Source: school records, 2026\", fontsize=8, color=\"gray\")",
+            "plt.tight_layout()",
+            "",
+            "print(\"rotation\", int(ax.get_xticklabels()[0].get_rotation()))"
+          ],
+          "explain": "`set_axisbelow(True)` is the difference between a grid that helps and a grid drawn on top of your bars."
+        },
+        {
+          "title": "Two charts, one figure",
+          "brief": "Put the distribution and the relationship side by side, title each one, and print both titles.",
+          "steps": [
+            "`fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))` returns an array of axes",
+            "Draw the histogram on `axes[0]` and the scatter on `axes[1]`",
+            "Print how many axes the figure has, then each title"
+          ],
+          "starter": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "scores = [58, 62, 65, 67, 70, 71, 73, 74, 75, 77, 78, 80, 82, 85, 88, 91]",
+            "hours = [2, 3, 5, 5, 7, 8, 9, 10, 12, 14, 15, 16]",
+            "sample = [48, 61, 55, 70, 66, 81, 72, 88, 79, 92, 85, 97]",
+            "",
+            "# 1. one figure, two axes side by side",
+            "",
+            "# 2. histogram of scores on the left, scatter of hours vs sample on the right",
+            "",
+            "# 3. print: 2 axes  then each title on its own line"
+          ],
+          "expected": ["2 axes", "Score distribution", "Hours vs score"],
+          "hint": "`axes[0].set_title(\"Score distribution\")` and `axes[1].set_title(\"Hours vs score\")` — then read them back with `get_title()`.",
+          "solution": [
+            "import matplotlib.pyplot as plt",
+            "",
+            "scores = [58, 62, 65, 67, 70, 71, 73, 74, 75, 77, 78, 80, 82, 85, 88, 91]",
+            "hours = [2, 3, 5, 5, 7, 8, 9, 10, 12, 14, 15, 16]",
+            "sample = [48, 61, 55, 70, 66, 81, 72, 88, 79, 92, 85, 97]",
+            "",
+            "fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))",
+            "",
+            "axes[0].hist(scores, bins=8, color=\"#2C5F8A\", edgecolor=\"white\")",
+            "axes[0].set_title(\"Score distribution\")",
+            "axes[0].set_xlabel(\"Score\")",
+            "axes[0].set_ylabel(\"Students\")",
+            "",
+            "axes[1].scatter(hours, sample, alpha=0.6)",
+            "axes[1].set_title(\"Hours vs score\")",
+            "axes[1].set_xlabel(\"Study hours per week\")",
+            "axes[1].set_ylabel(\"Exam score\")",
+            "",
+            "plt.tight_layout()",
+            "",
+            "print(len(axes), \"axes\")",
+            "for ax in axes:",
+            "    print(ax.get_title())"
+          ],
+          "explain": "`subplots(rows, cols)` hands back an array of axes, and every axes carries its own title, labels, and grid. This is the payoff for using the `fig, ax` form from the very first task."
+        }
+      ]
+    }
+  ]
+}

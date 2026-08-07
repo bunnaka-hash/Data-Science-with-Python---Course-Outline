@@ -1,0 +1,314 @@
+{
+  "id": "m1",
+  "number": "01",
+  "title": "Python Foundations",
+  "description": "Write and run the Python the rest of the course is built on.",
+  "duration": "60 min",
+  "lessons": [
+    {
+      "topic": "Python Review",
+      "title": "Types, formatting, and control flow",
+      "lead": "Two short programs: one about types and f-strings, one about branching inside a loop.",
+      "tasks": [
+        {
+          "title": "Describe a student",
+          "brief": "Print the type of `score`, then the same value as a whole number, then one formatted sentence.",
+          "steps": [
+            "Use `type(score)` for the first line",
+            "Use `int(score)` for the second — it truncates rather than rounds",
+            "Use an f-string for the third line"
+          ],
+          "starter": [
+            "name = \"Sokha\"",
+            "score = 87.5",
+            "",
+            "# 1. the type of score",
+            "",
+            "# 2. score as a whole number",
+            "",
+            "# 3. the sentence: Sokha scored 87.5"
+          ],
+          "expected": ["<class 'float'>", "87", "Sokha scored 87.5"],
+          "hint": "An f-string can hold any expression: `f\"{name} scored {score}\"`.",
+          "solution": [
+            "name = \"Sokha\"",
+            "score = 87.5",
+            "",
+            "print(type(score))",
+            "print(int(score))",
+            "print(f\"{name} scored {score}\")"
+          ],
+          "explain": "`int()` drops the decimal part rather than rounding — `int(87.5)` is 87, not 88."
+        },
+        {
+          "title": "Grade every score",
+          "brief": "Loop over the scores and print each one followed by its letter grade.",
+          "steps": [
+            "90 and above is an A, 80 and above is a B, anything else is a C",
+            "Print the score and the letter on one line, separated by a space"
+          ],
+          "starter": [
+            "scores = [95, 84, 72, 90, 61]",
+            "",
+            "for score in scores:",
+            "    # decide the grade, then print it",
+            "    pass"
+          ],
+          "expected": ["95 A", "84 B", "72 C", "90 A", "61 C"],
+          "hint": "Check the highest boundary first — an `elif` only runs when the branch above it did not.",
+          "solution": [
+            "scores = [95, 84, 72, 90, 61]",
+            "",
+            "for score in scores:",
+            "    if score >= 90:",
+            "        grade = \"A\"",
+            "    elif score >= 80:",
+            "        grade = \"B\"",
+            "    else:",
+            "        grade = \"C\"",
+            "",
+            "    print(score, grade)"
+          ],
+          "explain": "Order matters. If you tested `>= 80` first, a 95 would be caught by it and never reach the A branch."
+        }
+      ]
+    },
+    {
+      "topic": "Functions",
+      "title": "Parameters, defaults, and return values",
+      "lead": "Package logic behind a name so it can be reused and tested.",
+      "tasks": [
+        {
+          "title": "Two small functions",
+          "brief": "Write `celsius_to_fahrenheit(c)` and `is_passing(score, passing=50)`, then print the four calls already in the starter.",
+          "steps": [
+            "The conversion is `c * 9 / 5 + 32`",
+            "`is_passing` returns True or False, and the pass mark defaults to 50"
+          ],
+          "starter": [
+            "def celsius_to_fahrenheit(c):",
+            "    pass",
+            "",
+            "",
+            "def is_passing(score, passing=50):",
+            "    pass",
+            "",
+            "",
+            "print(celsius_to_fahrenheit(21))",
+            "print(celsius_to_fahrenheit(30))",
+            "print(is_passing(72))",
+            "print(is_passing(41))"
+          ],
+          "expected": ["69.8", "86.0", "True", "False"],
+          "hint": "Both functions need `return`, not `print` — the printing is already written for you.",
+          "solution": [
+            "def celsius_to_fahrenheit(c):",
+            "    return c * 9 / 5 + 32",
+            "",
+            "",
+            "def is_passing(score, passing=50):",
+            "    return score >= passing",
+            "",
+            "",
+            "print(celsius_to_fahrenheit(21))",
+            "print(celsius_to_fahrenheit(30))",
+            "print(is_passing(72))",
+            "print(is_passing(41))"
+          ],
+          "explain": "`score >= passing` already evaluates to True or False — an `if` that returns True or False around it would just be longer."
+        },
+        {
+          "title": "Summarise a list of scores",
+          "brief": "Write `summarise(scores)` returning a dictionary with the count, min, max, and average rounded to two places.",
+          "steps": [
+            "Use the keys `count`, `min`, `max`, and `avg` in that order",
+            "Round the average with `round(value, 2)`",
+            "Return `{}` when the list is empty, so the function never divides by zero"
+          ],
+          "starter": [
+            "def summarise(scores):",
+            "    pass",
+            "",
+            "",
+            "print(summarise([80, 92, 75]))",
+            "print(summarise([]))"
+          ],
+          "expected": ["{'count': 3, 'min': 75, 'max': 92, 'avg': 82.33}", "{}"],
+          "hint": "`sum()`, `len()`, `min()`, and `max()` all take the list directly.",
+          "solution": [
+            "def summarise(scores):",
+            "    if not scores:",
+            "        return {}",
+            "",
+            "    return {",
+            "        \"count\": len(scores),",
+            "        \"min\": min(scores),",
+            "        \"max\": max(scores),",
+            "        \"avg\": round(sum(scores) / len(scores), 2),",
+            "    }",
+            "",
+            "",
+            "print(summarise([80, 92, 75]))",
+            "print(summarise([]))"
+          ],
+          "explain": "Guarding the empty case first — a guard clause — keeps the main body free of nesting."
+        }
+      ]
+    },
+    {
+      "topic": "Lists & Dictionaries",
+      "title": "Order versus lookup",
+      "lead": "The two containers you will use every day, ending with the shape most raw data arrives in.",
+      "tasks": [
+        {
+          "title": "Slice, add, and sort",
+          "brief": "Print the first score, the last score, the middle two as a list, and then every score sorted from highest to lowest.",
+          "steps": [
+            "Index from the back with `[-1]`",
+            "The middle two are positions 1 and 2",
+            "Add 95 to the list before sorting"
+          ],
+          "starter": [
+            "scores = [80, 92, 75, 88]",
+            "",
+            "# first, last, middle two",
+            "",
+            "# append 95, then print the list sorted highest first"
+          ],
+          "expected": ["80", "88", "[92, 75]", "[95, 92, 88, 80, 75]"],
+          "hint": "`sorted(scores, reverse=True)` returns a new list and leaves the original alone.",
+          "solution": [
+            "scores = [80, 92, 75, 88]",
+            "",
+            "print(scores[0])",
+            "print(scores[-1])",
+            "print(scores[1:3])",
+            "",
+            "scores.append(95)",
+            "print(sorted(scores, reverse=True))"
+          ],
+          "explain": "`scores[1:3]` stops before position 3, so it gives two items, not three."
+        },
+        {
+          "title": "A table as a list of dictionaries",
+          "brief": "From the list of student dictionaries, print the names of everyone who passed, then the class average to one decimal place.",
+          "steps": [
+            "The pass mark is 50",
+            "Collect the passing names into a list and print that list",
+            "Format the average as `class average: 67.3`"
+          ],
+          "starter": [
+            "students = [",
+            "    {\"name\": \"Sokha\", \"score\": 87.5},",
+            "    {\"name\": \"Dara\",  \"score\": 41.0},",
+            "    {\"name\": \"Mony\",  \"score\": 73.5},",
+            "]",
+            "",
+            "# names of the students who passed",
+            "",
+            "# class average, one decimal place"
+          ],
+          "expected": ["['Sokha', 'Mony']", "class average: 67.3"],
+          "hint": "`f\"{value:.1f}\"` formats a number to one decimal place.",
+          "solution": [
+            "students = [",
+            "    {\"name\": \"Sokha\", \"score\": 87.5},",
+            "    {\"name\": \"Dara\",  \"score\": 41.0},",
+            "    {\"name\": \"Mony\",  \"score\": 73.5},",
+            "]",
+            "",
+            "passing = []",
+            "for student in students:",
+            "    if student[\"score\"] >= 50:",
+            "        passing.append(student[\"name\"])",
+            "",
+            "print(passing)",
+            "",
+            "average = sum(s[\"score\"] for s in students) / len(students)",
+            "print(f\"class average: {average:.1f}\")"
+          ],
+          "explain": "One dictionary is one row, and the list of them is the table. This is the shape a Pandas DataFrame wraps in Module 04."
+        }
+      ]
+    },
+    {
+      "topic": "File Handling",
+      "title": "Reading and writing real data",
+      "lead": "These run against a small in-memory file system, so the files you write here are real files as far as your code is concerned.",
+      "tasks": [
+        {
+          "title": "Write a file, then read it back",
+          "brief": "Write three lines to `notes.txt`, then read the file back and print each line with its number.",
+          "steps": [
+            "Open with `\"w\"` to write, then again with `\"r\"` to read",
+            "Pass `encoding=\"utf-8\"` both times",
+            "Strip the trailing newline before printing",
+            "Number the lines starting at 1"
+          ],
+          "starter": [
+            "lines = [\"load the data\", \"clean the data\", \"plot the data\"]",
+            "",
+            "# 1. write each line to notes.txt",
+            "",
+            "# 2. read it back and print: 1 load the data"
+          ],
+          "expected": ["1 load the data", "2 clean the data", "3 plot the data"],
+          "hint": "`f.write()` does not add a newline for you — append `\\n` yourself.",
+          "solution": [
+            "lines = [\"load the data\", \"clean the data\", \"plot the data\"]",
+            "",
+            "with open(\"notes.txt\", \"w\", encoding=\"utf-8\") as f:",
+            "    for line in lines:",
+            "        f.write(line + \"\\n\")",
+            "",
+            "with open(\"notes.txt\", \"r\", encoding=\"utf-8\") as f:",
+            "    for number, line in enumerate(f, start=1):",
+            "        print(number, line.strip())"
+          ],
+          "explain": "`enumerate(f, start=1)` counts as it loops, and looping over the file object reads it one line at a time — the right approach for a file too large to hold in memory."
+        },
+        {
+          "title": "Read a CSV and fix the types",
+          "brief": "Read `students.csv` with `csv.DictReader`, convert every score to a float, then print the number of rows and the name of the top scorer.",
+          "steps": [
+            "The file is written for you in the starter",
+            "Everything `DictReader` produces is a string",
+            "Use `max(rows, key=...)` to find the top row"
+          ],
+          "starter": [
+            "import csv",
+            "",
+            "with open(\"students.csv\", \"w\", encoding=\"utf-8\", newline=\"\") as f:",
+            "    f.write(\"name,score\\nSokha,87.5\\nDara,41\\nMony,73.5\\nVira,100\\n\")",
+            "",
+            "# 1. read the file into a list of dictionaries",
+            "",
+            "# 2. convert every score to a float",
+            "",
+            "# 3. print the row count, then the top scorer's name"
+          ],
+          "expected": ["4 rows", "top: Vira"],
+          "hint": "`max(rows, key=lambda r: r[\"score\"])` compares by score and hands back the whole row.",
+          "solution": [
+            "import csv",
+            "",
+            "with open(\"students.csv\", \"w\", encoding=\"utf-8\", newline=\"\") as f:",
+            "    f.write(\"name,score\\nSokha,87.5\\nDara,41\\nMony,73.5\\nVira,100\\n\")",
+            "",
+            "with open(\"students.csv\", newline=\"\", encoding=\"utf-8\") as f:",
+            "    rows = list(csv.DictReader(f))",
+            "",
+            "for row in rows:",
+            "    row[\"score\"] = float(row[\"score\"])",
+            "",
+            "print(len(rows), \"rows\")",
+            "",
+            "top = max(rows, key=lambda r: r[\"score\"])",
+            "print(\"top:\", top[\"name\"])"
+          ],
+          "explain": "Without the conversion the scores stay strings, and `max` compares them as text — \"100\" would lose to \"87.5\" because \"1\" sorts before \"8\"."
+        }
+      ]
+    }
+  ]
+}

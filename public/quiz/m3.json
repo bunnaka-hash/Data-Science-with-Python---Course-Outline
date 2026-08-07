@@ -1,0 +1,203 @@
+{
+  "id": "m3",
+  "number": "03",
+  "title": "NumPy",
+  "description": "Check that you can express calculations over whole arrays instead of looping.",
+  "duration": "20 min",
+  "passing": 70,
+  "lessons": [
+    {
+      "topic": "Arrays",
+      "title": "Creating and describing arrays",
+      "lead": "An ndarray is a grid of one type, with a shape. Everything else in NumPy follows from that.",
+      "questions": [
+        {
+          "prompt": "What is the difference between `[1, 2] * 2` and `np.array([1, 2]) * 2`?",
+          "options": [
+            "The list repeats to `[1, 2, 1, 2]`; the array doubles each element to `[2, 4]`",
+            "Both give `[2, 4]`",
+            "Both give `[1, 2, 1, 2]`",
+            "The array version raises a TypeError"
+          ],
+          "answer": 0,
+          "explain": "Operators on an array are element-wise. This is the single biggest behavioural difference from a list."
+        },
+        {
+          "prompt": "What does `np.arange(0, 10, 2)` produce?",
+          "options": [
+            "[0 2 4 6 8]",
+            "[0 2 4 6 8 10]",
+            "[0 1 2 … 9] in steps of 2 decimals",
+            "[2 4 6 8 10]"
+          ],
+          "answer": 0,
+          "explain": "Like `range`, the stop value is excluded. `np.linspace(0, 10, 5)` is the version that does include the endpoint."
+        },
+        {
+          "prompt": "Which attributes describe a NumPy array?",
+          "options": [
+            "`.shape` — the size of each dimension",
+            "`.dtype` — the single type of every element",
+            "`.ndim` — how many dimensions it has",
+            "`.length` — the number of elements"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "There is no `.length`. The element count is `.size`, and `len()` gives the first dimension only."
+        },
+        {
+          "prompt": "`scores = np.array([80, 92, 75, 88])`. What does `scores.argmax()` return?",
+          "options": ["1", "92", "3", "[92]"],
+          "answer": 0,
+          "explain": "`argmax` returns the position of the largest value, not the value itself — useful for looking up the matching name in a parallel array."
+        }
+      ]
+    },
+    {
+      "topic": "Indexing & Slicing",
+      "title": "Masks, slices, and views",
+      "lead": "How you select data — and NumPy's biggest surprise about what you get back.",
+      "questions": [
+        {
+          "prompt": "`scores = np.array([80, 92, 75, 41, 88])`. What is `scores[scores >= 50]`?",
+          "options": [
+            "[80 92 75 88]",
+            "[True True True False True]",
+            "[41]",
+            "[80 92 75 41 88]"
+          ],
+          "answer": 0,
+          "explain": "The comparison builds a boolean mask; indexing with that mask keeps only the positions where it is True."
+        },
+        {
+          "prompt": "Why must you write `scores[(scores > 50) & (scores < 90)]` rather than using `and`?",
+          "options": [
+            "`and` cannot work element-wise and raises a ValueError",
+            "`and` is slower but still correct",
+            "`&` is the only operator NumPy defines",
+            "`and` only works on 2D arrays"
+          ],
+          "answer": 0,
+          "explain": "Python's `and` / `or` need a single True or False. Use `&` and `|`, and wrap each condition in parentheses."
+        },
+        {
+          "prompt": "What does this code print?",
+          "code": {
+            "lang": "python",
+            "body": [
+              "a = np.array([10, 20, 30, 40, 50])",
+              "part = a[1:4]",
+              "part[0] = 999",
+              "print(a)"
+            ]
+          },
+          "options": [
+            "[ 10 999  30  40  50]",
+            "[10 20 30 40 50]",
+            "[999  20  30  40  50]",
+            "[999 30 40]"
+          ],
+          "answer": 0,
+          "explain": "A slice is a view onto the same memory, not a copy. Writing into it changes the original — use `.copy()` when you need independence."
+        },
+        {
+          "prompt": "For a 2D array `grid`, how do you select column 1 across every row?",
+          "options": ["`grid[:, 1]`", "`grid[1, :]`", "`grid[1]`", "`grid[:1]`"],
+          "answer": 0,
+          "explain": "The index is `[row, column]`. A bare colon means \"all of this dimension\"."
+        }
+      ]
+    },
+    {
+      "topic": "Reshaping & Broadcasting",
+      "title": "Shapes that fit together",
+      "lead": "Rearranging how values are indexed, and letting NumPy stretch shapes for you.",
+      "questions": [
+        {
+          "prompt": "`a = np.arange(12)`. What shape does `a.reshape(3, -1)` produce?",
+          "options": ["(3, 4)", "(3, 12)", "(12, 3)", "It raises ValueError"],
+          "answer": 0,
+          "explain": "`-1` means \"work this dimension out from the total\". 12 elements in 3 rows gives 4 columns."
+        },
+        {
+          "prompt": "Which reshape fixes an \"Expected 2D array\" error from a flat array?",
+          "options": [
+            "`a.reshape(-1, 1)` — one column",
+            "`a.flatten()`",
+            "`a.T`",
+            "`a.reshape(1)`"
+          ],
+          "answer": 0,
+          "explain": "`reshape(-1, 1)` turns a flat array into a single column, which is the shape scikit-learn and friends expect."
+        },
+        {
+          "prompt": "When are two shapes compatible for broadcasting?",
+          "options": [
+            "Compared from the right, each pair of dimensions is equal or one of them is 1",
+            "They have the same number of elements",
+            "They have the same number of dimensions",
+            "The smaller one divides evenly into the larger one"
+          ],
+          "answer": 0,
+          "explain": "A `(3,)` row broadcasts across every row of a `(2, 3)` array; a `(2, 1)` column broadcasts across every column."
+        },
+        {
+          "prompt": "Does reshaping change the number of elements in an array?",
+          "options": [
+            "No — the element count must stay the same",
+            "Yes, it pads with zeros when needed",
+            "Yes, it truncates the extras",
+            "Only for 1D arrays"
+          ],
+          "answer": 0,
+          "explain": "reshape only changes how the same values are indexed. A mismatched count raises ValueError."
+        }
+      ]
+    },
+    {
+      "topic": "Mathematical Operations",
+      "title": "Vectorised math and axes",
+      "lead": "Aggregations collapse an array. The `axis` argument decides in which direction.",
+      "questions": [
+        {
+          "prompt": "For a 2D array, what does `axis=0` mean in `scores.sum(axis=0)`?",
+          "options": [
+            "Collapse the rows — one result per column",
+            "Collapse the columns — one result per row",
+            "Sum everything into a single number",
+            "Sum only the first row"
+          ],
+          "answer": 0,
+          "explain": "Say it out loud: axis=0 collapses rows and gives you a per-column result. axis=1 is the opposite."
+        },
+        {
+          "prompt": "`scores = np.array([[80, 92, 75], [65, 88, 91]])`. What does `scores.sum(axis=1)` give?",
+          "options": ["[247 244]", "[145 180 166]", "491", "[80 65]"],
+          "answer": 0,
+          "explain": "axis=1 collapses each row into one number: 80+92+75 and 65+88+91."
+        },
+        {
+          "prompt": "What does `np.where(scores >= 80, \"pass\", \"fail\")` return?",
+          "options": [
+            "An array of \"pass\"/\"fail\" the same shape as `scores`",
+            "The positions where the condition is True",
+            "A single string",
+            "A boolean array"
+          ],
+          "answer": 0,
+          "explain": "With three arguments, `where` picks element-wise between the two values. With one argument it returns the matching indexes instead."
+        },
+        {
+          "prompt": "Why prefer NumPy operations over a Python loop for numerical work?",
+          "options": [
+            "The loop runs in compiled code across the whole array at once",
+            "NumPy automatically uses every CPU core",
+            "Python loops cannot do arithmetic on numbers",
+            "NumPy arrays use less memory per element than a list, and nothing else changes"
+          ],
+          "answer": 0,
+          "explain": "Vectorised operations push the loop down into compiled code, which is where the 10–100× speedup comes from. The compact memory layout helps too, but the loop is the point."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,547 @@
+/* ============================================================
+   Exercises — exercise.html
+   Layered on slide.css: the sidebar, deck shell, and card chrome
+   are shared. Only the workbook internals live here.
+   ============================================================ */
+
+:root {
+  --pass: #2e7d63;
+  --pass-soft: #e7f3ee;
+  --fail: #b5473a;
+  --fail-soft: #fbeae7;
+  --code-bg: #0f1420;
+  --code-head: #171d2b;
+  --code-line: #232a3a;
+  --code-ink: #dfe4f0;
+  --code-dim: #6c7893;
+}
+
+.exercise-page .slide-kicker i,
+.exercise-page .slide-kicker svg {
+  color: var(--blue);
+}
+
+.ex-card {
+  max-width: 960px;
+}
+
+/* ---------- Sidebar score badges ---------- */
+.nav-slide {
+  align-items: center;
+}
+.nav-score {
+  margin-left: auto;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  color: var(--blue);
+  background: var(--blue-soft);
+  padding: 2px 7px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.nav-score.is-perfect {
+  color: var(--panel);
+  background: var(--pass);
+}
+.nav-score.is-pending {
+  color: var(--slate);
+  background: var(--bg);
+}
+
+/* ---------- Lesson meta ---------- */
+.ex-lesson-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: -12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.ex-lesson-meta i {
+  color: var(--blue);
+  margin-right: 6px;
+}
+
+/* ---------- The exercise ----------
+   One exercise fills the card, so this is a plain wrapper rather than a box.
+   It stays a single node so a run can repaint it on its own. */
+.ex-task {
+  margin-top: 22px;
+}
+
+.ex-solved {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--pass-soft);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pass);
+}
+
+/* Inline `code` inside prose only — the dark editor styles its own. */
+.ex-card .slide-lead code,
+.ex-steps code,
+.ex-hint code,
+.ex-solution-note code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.88em;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+.ex-steps {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+.ex-steps li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.ex-steps li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--yellow);
+}
+
+/* ---------- Expected output ---------- */
+.ex-panel-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.ex-target,
+.ex-expected {
+  margin: 16px 0 0;
+  padding: 12px 15px;
+  border: 1px dashed var(--line);
+  border-radius: 9px;
+  background: var(--bg);
+}
+.ex-expected {
+  margin-left: 0;
+  margin-top: 12px;
+}
+.ex-target pre,
+.ex-expected pre {
+  margin-top: 7px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ---------- Editor ---------- */
+.ex-editor {
+  margin: 18px 0 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--code-bg);
+}
+.ex-editor-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 13px;
+  background: var(--code-head);
+  border-bottom: 1px solid var(--code-line);
+}
+.ex-editor-head .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #39415a;
+}
+.ex-editor-lang {
+  margin-left: auto;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--code-dim);
+}
+
+.ex-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 12px;
+  padding: 4px 9px;
+  border: 1px solid var(--code-line);
+  border-radius: 6px;
+  background: transparent;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--code-dim);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+.ex-mini:hover {
+  color: var(--code-ink);
+  border-color: var(--code-dim);
+}
+
+.ex-code {
+  display: block;
+  width: 100%;
+  min-height: 90px;
+  padding: 16px 18px;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background: transparent;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--code-ink);
+  tab-size: 4;
+  white-space: pre;
+  overflow-x: auto;
+}
+.ex-code:focus {
+  background: #121828;
+}
+.ex-code::selection {
+  background: #2c3a55;
+}
+
+/* ---------- Toolbar ---------- */
+.ex-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin: 14px 0 0;
+}
+.ex-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--blue);
+  border-radius: 9px;
+  background: var(--blue);
+  font-family: "Inter", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--panel);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+.ex-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.ex-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.ex-btn--ghost {
+  border-color: var(--line);
+  background: var(--panel);
+  color: var(--ink);
+}
+.ex-btn--ghost:hover {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+.ex-runstate {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  color: var(--slate);
+}
+
+/* ---------- Hint ---------- */
+.ex-hint {
+  display: flex;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 12px 15px;
+  background: var(--yellow-soft);
+  border-left: 3px solid var(--yellow);
+  border-radius: 0 8px 8px 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.ex-hint i,
+.ex-hint svg {
+  color: var(--yellow);
+  font-size: 13px;
+  width: 13px;
+  height: 13px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* ---------- Output ---------- */
+.ex-output {
+  margin: 16px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+}
+.ex-output-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.ex-output pre {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 340px;
+  overflow: auto;
+}
+.ex-output pre.is-error {
+  color: var(--fail);
+}
+.ex-empty {
+  color: var(--slate);
+  font-style: italic;
+}
+
+.ex-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 20px;
+}
+.ex-status.is-pass {
+  color: var(--pass);
+  background: var(--pass-soft);
+}
+.ex-status.is-near {
+  color: #8a6216;
+  background: var(--yellow-soft);
+}
+.ex-status.is-error {
+  color: var(--fail);
+  background: var(--fail-soft);
+}
+.ex-status.is-ran {
+  color: var(--slate);
+  background: var(--bg);
+}
+
+.ex-figures {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+.ex-figures img {
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+/* ---------- Solution ---------- */
+.ex-solution {
+  margin: 16px 0 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+}
+.ex-solution-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.ex-solution-head .ex-mini {
+  margin-left: 0;
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+.ex-solution-head .ex-mini:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.ex-solution-note {
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+/* ---------- Progress card ---------- */
+.ex-total {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+}
+.ex-total-figure span {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--blue);
+}
+.ex-total-figure em {
+  font-style: normal;
+  font-size: 20px;
+  color: var(--slate);
+}
+.ex-total-figure small {
+  display: block;
+  margin-top: 5px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--slate);
+}
+.ex-total-bar {
+  flex: 1;
+  height: 10px;
+  border-radius: 99px;
+  background: var(--line);
+  overflow: hidden;
+}
+.ex-total-bar > div {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--pass);
+  transition: width 0.3s ease;
+}
+
+.ex-breakdown {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
+}
+.ex-breakdown li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+}
+.ex-breakdown li.is-done {
+  border-color: #bfded1;
+  background: var(--pass-soft);
+}
+.ex-breakdown .tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--slate);
+}
+.ex-breakdown-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.ex-breakdown-title em {
+  display: block;
+  font-style: normal;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ex-breakdown-score {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.ex-breakdown-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  font-family: "Inter", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+.ex-breakdown-go:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.ex-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .ex-total {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+  .ex-breakdown li {
+    flex-wrap: wrap;
+  }
+}

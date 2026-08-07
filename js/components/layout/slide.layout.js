@@ -36,7 +36,6 @@ function showError(message) {
   `;
   el("deckKicker").textContent = "not found";
   el("moduleTitle").textContent = "Slides";
-  el("moduleMeta").textContent = "";
   el("deckBottom").innerHTML = "";
 }
 
@@ -70,10 +69,6 @@ function renderChrome() {
 
   document.title = `${deck.title} — Slides`;
   el("moduleTitle").textContent = deck.title;
-  el("moduleMeta").innerHTML = `
-    Module ${escapeHtml(deck.number)} · ${deck.slides.length} slides
-    ${deck.duration ? ` · ${escapeHtml(deck.duration)}` : ""}
-  `;
   el("slideNav").innerHTML = renderSlideNav(deck.slides, state.index);
   renderModuleSwitch();
 }

@@ -1,0 +1,206 @@
+{
+  "id": "m1",
+  "number": "01",
+  "title": "Python Foundations",
+  "description": "Check that the base the rest of the course builds on is solid.",
+  "duration": "20 min",
+  "passing": 70,
+  "lessons": [
+    {
+      "topic": "Python Review",
+      "title": "Types, control flow, and strings",
+      "lead": "Four questions on the grammar of Python — the parts every later module assumes you already know.",
+      "questions": [
+        {
+          "prompt": "What does `print(int(87.5))` output?",
+          "options": ["88", "87", "87.5", "TypeError"],
+          "answer": 1,
+          "explain": "`int()` truncates toward zero — it drops the decimal part rather than rounding. Use `round(87.5)` when you want rounding."
+        },
+        {
+          "prompt": "How many lines does this loop print?",
+          "code": {
+            "lang": "python",
+            "body": ["for n in range(1, 4):", "    print(n)"]
+          },
+          "options": ["3", "4", "2", "5"],
+          "answer": 0,
+          "explain": "`range(1, 4)` yields 1, 2, 3 — the stop value is never included. This off-by-one catches everyone once."
+        },
+        {
+          "prompt": "What defines a block of code in Python?",
+          "options": [
+            "Curly braces `{}`",
+            "Indentation",
+            "An `end` keyword",
+            "A semicolon at the end of each line"
+          ],
+          "answer": 1,
+          "explain": "Indentation is the syntax, not a style choice. Four spaces per level is the convention."
+        },
+        {
+          "prompt": "Which of these statements about Python strings are true?",
+          "options": [
+            "`.strip()` removes leading and trailing whitespace",
+            "`.split(\",\")` turns one line into a list of fields",
+            "`.lower()` changes the string in place",
+            "An f-string can format a value inline, as in `f\"{score:.1f}\"`"
+          ],
+          "answer": [0, 1, 3],
+          "explain": "Strings are immutable — `.lower()` returns a new string and leaves the original untouched. You have to assign the result."
+        }
+      ]
+    },
+    {
+      "topic": "Functions",
+      "title": "Parameters, defaults, and scope",
+      "lead": "Functions are how logic gets named and reused. These questions cover the traps that come with them.",
+      "questions": [
+        {
+          "prompt": "Given this function, what does `grade(41, passing=40)` return?",
+          "code": {
+            "lang": "python",
+            "body": [
+              "def grade(score, passing=50, label=\"student\"):",
+              "    status = \"pass\" if score >= passing else \"fail\"",
+              "    return f\"{label}: {status}\""
+            ]
+          },
+          "options": [
+            "student: pass",
+            "student: fail",
+            "Dara: fail",
+            "TypeError — too few arguments"
+          ],
+          "answer": 0,
+          "explain": "41 >= 40, so status is \"pass\", and `label` keeps its default of \"student\"."
+        },
+        {
+          "prompt": "What does a function return when it has no `return` statement?",
+          "options": ["`None`", "`0`", "An empty string", "It raises an error"],
+          "answer": 0,
+          "explain": "Every Python function returns something. With no `return`, that something is `None`."
+        },
+        {
+          "prompt": "Why should you never write `def add_item(item, items=[])`?",
+          "options": [
+            "The same list is created once and shared across every call",
+            "Lists are not allowed as default arguments",
+            "It is significantly slower than passing the list in",
+            "Python raises a SyntaxError"
+          ],
+          "answer": 0,
+          "explain": "Default values are evaluated once, when the function is defined. Use `items=None` and create the list inside the body."
+        },
+        {
+          "prompt": "Calling `grade(72)` and then `print(status)` outside the function raises NameError. Why?",
+          "options": [
+            "`status` only exists inside the function that created it",
+            "`status` was never assigned a value",
+            "`print` cannot display a string variable",
+            "The function has to be called twice first"
+          ],
+          "answer": 0,
+          "explain": "Variables created inside a function are local to it. If you need the value outside, return it."
+        }
+      ]
+    },
+    {
+      "topic": "Lists & Dictionaries",
+      "title": "Order versus lookup",
+      "lead": "The two containers you will use every day, and the moment to reach for each one.",
+      "questions": [
+        {
+          "prompt": "Given `scores = [80, 92, 75, 88]`, what is `scores[1:3]`?",
+          "options": ["[92, 75]", "[92, 75, 88]", "[80, 92, 75]", "[80, 92]"],
+          "answer": 0,
+          "explain": "Slices start at the first index and stop before the second — positions 1 and 2, not 3."
+        },
+        {
+          "prompt": "`student = {\"name\": \"Sokha\"}`. What does `student.get(\"email\", \"-\")` return?",
+          "options": [
+            "\"-\"",
+            "`None`",
+            "It raises KeyError",
+            "An empty string"
+          ],
+          "answer": 0,
+          "explain": "`.get()` returns the default you supply when the key is missing, instead of raising KeyError the way `student[\"email\"]` would."
+        },
+        {
+          "prompt": "Which statements are true?",
+          "options": [
+            "A list keeps its items in the order they were added",
+            "Reading a missing key with `d[\"key\"]` raises KeyError",
+            "Assigning to a key that does not exist adds it to the dictionary",
+            "A list can only be indexed from the front"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "`scores[-1]` reads the last item — negative indexes count back from the end."
+        },
+        {
+          "prompt": "Which shape is the usual way to represent a table of records in plain Python?",
+          "options": [
+            "A list of dictionaries",
+            "A dictionary of strings",
+            "A list of lists of strings",
+            "A single dictionary with numeric keys"
+          ],
+          "answer": 0,
+          "explain": "One dictionary is one row; a list of them is the table. This is exactly what a Pandas DataFrame wraps in Module 04."
+        }
+      ]
+    },
+    {
+      "topic": "File Handling",
+      "title": "Getting data in and out",
+      "lead": "Reading files safely, and the one thing everybody forgets about CSV values.",
+      "questions": [
+        {
+          "prompt": "Why open files with `with open(...) as f:` rather than a plain `open()`?",
+          "options": [
+            "The file is closed automatically, even if the code raises an error",
+            "It reads the file faster",
+            "It is the only way to pass an encoding",
+            "It converts the file to a list of strings"
+          ],
+          "answer": 0,
+          "explain": "The `with` block closes the file on the way out, whether the body finished normally or raised."
+        },
+        {
+          "prompt": "What does mode `\"w\"` do to a file that already exists?",
+          "options": [
+            "Overwrites it — the previous contents are gone",
+            "Appends to the end of it",
+            "Opens it read-only",
+            "Raises FileExistsError"
+          ],
+          "answer": 0,
+          "explain": "`\"w\"` truncates the file. Use `\"a\"` when you mean to add to what is already there."
+        },
+        {
+          "prompt": "What type are the values that come out of `csv.DictReader`?",
+          "options": [
+            "Always `str`",
+            "Guessed per column — numbers become `int` or `float`",
+            "Always `float`",
+            "`bytes`"
+          ],
+          "answer": 0,
+          "explain": "Every CSV value arrives as a string. Converting types on the way in — `float(row[\"score\"])` — prevents a whole category of bugs later."
+        },
+        {
+          "prompt": "Which are good practice when reading a text file?",
+          "options": [
+            "Pass `encoding=\"utf-8\"` so Khmer and other non-ASCII text survives",
+            "Strip the trailing newline from each line before using it",
+            "Loop over the file object directly for a large file",
+            "Use `.read()` to pull a 2 GB file into one string"
+          ],
+          "answer": [0, 1, 2],
+          "explain": "`.read()` loads the whole file into memory at once. Looping over the file object reads it line by line instead."
+        }
+      ]
+    }
+  ]
+}

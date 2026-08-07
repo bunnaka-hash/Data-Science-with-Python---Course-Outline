@@ -1,0 +1,285 @@
+{
+  "id": "m2",
+  "number": "02",
+  "title": "Python for Data Analysis",
+  "description": "Practise the compact syntax that data code is written in.",
+  "duration": "60 min",
+  "lessons": [
+    {
+      "topic": "List Comprehension",
+      "title": "Loops in one line",
+      "lead": "Read a comprehension as: the expression, for each item, optionally where a condition holds.",
+      "tasks": [
+        {
+          "title": "Three comprehensions",
+          "brief": "Build the passing scores, a curved set of scores, and a lookup of name lengths — each as a single comprehension.",
+          "steps": [
+            "Keep the scores of 50 and above",
+            "Curve every score by 5 points, but never above 100",
+            "Build `{name: length}` for the three names"
+          ],
+          "starter": [
+            "scores = [80, 92, 75, 41, 88]",
+            "names = [\"Sokha\", \"Dara\", \"Mony\"]",
+            "",
+            "# 1. the passing scores",
+            "",
+            "# 2. every score curved by 5, capped at 100",
+            "",
+            "# 3. {name: number of letters}"
+          ],
+          "expected": [
+            "[80, 92, 75, 88]",
+            "[85, 97, 80, 46, 93]",
+            "{'Sokha': 5, 'Dara': 4, 'Mony': 4}"
+          ],
+          "hint": "`min(s + 5, 100)` caps a curved score, and `{k: v for ... }` builds a dictionary.",
+          "solution": [
+            "scores = [80, 92, 75, 41, 88]",
+            "names = [\"Sokha\", \"Dara\", \"Mony\"]",
+            "",
+            "print([s for s in scores if s >= 50])",
+            "print([min(s + 5, 100) for s in scores])",
+            "print({name: len(name) for name in names})"
+          ],
+          "explain": "The `if` clause filters, the expression before `for` transforms. A comprehension can do either, or both at once."
+        },
+        {
+          "title": "Clean a list of place names",
+          "brief": "Strip the stray whitespace and fix the capitalisation, then keep only the two-word names.",
+          "steps": [
+            "`.strip()` removes the spaces, `.title()` fixes the case",
+            "Do both inside one comprehension",
+            "A name is two words when `len(name.split()) == 2`"
+          ],
+          "starter": [
+            "raw = [\"  Phnom Penh \", \"siem reap\", \"  BATTAMBANG\", \"kampot \"]",
+            "",
+            "# 1. the cleaned names",
+            "",
+            "# 2. only the two-word names"
+          ],
+          "expected": [
+            "['Phnom Penh', 'Siem Reap', 'Battambang', 'Kampot']",
+            "['Phnom Penh', 'Siem Reap']"
+          ],
+          "hint": "String methods chain: `place.strip().title()` runs left to right.",
+          "solution": [
+            "raw = [\"  Phnom Penh \", \"siem reap\", \"  BATTAMBANG\", \"kampot \"]",
+            "",
+            "cleaned = [place.strip().title() for place in raw]",
+            "print(cleaned)",
+            "",
+            "print([place for place in cleaned if len(place.split()) == 2])"
+          ],
+          "explain": "Naming the intermediate list is worth it here — the second comprehension reads from it instead of repeating the cleaning."
+        }
+      ]
+    },
+    {
+      "topic": "Lambda Functions",
+      "title": "Small anonymous functions",
+      "lead": "A lambda is used where a function is expected for a moment and never again — most often as a `key=`.",
+      "tasks": [
+        {
+          "title": "Rank the students",
+          "brief": "Sort the students by score, highest first, and print just their names in that order.",
+          "steps": [
+            "Pass `key=lambda s: s[\"score\"]` to `sorted`",
+            "Add `reverse=True` for highest first",
+            "Print the names as a list"
+          ],
+          "starter": [
+            "students = [",
+            "    {\"name\": \"Sokha\", \"score\": 87.5},",
+            "    {\"name\": \"Dara\",  \"score\": 41.0},",
+            "    {\"name\": \"Mony\",  \"score\": 73.5},",
+            "    {\"name\": \"Vira\",  \"score\": 92.0},",
+            "]",
+            "",
+            "# sort by score, highest first, then print the names"
+          ],
+          "expected": ["['Vira', 'Sokha', 'Mony', 'Dara']"],
+          "hint": "`sorted` gives you back whole dictionaries — pull the names out afterwards with a comprehension.",
+          "solution": [
+            "students = [",
+            "    {\"name\": \"Sokha\", \"score\": 87.5},",
+            "    {\"name\": \"Dara\",  \"score\": 41.0},",
+            "    {\"name\": \"Mony\",  \"score\": 73.5},",
+            "    {\"name\": \"Vira\",  \"score\": 92.0},",
+            "]",
+            "",
+            "ranked = sorted(students, key=lambda s: s[\"score\"], reverse=True)",
+            "print([s[\"name\"] for s in ranked])"
+          ],
+          "explain": "The lambda tells `sorted` what to compare. Without it, Python would try to compare whole dictionaries and raise a TypeError."
+        },
+        {
+          "title": "Sort by two things at once",
+          "brief": "Sort the words by length first, and alphabetically within the same length.",
+          "steps": [
+            "A lambda can return a tuple: `lambda w: (len(w), w)`",
+            "Tuples compare left to right, so length wins and the word breaks the tie"
+          ],
+          "starter": [
+            "words = [\"zip\", \"map\", \"filter\", \"lambda\", \"list\", \"set\"]",
+            "",
+            "# sort by length, then alphabetically"
+          ],
+          "expected": ["['map', 'set', 'zip', 'list', 'filter', 'lambda']"],
+          "hint": "One `sorted` call is enough — the tuple key does both jobs.",
+          "solution": [
+            "words = [\"zip\", \"map\", \"filter\", \"lambda\", \"list\", \"set\"]",
+            "",
+            "print(sorted(words, key=lambda w: (len(w), w)))"
+          ],
+          "explain": "This is the standard way to sort by several fields — build a tuple in the order you want them compared."
+        }
+      ]
+    },
+    {
+      "topic": "map() & filter()",
+      "title": "Transform, then select",
+      "lead": "`map` applies a function to every item; `filter` keeps the items that pass a test. Both are lazy, so wrap them in `list()`.",
+      "tasks": [
+        {
+          "title": "Fix the types coming out of a CSV",
+          "brief": "Convert the raw strings to floats with `map`, then print the list and its average rounded to two places.",
+          "steps": [
+            "`map(float, raw)` needs no lambda — pass the function by name",
+            "Wrap the result in `list()` before using it twice"
+          ],
+          "starter": [
+            "raw = [\"87.5\", \"41\", \"73.5\", \"92\"]",
+            "",
+            "# 1. the values as floats",
+            "",
+            "# 2. their average, rounded to two places"
+          ],
+          "expected": ["[87.5, 41.0, 73.5, 92.0]", "73.5"],
+          "hint": "A map object can only be walked once — that is why `list()` matters when you need it twice.",
+          "solution": [
+            "raw = [\"87.5\", \"41\", \"73.5\", \"92\"]",
+            "",
+            "scores = list(map(float, raw))",
+            "print(scores)",
+            "print(round(sum(scores) / len(scores), 2))"
+          ],
+          "explain": "Every value read from a CSV arrives as a string. Converting on the way in prevents a whole category of bugs later."
+        },
+        {
+          "title": "Drop the empty values",
+          "brief": "Use `filter` twice: once to remove the empty and missing names, once to keep the passing scores.",
+          "steps": [
+            "`filter(None, items)` keeps everything truthy",
+            "The scores need a lambda: keep 50 and above"
+          ],
+          "starter": [
+            "names = [\"Sokha\", \"\", \"Dara\", None, \"Mony\"]",
+            "scores = [80, 92, 75, 41, 88]",
+            "",
+            "# 1. the real names",
+            "",
+            "# 2. the passing scores"
+          ],
+          "expected": ["['Sokha', 'Dara', 'Mony']", "[80, 92, 75, 88]"],
+          "hint": "`filter(None, ...)` is a shortcut — passing `None` as the function means \"keep what is truthy\".",
+          "solution": [
+            "names = [\"Sokha\", \"\", \"Dara\", None, \"Mony\"]",
+            "scores = [80, 92, 75, 41, 88]",
+            "",
+            "print(list(filter(None, names)))",
+            "print(list(filter(lambda s: s >= 50, scores)))"
+          ],
+          "explain": "`[s for s in scores if s >= 50]` does the same job as the second line, and most Python teams prefer it. Know both — you will read both."
+        }
+      ]
+    },
+    {
+      "topic": "zip()",
+      "title": "Walk two lists side by side",
+      "lead": "zip pairs items by position and stops at the shortest input.",
+      "tasks": [
+        {
+          "title": "Pair names with scores",
+          "brief": "Print one aligned line per student, then build a dictionary from the two lists.",
+          "steps": [
+            "Format each line as `f\"{name:<6} {score:>5}\"`",
+            "`dict(zip(names, scores))` builds the lookup in one step"
+          ],
+          "starter": [
+            "names = [\"Sokha\", \"Dara\", \"Mony\"]",
+            "scores = [87.5, 41.0, 73.5]",
+            "",
+            "# 1. one line per student",
+            "",
+            "# 2. the same data as a dictionary"
+          ],
+          "expected": [
+            "Sokha   87.5",
+            "Dara    41.0",
+            "Mony    73.5",
+            "{'Sokha': 87.5, 'Dara': 41.0, 'Mony': 73.5}"
+          ],
+          "hint": "`for name, score in zip(names, scores):` unpacks each pair straight into two variables.",
+          "solution": [
+            "names = [\"Sokha\", \"Dara\", \"Mony\"]",
+            "scores = [87.5, 41.0, 73.5]",
+            "",
+            "for name, score in zip(names, scores):",
+            "    print(f\"{name:<6} {score:>5}\")",
+            "",
+            "print(dict(zip(names, scores)))"
+          ],
+          "explain": "`:<6` pads a string to six characters on the left, `:>5` pushes a number to the right of five. That is how columns line up without a table."
+        },
+        {
+          "title": "All four together",
+          "brief": "Convert, combine, filter, and sort — the whole toolkit on one small dataset.",
+          "steps": [
+            "Convert the scores to floats with `map`",
+            "Build a list of `{\"name\": …, \"score\": …}` dictionaries with `zip`",
+            "Keep the students who scored 50 or more with `filter`",
+            "Sort them by score, highest first, and print the names"
+          ],
+          "starter": [
+            "names = [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"]",
+            "raw = [\"87.5\", \"41\", \"73.5\", \"92\"]",
+            "",
+            "# 1. scores as floats",
+            "",
+            "# 2. a list of dictionaries",
+            "",
+            "# 3. only the passing students",
+            "",
+            "# 4. their names, highest score first"
+          ],
+          "expected": [
+            "[87.5, 41.0, 73.5, 92.0]",
+            "4 students",
+            "3 passed",
+            "['Vira', 'Sokha', 'Mony']"
+          ],
+          "hint": "Print the four results in the order the steps list them: the floats, the number of students, the number who passed, then the ranked names.",
+          "solution": [
+            "names = [\"Sokha\", \"Dara\", \"Mony\", \"Vira\"]",
+            "raw = [\"87.5\", \"41\", \"73.5\", \"92\"]",
+            "",
+            "scores = list(map(float, raw))",
+            "print(scores)",
+            "",
+            "students = [{\"name\": n, \"score\": s} for n, s in zip(names, scores)]",
+            "print(len(students), \"students\")",
+            "",
+            "passed = list(filter(lambda s: s[\"score\"] >= 50, students))",
+            "print(len(passed), \"passed\")",
+            "",
+            "ranked = sorted(passed, key=lambda s: s[\"score\"], reverse=True)",
+            "print([s[\"name\"] for s in ranked])"
+          ],
+          "explain": "This is the shape of most small analyses: read, convert, combine, filter, order. Modules 03 and 04 do the same work on whole columns at once."
+        }
+      ]
+    }
+  ]
+}

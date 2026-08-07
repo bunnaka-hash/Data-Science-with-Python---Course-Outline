@@ -12,6 +12,11 @@
 .slide-page .sidebar {
   display: flex;
   flex-direction: column;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+.slide-page .sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 .back-link {
@@ -54,6 +59,11 @@
   overflow-y: auto;
   margin: 0 -6px;
   padding: 0 6px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+.slide-page nav::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 .nav-topic {
@@ -154,9 +164,11 @@
 .deck-top .eyebrow {
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;
-  color: var(--blue);
-  background: var(--blue-soft);
+  color: rgb(46, 46, 46);
+  /* background: var(--blue-soft); */
   padding: 4px 10px;
+  font-weight: 500;
+  font-size: 16px;
   border-radius: 6px;
   white-space: nowrap;
   overflow: hidden;
