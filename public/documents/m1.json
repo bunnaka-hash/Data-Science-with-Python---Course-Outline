@@ -105,10 +105,21 @@
       "code": {
         "lang": "python",
         "body": [
-          "raw = \"  Phnom Penh , Cambodia \\n\"",
-          "city, country = [p.strip() for p in raw.strip().split(\",\")]",
+          "raw = \"  Phnom Penh , Cambodia  \"",
           "",
-          "print(f\"{city} is in {country}\")",
+
+          "parts = raw.strip().split(\",\") # Removes spaces and splits into a list",
+          "# [\"Phnom Penh \", \" Cambodia\"]",
+
+          "city = parts[0].strip()  # \"Phnom Penh\"", 
+          "", 
+          "country = parts[1].strip().upper()  # \"CAMBODIA\"", 
+          "",
+
+          "country = country.replace(\"CAMBODIA\", \"Cambodia\") ",
+          "",
+          "print(f\"{city} is in {country}\") #f-string → Format text with variables" ,
+
           "# Phnom Penh is in Cambodia"
         ]
       }
